@@ -21,9 +21,11 @@ extension TextExtensions on String {
     )).tr();
   }
 
-  ts(BuildContext context, {Color? color, TextAlign? align}){
+  ts(BuildContext context, {Color? color, TextAlign? align, bool isLink = false}){
     return Text(this, textAlign: align, style: Theme.of(context).textTheme.titleSmall!.copyWith(
-      color: color
+      color: color ?? (isLink ? const Color(0xFF0000FF) : null), 
+      decoration: isLink ? TextDecoration.underline : null,
+      decorationColor: const Color(0xFF0000FF)
     )).tr();
   }
 

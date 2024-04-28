@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
+import 'package:mylingz_app/extensions/date_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
@@ -37,7 +39,8 @@ class LinkItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 link.title?.hm(context),
-                ("${link.domain.removeHttps()}/${link.short}").ts(context)
+                ("${link.domain.removeHttps()}/${link.short}").ts(context, isLink: true),
+                Text("${link.createdAt.format("dd MMM, yyyy")} . 23 views", style: const TextStyle(fontSize: 12)).tr()
               ],
             ),
           ),
