@@ -1,4 +1,4 @@
-package com.example.mylingz_app
+package com.spiderlingz.mylingz
 
 import io.flutter.embedding.android.FlutterActivity
 

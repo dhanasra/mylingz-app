@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "834343356980",
+    "project_id": "mylingz",
+    "storage_bucket": "mylingz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834343356980:android:3c66537fbb6ffc2e321861",
+        "android_client_info": {
+          "package_name": "com.spiderlingz.mylingz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmpsYKnK8K6iZmdkg-4e5PvDR7kxVwh6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
