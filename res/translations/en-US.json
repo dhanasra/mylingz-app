@@ -60,6 +60,9 @@
   "historyPop1": "Show Preview",
   "historyPop2": "Decorate QR",
   "historyPop3": "Share Now",
-  "historyPop4": "Delete Forever"
+  "historyPop4": "Delete Forever",
+
+  "destUrlHint": "Tap to paste your long URL",
+  "destUrlLabel": "Your Destination Url"
   
 }

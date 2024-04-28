@@ -28,5 +28,15 @@ class StringConst {
   // contents
   static const recommendContent = "recommendContent";
 
+  // hints
+  static const destUrlHint = "destUrlHint";
+
+  // labels
+  static const destUrlLabel = "destUrlLabel";
+
+  // button
+  static const create = "create";
+
+
 
 }

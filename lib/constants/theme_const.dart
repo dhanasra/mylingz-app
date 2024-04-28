@@ -9,6 +9,16 @@ class ThemeConst {
 
   static getApplicationTheme(bool isDark){
 
+    var fillcolor = MaterialStateColor.resolveWith(
+      (states) {
+        if (states.contains(MaterialState.disabled)) {
+          return isDark ? Colors.black.withOpacity(0.3): Colors.grey.withOpacity(0.05);
+        } else {
+          return isDark ? Colors.black: Colors.white;
+        }
+      },
+    );
+
     return ThemeData(
       scaffoldBackgroundColor: isDark ? const Color(0xFF383838) : Colors.white,
       fontFamily: GoogleFonts.lato().fontFamily,
@@ -116,8 +126,10 @@ class ThemeConst {
       ),
 
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStatePropertyAll(!isDark ? ColorConst.primary : ColorConst.primaryLight),
-        checkColor: MaterialStatePropertyAll(!isDark ? Colors.white : ColorConst.primary),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(2),
+          side: BorderSide(color: isDark ? ColorConst.primaryLight : ColorConst.primary)
+        ),
       ),
 
       radioTheme: RadioThemeData(
@@ -168,7 +180,7 @@ class ThemeConst {
 
       inputDecorationTheme: InputDecorationTheme(
         contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-        fillColor: isDark ? Colors.black: Colors.white,
+        fillColor: fillcolor,
         filled: true,
         helperMaxLines: 2,
         prefixIconColor: isDark ? ColorConst.primaryLight: ColorConst.primary,
@@ -208,6 +220,13 @@ class ThemeConst {
           borderRadius: BorderRadius.circular(4),
         ),
         enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: isDark ? Colors.white30: Colors.black12,
+            width: 1,
+          ),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        disabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: isDark ? Colors.white30: Colors.black12,
             width: 1,

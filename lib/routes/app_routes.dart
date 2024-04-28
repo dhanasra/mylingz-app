@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mylingz_app/pages/links/create/create_link_view.dart';
 import 'package:mylingz_app/pages/settings/settings_view.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -15,6 +16,8 @@ class Routes {
   static const home = '/home';
 
   static const settings = '/settings';
+
+  static const createLink = '/createLink';
 
 }
 
@@ -38,6 +41,8 @@ class RouteGenerator {
         ], child: const HomeView()));
       case Routes.settings:
         return getTransistionPage(const SettingsView());
+      case Routes.createLink:
+        return getTransistionPage(const CreateLinkView());
       default:
         return unDefinedRoute();
     }

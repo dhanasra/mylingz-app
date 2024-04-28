@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
+import 'package:mylingz_app/routes/app_routes.dart';
 
 import '../../widgets/drawer_dialog.dart';
 import '../../widgets/home_drawer.dart';
@@ -37,7 +38,7 @@ class _HomeViewState extends State<HomeView> {
             child: HomeDrawer()),
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
-            onPressed: (){}),
+            onPressed: ()=>context.goto(Routes.createLink)),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           appBar: AppBar(
             automaticallyImplyLeading: false,
