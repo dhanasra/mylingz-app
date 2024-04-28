@@ -13,4 +13,8 @@ extension ContextExtensions on BuildContext {
   back(){
     Navigator.pop(this);
   }
+
+  ThemeData theme(){
+    return Theme.of(this);
+  }
 }

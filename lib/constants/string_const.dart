@@ -18,5 +18,15 @@ class StringConst {
   static const reportOpt = "reportOpt";
   static const feedbackOpt = "feedbackOpt";
 
+  // drawer
+  static const welcomeText1 = "welcomeText1";
+  static const welcomeText2 = "welcomeText2";
+  static const privacy = "privacy";
+  static const terms = "terms";
+  static const about = "about";
+
+  // contents
+  static const recommendContent = "recommendContent";
+
 
 }

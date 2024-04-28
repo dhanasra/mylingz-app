@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../pages/home/bloc/home_bloc.dart';
+import '../pages/home/cubit/home_cubit.dart';
+import '../pages/home/home_view.dart';
 import '../pages/splash/splash_view.dart';
 
 class Routes {
   static const splash = '/splash';
   static const welcome = '/welcome';
+
+  static const home = '/home';
 
 }
 
@@ -18,6 +24,15 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.splash:
         return getTransistionPage(const SplashView());
+      case Routes.home:
+        return getTransistionPage(MultiBlocProvider(providers: [
+          BlocProvider(
+            create: (context) => HomeCubit(),
+          ),
+          BlocProvider(
+            create: (context) => HomeBloc(),
+          ),
+        ], child: const HomeView()));
       default:
         return unDefinedRoute();
     }

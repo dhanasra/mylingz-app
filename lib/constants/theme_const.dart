@@ -17,7 +17,13 @@ class ThemeConst {
       primaryColor: isDark ? ColorConst.primaryLight: ColorConst.primary,
       primaryColorLight: ColorConst.primaryLight,
 
-      
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30)
+        ),
+        backgroundColor: isDark ? ColorConst.primaryLight: ColorConst.primary,
+        foregroundColor: isDark ? ColorConst.primary: Colors.white
+      ),
 
       appBarTheme: AppBarTheme(
         centerTitle: true,
