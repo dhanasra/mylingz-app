@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
-import 'package:url_launcher/url_launcher.dart';
+
+import '../utils/toast.dart';
 
 class LinkItem extends StatelessWidget {
   final ShortLink link;
@@ -46,7 +49,12 @@ class LinkItem extends StatelessWidget {
                 constraints: const BoxConstraints(
                   minWidth: 200
                 ),
-                onSelected: (v)=>{},
+                onSelected: (v){
+                  if(v=="copy"){
+                    Clipboard.setData(ClipboardData(text: "${link.domain}/${link.short}"));
+                    Toast.show(context, message: "Copied successfully!");
+                  }
+                },
                 itemBuilder: (_){
                 return[
                   PopupMenuItem<String>(
@@ -62,7 +70,7 @@ class LinkItem extends StatelessWidget {
                   ),
                   PopupMenuItem<String>(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    value: 'edit',
+                    value: 'copy',
                     child: Row(
                       children: [
                         const Icon(Icons.copy_outlined, size: 20),
