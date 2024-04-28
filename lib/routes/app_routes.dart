@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mylingz_app/pages/auth/login/login_view.dart';
+import 'package:mylingz_app/pages/auth/signup/signup_view.dart';
 import 'package:mylingz_app/pages/links/create/create_link_view.dart';
 import 'package:mylingz_app/pages/settings/settings_view.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../pages/auth/bloc/auth_bloc.dart';
 import '../pages/home/bloc/home_bloc.dart';
 import '../pages/home/cubit/home_cubit.dart';
 import '../pages/home/home_view.dart';
@@ -13,12 +16,14 @@ class Routes {
   static const splash = '/splash';
   static const welcome = '/welcome';
 
+  static const login = '/login';
+  static const signup = '/signup';
+
   static const home = '/home';
 
   static const settings = '/settings';
 
   static const createLink = '/createLink';
-
 }
 
 class RouteGenerator {
@@ -30,6 +35,16 @@ class RouteGenerator {
     switch (settings.name) {
       case Routes.splash:
         return getTransistionPage(const SplashView());
+      case Routes.login:
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const LoginView(),
+        ));
+      case Routes.signup:
+        return getTransistionPage(BlocProvider(
+          create: (context) => AuthBloc(),
+          child: const SignupView(),
+        ));
       case Routes.home:
         return getTransistionPage(MultiBlocProvider(providers: [
           BlocProvider(

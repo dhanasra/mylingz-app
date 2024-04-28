@@ -85,6 +85,11 @@ class ThemeConst {
           fontWeight: FontWeight.w600,
           color: !isDark ? const Color(0xFF383838) : Colors.white,
         ),
+        headlineLarge: GoogleFonts.lato(
+          fontSize: 24,
+          fontWeight: FontWeight.w600,
+          color: !isDark ? const Color(0xFF383838) : Colors.white,
+        ),
         headlineMedium: GoogleFonts.lato(
           fontSize: 20,
           fontWeight: FontWeight.w600,
