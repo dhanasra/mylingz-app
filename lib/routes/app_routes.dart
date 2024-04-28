@@ -10,6 +10,7 @@ import '../pages/auth/bloc/auth_bloc.dart';
 import '../pages/home/bloc/home_bloc.dart';
 import '../pages/home/cubit/home_cubit.dart';
 import '../pages/home/home_view.dart';
+import '../pages/links/bloc/links_bloc.dart';
 import '../pages/splash/splash_view.dart';
 
 class Routes {
@@ -57,7 +58,10 @@ class RouteGenerator {
       case Routes.settings:
         return getTransistionPage(const SettingsView());
       case Routes.createLink:
-        return getTransistionPage(const CreateLinkView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => LinksBloc(),
+          child: const CreateLinkView(),
+        ));
       default:
         return unDefinedRoute();
     }

@@ -8,21 +8,24 @@ class ShortLink {
   final String url;
   final String short;
   final String domain;
-  final String? backHalf;
   final String? title;
   final bool bioLink;
   final String? bioLinkBtnLabel;
-
+  final String createdBy;
+  final DateTime createdAt;
+  
   ShortLink({
     required this.id,
     required this.url,
     required this.short,
     this.domain = UrlConst.domainName,
-    this.backHalf,
     this.title,
     this.bioLink = false,
     this.bioLinkBtnLabel,
+    required this.createdBy,
+    required this.createdAt,
   });
+
 
   ShortLink copyWith({
     String? id,
@@ -33,16 +36,19 @@ class ShortLink {
     String? title,
     bool? bioLink,
     String? bioLinkBtnLabel,
+    String? createdBy,
+    DateTime? createdAt,
   }) {
     return ShortLink(
       id: id ?? this.id,
       url: url ?? this.url,
       short: short ?? this.short,
       domain: domain ?? this.domain,
-      backHalf: backHalf ?? this.backHalf,
       title: title ?? this.title,
       bioLink: bioLink ?? this.bioLink,
       bioLinkBtnLabel: bioLinkBtnLabel ?? this.bioLinkBtnLabel,
+      createdBy: createdBy ?? this.createdBy,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
@@ -52,10 +58,11 @@ class ShortLink {
       'url': url,
       'short': short,
       'domain': domain,
-      'backHalf': backHalf,
       'title': title,
       'bioLink': bioLink,
       'bioLinkBtnLabel': bioLinkBtnLabel,
+      'createdBy': createdBy,
+      'createdAt': createdAt.millisecondsSinceEpoch,
     };
   }
 
@@ -65,10 +72,11 @@ class ShortLink {
       url: map['url'] as String,
       short: map['short'] as String,
       domain: map['domain'] as String,
-      backHalf: map['backHalf'] != null ? map['backHalf'] as String : null,
       title: map['title'] != null ? map['title'] as String : null,
       bioLink: map['bioLink'] as bool,
       bioLinkBtnLabel: map['bioLinkBtnLabel'] != null ? map['bioLinkBtnLabel'] as String : null,
+      createdBy: map['createdBy'] as String,
+      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
     );
   }
 
@@ -78,7 +86,7 @@ class ShortLink {
 
   @override
   String toString() {
-    return 'ShortLink(id: $id, url: $url, short: $short, domain: $domain, backHalf: $backHalf, title: $title, bioLink: $bioLink, bioLinkBtnLabel: $bioLinkBtnLabel)';
+    return 'ShortLink(id: $id, url: $url, short: $short, domain: $domain, title: $title, bioLink: $bioLink, bioLinkBtnLabel: $bioLinkBtnLabel, createdBy: $createdBy, createdAt: $createdAt)';
   }
 
   @override
@@ -90,10 +98,11 @@ class ShortLink {
       other.url == url &&
       other.short == short &&
       other.domain == domain &&
-      other.backHalf == backHalf &&
       other.title == title &&
       other.bioLink == bioLink &&
-      other.bioLinkBtnLabel == bioLinkBtnLabel;
+      other.bioLinkBtnLabel == bioLinkBtnLabel &&
+      other.createdBy == createdBy &&
+      other.createdAt == createdAt;
   }
 
   @override
@@ -102,9 +111,10 @@ class ShortLink {
       url.hashCode ^
       short.hashCode ^
       domain.hashCode ^
-      backHalf.hashCode ^
       title.hashCode ^
       bioLink.hashCode ^
-      bioLinkBtnLabel.hashCode;
+      bioLinkBtnLabel.hashCode ^
+      createdBy.hashCode ^
+      createdAt.hashCode;
   }
 }

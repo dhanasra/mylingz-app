@@ -47,4 +47,8 @@ extension ControllerExtension on TextEditingController {
     return text.trim();
   }
 
+  String? trimNull(){
+    return text.trim().isEmpty ? null : text.trim();
+  }
+
 }
