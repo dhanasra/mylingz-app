@@ -4,7 +4,7 @@ import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
-import 'package:url_launcher/url_launcher_string.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LinkItem extends StatelessWidget {
   final ShortLink link;
@@ -16,7 +16,7 @@ class LinkItem extends StatelessWidget {
       m: const EdgeInsets.only(bottom: 16),
       p: const EdgeInsets.fromLTRB(16, 12, 0, 12),
       onClick: (){
-        launchUrlString("${link.domain}/${link.short}");
+        launchUrl(Uri.parse("${link.domain}/${link.short}"));
       },
       child: Row(
         children: [
