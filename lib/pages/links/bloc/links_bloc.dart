@@ -31,9 +31,7 @@ class LinksBloc extends Bloc<LinksEvent, LinksState> {
       
       DocumentReference ref = await _client.linksDB.add(data);
       data["id"] = ref.id;
-
-      print(data);
-
+      
       Global.links.add(ShortLink.fromMap(data));
       emit(Success());
     }catch(e){

@@ -39,6 +39,13 @@ extension TextExtensions on String {
     )).tr();
   }
 
+  String? removeHttps(){
+    if (startsWith('https://')) {
+      return substring(8);
+    } else {
+      return this;
+    }
+  }
 }
 
 extension ControllerExtension on TextEditingController {

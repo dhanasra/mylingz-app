@@ -4,9 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/network/firebase_client.dart';
 
-import '../../network/models/user_data.dart';
 import '../../routes/app_routes.dart';
-import '../../utils/global.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -20,16 +18,11 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 2), ()async{
-      User? user = FirebaseAuth.instance.currentUser;
+      User? user = FirebaseAuth.instance.currentUser; 
 
       if(user!=null){
-        var userId = user.uid;
-        await FirebaseClient().userDB.doc(userId).get().then(
-          (res){
-            var data = res.data();
-            Global.user = UserData.fromMap(data);
-            context.goto(Routes.home, clear: true);
-          });
+        await FirebaseClient().initApp(user).then(
+          (value) => context.goto(Routes.home, clear: true));
       }else{
         context.goto(Routes.login, clear: true);
       }

@@ -66,7 +66,7 @@ class ShortLink {
     };
   }
 
-  factory ShortLink.fromMap(Map<String, dynamic> map) {
+  factory ShortLink.fromMap(map) {
     return ShortLink(
       id: map['id'] as String,
       url: map['url'] as String,
