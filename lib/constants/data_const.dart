@@ -1,0 +1,4 @@
+class DataConst {
+  DataConst._();
+
+}

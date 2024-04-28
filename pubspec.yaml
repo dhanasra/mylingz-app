@@ -36,9 +36,37 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
 
+  #firebase
+  firebase_core: ^2.30.0
+  firebase_analytics: ^10.10.2
+  firebase_crashlytics: ^3.5.2
+  firebase_remote_config: ^4.4.2
+  cloud_firestore: ^4.17.1
+
+  #system
+  path_provider: ^2.1.3
+
+  #style
+  google_fonts: ^6.2.1
+
+  #SML
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.5
+
+  #localstorgae
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+
+  #routes
+  page_transition: ^2.1.0
+
+  #language
+  easy_localization: ^3.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -50,6 +78,11 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "res/logo/app_logo.png"
+
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -58,10 +91,11 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - res/translations/
+    - res/json/
+    - res/images/
+    - res/logo/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
