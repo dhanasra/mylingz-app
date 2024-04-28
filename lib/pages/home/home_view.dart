@@ -62,6 +62,7 @@ class _HomeViewState extends State<HomeView> {
             leftCornerRadius: 16,
             rightCornerRadius: 16,
             height: 60,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             tabBuilder: (idx, isActive){
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/pages/home/fragments/analytics_fragment.dart';
 import 'package:mylingz_app/pages/home/fragments/dashboard_fragment.dart';
 import 'package:mylingz_app/pages/home/fragments/products_fragment.dart';
 import 'package:mylingz_app/pages/home/fragments/settings_fragment.dart';
+import 'package:mylingz_app/routes/app_routes.dart';
 
 import '../../base/base_viewmodel.dart';
 import 'cubit/home_cubit.dart';
@@ -39,6 +41,10 @@ class HomeViewModel extends BaseViewModel {
   }
 
   handleItemClick(BuildContext context, int idx){
+
+    if(idx==3){
+      context.goto(Routes.settings);
+    }
 
     context.read<HomeCubit>().onPageChange(idx.toInt());
     controller.jumpToPage(idx.toInt());

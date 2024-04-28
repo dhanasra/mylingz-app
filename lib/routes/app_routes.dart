@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mylingz_app/pages/settings/settings_view.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../pages/home/bloc/home_bloc.dart';
@@ -12,6 +13,8 @@ class Routes {
   static const welcome = '/welcome';
 
   static const home = '/home';
+
+  static const settings = '/settings';
 
 }
 
@@ -33,6 +36,8 @@ class RouteGenerator {
             create: (context) => HomeBloc(),
           ),
         ], child: const HomeView()));
+      case Routes.settings:
+        return getTransistionPage(const SettingsView());
       default:
         return unDefinedRoute();
     }
