@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mylingz_app/pages/auth/login/login_view.dart';
 import 'package:mylingz_app/pages/auth/signup/signup_view.dart';
 import 'package:mylingz_app/pages/links/create/create_link_view.dart';
+import 'package:mylingz_app/pages/links/details/link_details_view.dart';
 import 'package:mylingz_app/pages/settings/settings_view.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -25,6 +26,7 @@ class Routes {
   static const settings = '/settings';
 
   static const createLink = '/createLink';
+  static const linkDetails = '/linkDetails';
 }
 
 class RouteGenerator {
@@ -62,6 +64,9 @@ class RouteGenerator {
           create: (context) => LinksBloc(),
           child: const CreateLinkView(),
         ));
+      case Routes.linkDetails:
+        return getTransistionPage(
+          LinkDetailsView(linkId: settings.arguments as String));
       default:
         return unDefinedRoute();
     }

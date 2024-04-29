@@ -15,9 +15,11 @@ extension TextExtensions on String {
     return Text(this, style: Theme.of(context).textTheme.headlineSmall).tr();
   }
 
-  tl(BuildContext context, {int? maxLines, Color? color}){
+  tl(BuildContext context, {int? maxLines, Color? color, bool isLink = false}){
     return Text(this, maxLines: maxLines, style: Theme.of(context).textTheme.titleLarge!.copyWith(
-      color: color
+      color: color ?? (isLink ? const Color(0xFF0000FF) : null),
+      decoration: isLink ? TextDecoration.underline : null,
+      decorationColor: const Color(0xFF0000FF)
     )).tr();
   }
 

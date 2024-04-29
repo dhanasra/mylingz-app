@@ -32,7 +32,7 @@ class _LoginViewState extends State<LoginView> {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if(state is Success){
-          context.goto(Routes.home);
+          context.goto(Routes.home, clear: true);
         }
       },
       child: Scaffold(

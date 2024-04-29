@@ -7,7 +7,9 @@ import 'package:mylingz_app/extensions/date_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
+import 'package:mylingz_app/routes/app_routes.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '../utils/toast.dart';
 
@@ -53,9 +55,20 @@ class LinkItem extends StatelessWidget {
                   minWidth: 200
                 ),
                 onSelected: (v){
-                  if(v=="copy"){
-                    Clipboard.setData(ClipboardData(text: "${link.domain}/${link.short}"));
+                  
+                  var shortLink = "${link.domain}/${link.short}";
+
+                  if(v=="view"){
+                    context.goto(Routes.linkDetails, args: link.id);
+                  }else if(v=="copy"){
+                    Clipboard.setData(ClipboardData(text: shortLink));
                     Toast.show(context, message: "Copied successfully!");
+                  }else if(v=="share"){
+                    Share.share(shortLink);
+                  }else if(v=="bioLink"){
+
+                  }else if(v=="delete"){
+
                   }
                 },
                 itemBuilder: (_){
@@ -95,7 +108,7 @@ class LinkItem extends StatelessWidget {
                   ),
                   PopupMenuItem<String>(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    value: 'delete',
+                    value: 'bioLink',
                     child: Row(
                       children: [
                         const Icon(Icons.person_add_alt_outlined, size: 20),
