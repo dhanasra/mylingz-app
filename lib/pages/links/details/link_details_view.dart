@@ -1,10 +1,12 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:like_button/like_button.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/pages/links/details/link_details_viewmodel.dart';
+import 'package:mylingz_app/widgets/line_chart.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
 
 class LinkDetailsView extends StatefulWidget {
@@ -102,7 +104,57 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
                   ).toList()
                 )
               ],
-            ))
+            )),
+          26.h(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+            child: "Analytics".hm(context),
+          ),
+          18.h(),
+          GridView.builder(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 16,
+              childAspectRatio: 2.5  
+            ), 
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: _viewModel.analytics.length,
+            itemBuilder: (_, idx){
+              var item = _viewModel.analytics[idx];
+              return StyledWrapper(
+                p: const EdgeInsets.all(12),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: (item["color"] as Color).withOpacity(0.1),
+                      child: item["icon"],
+                    ),
+                    16.w(),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("${item["label"]}"),
+                          2.h(),
+                          "${item["value"]}".hs(context)
+                        ],
+                      ),
+                    )
+                  ],
+                ));
+            }
+          ),
+          18.h(),
+          StyledWrapper(
+            p: const EdgeInsets.all(16),
+            child: LineChart(
+              title: "Click Performance",
+              data: _viewModel.chartData,
+            ),
+          )
         ],
       ),
     );
