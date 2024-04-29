@@ -13,6 +13,7 @@ class BioLink {
   final String name;
   final String? description;
   final String? picture;
+  final String? banner;
   final Company? company;
   final String bioId;
   final String domainName;
@@ -24,12 +25,13 @@ class BioLink {
     required this.name,
     this.description,
     this.picture,
+    this.banner,
     this.company,
     required this.bioId,
     required this.domainName,
     this.buttons = const [],
     this.icons = const [],
-    this.contactFields = const [],
+    this.contactFields = const []
   });
 
 
@@ -37,6 +39,7 @@ class BioLink {
     String? name,
     String? description,
     String? picture,
+    String? banner,
     Company? company,
     String? bioId,
     String? domainName,
@@ -48,6 +51,7 @@ class BioLink {
       name: name ?? this.name,
       description: description ?? this.description,
       picture: picture ?? this.picture,
+      banner: banner ?? this.banner,
       company: company ?? this.company,
       bioId: bioId ?? this.bioId,
       domainName: domainName ?? this.domainName,
@@ -62,6 +66,7 @@ class BioLink {
       'name': name,
       'description': description,
       'picture': picture,
+      'banner': banner,
       'company': company?.toMap(),
       'bioId': bioId,
       'domainName': domainName,
@@ -76,6 +81,7 @@ class BioLink {
       name: map['name'] as String,
       description: map['description'] != null ? map['description'] as String : null,
       picture: map['picture'] != null ? map['picture'] as String : null,
+      banner: map['banner'] != null ? map['banner'] as String : null,
       company: map['company'] != null ? Company.fromMap(map['company'] as Map<String,dynamic>) : null,
       bioId: map['bioId'] as String,
       domainName: map['domainName'] as String,
@@ -91,7 +97,7 @@ class BioLink {
 
   @override
   String toString() {
-    return 'BioLink(name: $name, description: $description, picture: $picture, company: $company, bioId: $bioId, domainName: $domainName, buttons: $buttons, icons: $icons, contactFields: $contactFields)';
+    return 'BioLink(name: $name, description: $description, picture: $picture, banner: $banner, company: $company, bioId: $bioId, domainName: $domainName, buttons: $buttons, icons: $icons, contactFields: $contactFields)';
   }
 
   @override
@@ -102,6 +108,7 @@ class BioLink {
       other.name == name &&
       other.description == description &&
       other.picture == picture &&
+      other.banner == banner &&
       other.company == company &&
       other.bioId == bioId &&
       other.domainName == domainName &&
@@ -115,6 +122,7 @@ class BioLink {
     return name.hashCode ^
       description.hashCode ^
       picture.hashCode ^
+      banner.hashCode ^
       company.hashCode ^
       bioId.hashCode ^
       domainName.hashCode ^

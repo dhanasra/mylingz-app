@@ -124,22 +124,22 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
             itemBuilder: (_, idx){
               var item = _viewModel.analytics[idx];
               return StyledWrapper(
-                p: const EdgeInsets.all(12),
+                p: const EdgeInsets.all(8),
                 child: Row(
                   children: [
                     CircleAvatar(
                       backgroundColor: (item["color"] as Color).withOpacity(0.1),
                       child: item["icon"],
                     ),
-                    16.w(),
+                    8.w(),
                     Expanded(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("${item["label"]}"),
-                          2.h(),
-                          "${item["value"]}".hs(context)
+                          Text("${item["label"]}", style: const TextStyle(fontSize: 12)),
+                          4.h(),
+                          "${item["value"]}".tl(context)
                         ],
                       ),
                     )

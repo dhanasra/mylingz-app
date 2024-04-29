@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: const Text("MYLingz"),
+            title: Text( idx==1 ? "My BioLink" : "MYLingz"),
             centerTitle: false,
             actions: [
               IconButton(onPressed: (){

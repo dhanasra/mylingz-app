@@ -4,8 +4,9 @@ class StyledWrapper extends StatelessWidget {
   final Widget child;
   final EdgeInsets? m;
   final EdgeInsets? p;
+  final double? r;
   final VoidCallback? onClick;
-  const StyledWrapper({super.key, required this.child, this.m, this.p, this.onClick});
+  const StyledWrapper({super.key, required this.child, this.m, this.p, this.onClick, this.r});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class StyledWrapper extends StatelessWidget {
         margin: m,
         padding: p,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(r ?? 8),
           color: Theme.of(context).cardColor,
           boxShadow: [
             BoxShadow(offset: const Offset(-3, -3), color: Theme.of(context).shadowColor, blurRadius: 10),
