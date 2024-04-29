@@ -43,7 +43,7 @@ extension TextExtensions on String {
     )).tr();
   }
 
-  String? removeHttps(){
+  String removeHttps(){
     if (startsWith('https://')) {
       return substring(8);
     } else {

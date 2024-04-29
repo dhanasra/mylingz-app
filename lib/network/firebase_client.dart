@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:mylingz_app/constants/url_const.dart';
+import 'package:mylingz_app/network/models/bio_link.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/network/models/user_data.dart';
 import 'package:mylingz_app/utils/global.dart';
@@ -38,6 +40,8 @@ class FirebaseClient {
 
       Global.links = links;
       Global.user = UserData.fromMap(userInfo);
+
+      Global.bioLink = BioLink(name: "Dhana Sekar", bioId: "dhanasra", domainName: UrlConst.domainName);
     } 
   }
 
