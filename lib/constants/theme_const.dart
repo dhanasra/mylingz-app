@@ -69,6 +69,11 @@ class ThemeConst {
       ),
 
       textTheme: TextTheme(
+        displaySmall: GoogleFonts.lato(
+          fontSize: 36,
+          fontWeight: FontWeight.w600,
+          color: !isDark ? const Color(0xFF383838) : Colors.white,
+        ),
         titleSmall: GoogleFonts.lato(
           fontSize: 14,
           fontWeight: FontWeight.w600,

@@ -4,7 +4,6 @@ import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/pages/home/fragments/analytics_fragment.dart';
 import 'package:mylingz_app/pages/home/fragments/dashboard_fragment.dart';
 import 'package:mylingz_app/pages/home/fragments/biolink_fragment.dart';
-import 'package:mylingz_app/pages/home/fragments/settings_fragment.dart';
 import 'package:mylingz_app/routes/app_routes.dart';
 
 import '../../base/base_viewmodel.dart';
@@ -41,8 +40,7 @@ class HomeViewModel extends BaseViewModel {
     items = [
       const DashboardFragment(),
       BioLinkFragment(vm: this),
-      const AnalyticsFragment(),
-      const SettingsFragment()
+      const AnalyticsFragment()
     ];
     ctx = context;
   }
@@ -51,6 +49,7 @@ class HomeViewModel extends BaseViewModel {
 
     if(idx==3){
       context.goto(Routes.settings);
+      return;
     }
 
     context.read<HomeCubit>().onPageChange(idx.toInt());

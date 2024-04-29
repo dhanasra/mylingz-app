@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 
 extension TextExtensions on String {
 
+  ds(BuildContext context, {TextAlign? align}){
+    return Text(this, textAlign: align, style: Theme.of(context).textTheme.displaySmall).tr();
+  }
+
   hl(BuildContext context, {TextAlign? align}){
     return Text(this, textAlign: align, style: Theme.of(context).textTheme.headlineLarge).tr();
   }
