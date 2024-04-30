@@ -50,7 +50,7 @@ class BioLink {
     return BioLink(
       title: title ?? this.title,
       slogan: slogan ?? this.slogan,
-      picture: picture ?? this.picture,
+      picture: picture,
       banner: banner ?? this.banner,
       company: company ?? this.company,
       bioId: bioId ?? this.bioId,

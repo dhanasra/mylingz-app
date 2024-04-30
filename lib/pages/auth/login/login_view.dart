@@ -54,7 +54,9 @@ class _LoginViewState extends State<LoginView> {
                       validator: (v) =>
                           Validator.validateNonNullOrEmpty(v, "Email address"),
                       decoration:
-                          InputDecoration(hintText: "Enter email address".tr()),
+                          InputDecoration(
+                            prefixIcon: const Icon(Icons.email_outlined),
+                            hintText: "Enter email address".tr()),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     12.h(),

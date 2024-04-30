@@ -11,14 +11,14 @@ class BasicInfoViewModel extends BaseViewModel {
 
   late TextEditingController titleController;
   late TextEditingController sloganController;
-  late ValueNotifier image;
+  late String? image;
   late ValueNotifier<AutovalidateMode> mode;
 
   BasicInfoViewModel(){
     var bioLink = Global.bioLink.value!;
     titleController = TextEditingController(text: bioLink.title);
     sloganController = TextEditingController(text: bioLink.slogan);
-    image = ValueNotifier(bioLink.picture);
+    image = bioLink.picture;
     mode = ValueNotifier(AutovalidateMode.disabled);
   }
 
@@ -33,7 +33,7 @@ class BasicInfoViewModel extends BaseViewModel {
       SaveBasicInfoEvent(
         title: titleController.trim(),
         slogan: sloganController.trimNull(),
-        picture: image.value  
+        picture: image  
       )
     );
   }

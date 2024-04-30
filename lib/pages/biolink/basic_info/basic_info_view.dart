@@ -42,7 +42,7 @@ class _BasicInfoViewState extends State<BasicInfoView> {
         builder: (context, state) {
 
           if(state is ImageUploaded){
-            _viewModel.image.value = state.url;
+            _viewModel.image = state.url;
           }
 
           return Scaffold(
@@ -62,8 +62,17 @@ class _BasicInfoViewState extends State<BasicInfoView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             "Logo".ts(context),
-                            "Remove".ts(context,
+                            GestureDetector(
+                              onTap: (){
+                                _viewModel.image = null;
+                                setState(() {});
+                              },
+                              child: Visibility(
+                                visible: _viewModel.image != null,
+                                child: "Remove".ts(context,
                                 color: context.theme().primaryColorLight),
+                              ),
+                            ),
                           ],
                         ),
                         Stack(
@@ -75,8 +84,8 @@ class _BasicInfoViewState extends State<BasicInfoView> {
                                 r: 100,
                                 child: CircleAvatar(
                                   radius: 60,
-                                  backgroundImage: _viewModel.image.value!=null
-                                    ? NetworkImage(_viewModel.image.value) 
+                                  backgroundImage: _viewModel.image!=null
+                                    ? NetworkImage(_viewModel.image!) 
                                     : null
                                 ),
                               )
