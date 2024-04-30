@@ -61,7 +61,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       var userId = userCredential.user?.uid;
       var data = (await _client.userDB.doc(userId).get()).data();
+      var biolink = (await _client.myBiolink.get()).data();
       Global.user = UserData.fromMap(data);
+      Global.bioLink.value = BioLink.fromMap(biolink);
       emit(Success());
     }catch(e){
       emit(Error());

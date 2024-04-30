@@ -9,6 +9,7 @@ import 'package:mylingz_app/pages/links/details/link_details_view.dart';
 import 'package:mylingz_app/pages/settings/settings_view.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../common/image/image_bloc.dart';
 import '../pages/auth/bloc/auth_bloc.dart';
 import '../pages/biolink/bloc/bio_link_bloc.dart';
 import '../pages/home/bloc/home_bloc.dart';
@@ -76,8 +77,15 @@ class RouteGenerator {
       case Routes.bioLinkEdit:
         return getTransistionPage(const BioLinkEditView());
       case Routes.bioLinkBasicInfo:
-        return getTransistionPage(BlocProvider(
-          create: (context) => BioLinkBloc(),
+        return getTransistionPage(MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => BioLinkBloc(),
+            ),
+            BlocProvider(
+              create: (context) => ImageBloc(),
+            ),
+          ],
           child: const BasicInfoView(),
         ));
       default:

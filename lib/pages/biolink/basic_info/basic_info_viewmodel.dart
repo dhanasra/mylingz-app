@@ -23,6 +23,7 @@ class BasicInfoViewModel extends BaseViewModel {
   }
 
   save(BuildContext context){
+    FocusScope.of(context).unfocus();
     if(!formKey.currentState!.validate()){
       mode.value = AutovalidateMode.always;
       return;

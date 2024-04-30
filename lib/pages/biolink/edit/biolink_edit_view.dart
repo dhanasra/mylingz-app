@@ -32,11 +32,17 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                 onClick: ()=>context.goto(Routes.bioLinkBasicInfo),
                 child: Column(
                   children: [
-                    const CircleAvatar(
-                      radius: 50,
+                    StyledWrapper(
+                      r: 100,
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage: biolink!.picture!=null
+                          ? NetworkImage(biolink.picture!) 
+                          : null
+                      ),
                     ),
                     16.h(),
-                    biolink!.title.hm(context)
+                    biolink.title.hm(context)
                   ],
                 )
               ),

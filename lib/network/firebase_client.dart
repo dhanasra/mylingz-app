@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:mylingz_app/network/models/bio_link.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/network/models/user_data.dart';
@@ -22,6 +23,8 @@ class FirebaseClient {
   DocumentReference get myBiolink => firestore.collection(Collection.bioLinks).doc(FirebaseAuth.instance.currentUser?.uid);
 
   CollectionReference get configDB => firestore.collection(Collection.config);
+  Reference get storageReference => FirebaseStorage.instance.ref().child("free");
+  String get userId => FirebaseAuth.instance.currentUser!.uid;
 
   Future initApp(User? user)async{
     if(user!=null){
