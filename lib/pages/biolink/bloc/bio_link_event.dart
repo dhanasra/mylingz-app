@@ -14,3 +14,10 @@ class SaveBasicInfoEvent extends BioLinkEvent {
     this.slogan,
   });
 }
+
+class SaveButtonsEvent extends BioLinkEvent {
+  final List<BioLinkButton> buttons;
+  SaveButtonsEvent({
+    required this.buttons
+  });
+}

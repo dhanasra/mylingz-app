@@ -7,6 +7,8 @@ import 'package:mylingz_app/utils/global.dart';
 import 'package:mylingz_app/widgets/dotted_wrapper.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
 
+import '../../../widgets/styled_button.dart';
+
 class BioLinkEditView extends StatefulWidget {
   const BioLinkEditView({super.key});
 
@@ -42,7 +44,9 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                       ),
                     ),
                     16.h(),
-                    biolink.title.hm(context)
+                    biolink.title.hm(context),
+                    6.h(),
+                    biolink.slogan?.ts(context)
                   ],
                 )
               ),
@@ -73,7 +77,10 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
               ),
               16.h(),
               DottedWrapper(
-                child: biolink.icons.isEmpty
+                onClick: ()=>{
+                  context.goto(Routes.bioLinkButtons).then((value) => setState(() {}))
+                },
+                child: biolink.buttons.isEmpty
                 ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -84,11 +91,17 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                 ): ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: biolink.icons.length,
+                  itemCount: biolink.buttons.length,
                   itemBuilder: (_, idx){
-                    return StyledWrapper(
-                      p: const EdgeInsets.all(8),
-                      child: "Button Label".tl(context));
+                    return AbsorbPointer(
+                      child: StyledWrapper(
+                        m: const EdgeInsets.all(10),
+                        child: StyledButton(
+                          onClick: (){}, 
+                          secondary: true,
+                          text: (biolink.buttons[idx].text).trim()
+                        )),
+                    );
                   }
                 )
               ),

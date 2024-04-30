@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 extension ContextExtensions on BuildContext {
   
-  goto(String path, {Object? args, bool clear = false}){
+  Future goto(String path, {Object? args, bool clear = false})async{
     if(clear){
-      Navigator.pushNamedAndRemoveUntil(this, path, (route) => false, arguments: args);
+      return await Navigator.pushNamedAndRemoveUntil(this, path, (route) => false, arguments: args);
     }else{
-      Navigator.pushNamed(this, path, arguments: args);
+      return await Navigator.pushNamed(this, path, arguments: args);
     }
   }
 

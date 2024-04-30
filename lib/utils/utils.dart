@@ -43,7 +43,7 @@ String getLanguage(String languageCode){
 String generateUniqueString() {
   String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
   String randomChars = generateRandomChars(5);
-  String uniqueString = timestamp.substring(timestamp.length - 5) + randomChars;
+  String uniqueString = timestamp.substring(timestamp.length - 7) + randomChars;
   return uniqueString;
 }
 

@@ -1,5 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mylingz_app/constants/assets_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
@@ -28,15 +30,20 @@ class BioLinkItem extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
                     color: context.theme().colorScheme.background,
+                    image: const DecorationImage(
+                      fit: BoxFit.cover,
+                      colorFilter: ColorFilter.mode(Colors.black, BlendMode.color),
+                      image: AssetImage(AssetsConst.placeholder))
                   ),
                 ),
-                const Align(
+                Align(
                   alignment: Alignment.bottomCenter,
                   child: StyledWrapper(
                     r: 100,
                     child: CircleAvatar(
                     radius: 50,
-                    // backgroundImage: NetworkImage(url),
+                    backgroundImage: bioLink.picture!=null
+                    ? NetworkImage(bioLink.picture!) : null,
                   )),
                 )
               ],
@@ -64,20 +71,25 @@ class BioLinkItem extends StatelessWidget {
                         radius: const Radius.circular(16),
                         borderType: BorderType.RRect,
                         dashPattern: const [6, 3],
-                        child: Container(
-                          padding: const EdgeInsets.all(14),
-                          decoration: BoxDecoration(
-                            color: context.theme().primaryColorLight.withOpacity(0.2),
-                            borderRadius: BorderRadius.circular(16)
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Text("${bioLink.domainName}/${bioLink.bioId}", 
-                                style: TextStyle(fontSize: 15, overflow: TextOverflow.ellipsis, color: context.theme().primaryColor)),
-                              ),
-                              Icon(Icons.open_in_new, color: context.theme().primaryColor, size: 20)
-                            ],
+                        child: GestureDetector(
+                          onTap: (){
+                            Clipboard.setData(ClipboardData(text: "${bioLink.domainName}/${bioLink.bioId}"));
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(14),
+                            decoration: BoxDecoration(
+                              color: context.theme().primaryColorLight.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(16)
+                            ),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text("${bioLink.domainName}/${bioLink.bioId}", 
+                                  style: TextStyle(fontSize: 15, overflow: TextOverflow.ellipsis, color: context.theme().primaryColor)),
+                                ),
+                                Icon(Icons.copy, color: context.theme().primaryColor, size: 20)
+                              ],
+                            ),
                           ),
                         )
                       ),
@@ -125,37 +137,6 @@ class BioLinkItem extends StatelessWidget {
               ],
             ),  
           )
-          // 16.h(),
-          // SizedBox(
-          //   height: 50,
-          //   child: Row(
-          //     children: [
-          //       Expanded(
-          //         child: ElevatedButton(
-          //           onPressed: (){},
-          //           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-          //             elevation: const MaterialStatePropertyAll(0),
-          //             backgroundColor: const MaterialStatePropertyAll(Color(0xFFf4f6fa)),
-          //             foregroundColor: const MaterialStatePropertyAll(ColorConst.primary),
-          //           ), 
-          //           child: const Text("View"),
-          //         )
-          //       ),
-          //       16.w(),
-          //       Expanded(
-          //         child: ElevatedButton(
-          //           onPressed: (){}, 
-          //           style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-          //             elevation: const MaterialStatePropertyAll(0),
-          //             backgroundColor: const MaterialStatePropertyAll(ColorConst.primaryLight),
-          //             foregroundColor: const MaterialStatePropertyAll(Colors.white),
-          //           ), 
-          //           child: const Text("Share")
-          //         )
-          //       )
-          //     ],
-          //   ),
-          // )
 
         ],
       ));

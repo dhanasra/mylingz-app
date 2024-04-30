@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/pages/home/home_viewmodel.dart';
@@ -14,8 +15,13 @@ class BioLinkFragment extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       children: [
         16.h(),
-        BioLinkItem(
-          bioLink: Global.bioLink.value!, options: vm.options)
+        ValueListenableBuilder(
+          valueListenable: Global.bioLink,
+          builder: (_, value, __) {
+            return BioLinkItem(
+              bioLink: value!, options: vm.options);
+          }
+        )
       ],
     );
   }
