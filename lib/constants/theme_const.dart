@@ -50,13 +50,14 @@ class ThemeConst {
       colorScheme: ThemeData().colorScheme.copyWith(
         primary: ColorConst.primary,
         secondary: Colors.white,
-        tertiary: ColorConst.primaryLight.withOpacity(0.4)
+        tertiary: ColorConst.primaryLight.withOpacity(0.4),
+        background: const Color(0xFFf4f6fa)
       ),
 
       iconTheme: IconThemeData(
         color: !isDark ? ColorConst.primary : ColorConst.primaryLight,
       ),
-      
+
       highlightColor: isDark ? ColorConst.primary : Colors.white,
       cardColor: isDark ? Colors.black : Colors.white,
       shadowColor: isDark ? const Color(0xFF444444) : const Color(0x88DFDFDF),

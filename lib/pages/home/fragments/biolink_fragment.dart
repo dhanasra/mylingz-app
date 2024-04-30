@@ -15,7 +15,7 @@ class BioLinkFragment extends StatelessWidget {
       children: [
         16.h(),
         BioLinkItem(
-          bioLink: Global.bioLink!, options: vm.options)
+          bioLink: Global.bioLink.value!, options: vm.options)
       ],
     );
   }

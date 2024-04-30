@@ -10,8 +10,8 @@ import 'package:mylingz_app/network/models/social_icon.dart';
 import 'bio_link_button.dart';
 
 class BioLink {
-  final String name;
-  final String? description;
+  final String title;
+  final String? slogan;
   final String? picture;
   final String? banner;
   final Company? company;
@@ -22,8 +22,8 @@ class BioLink {
   final List<ContactFields> contactFields;
 
   BioLink({
-    required this.name,
-    this.description,
+    required this.title,
+    this.slogan,
     this.picture,
     this.banner,
     this.company,
@@ -36,8 +36,8 @@ class BioLink {
 
 
   BioLink copyWith({
-    String? name,
-    String? description,
+    String? title,
+    String? slogan,
     String? picture,
     String? banner,
     Company? company,
@@ -48,8 +48,8 @@ class BioLink {
     List<ContactFields>? contactFields,
   }) {
     return BioLink(
-      name: name ?? this.name,
-      description: description ?? this.description,
+      title: title ?? this.title,
+      slogan: slogan ?? this.slogan,
       picture: picture ?? this.picture,
       banner: banner ?? this.banner,
       company: company ?? this.company,
@@ -63,8 +63,8 @@ class BioLink {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'name': name,
-      'description': description,
+      'title': title,
+      'slogan': slogan,
       'picture': picture,
       'banner': banner,
       'company': company?.toMap(),
@@ -76,10 +76,10 @@ class BioLink {
     };
   }
 
-  factory BioLink.fromMap(Map<String, dynamic> map) {
+  factory BioLink.fromMap(map) {
     return BioLink(
-      name: map['name'] as String,
-      description: map['description'] != null ? map['description'] as String : null,
+      title: map['title'] as String,
+      slogan: map['slogan'] != null ? map['slogan'] as String : null,
       picture: map['picture'] != null ? map['picture'] as String : null,
       banner: map['banner'] != null ? map['banner'] as String : null,
       company: map['company'] != null ? Company.fromMap(map['company'] as Map<String,dynamic>) : null,
@@ -97,7 +97,7 @@ class BioLink {
 
   @override
   String toString() {
-    return 'BioLink(name: $name, description: $description, picture: $picture, banner: $banner, company: $company, bioId: $bioId, domainName: $domainName, buttons: $buttons, icons: $icons, contactFields: $contactFields)';
+    return 'BioLink(title: $title, slogan: $slogan, picture: $picture, banner: $banner, company: $company, bioId: $bioId, domainName: $domainName, buttons: $buttons, icons: $icons, contactFields: $contactFields)';
   }
 
   @override
@@ -105,8 +105,8 @@ class BioLink {
     if (identical(this, other)) return true;
   
     return 
-      other.name == name &&
-      other.description == description &&
+      other.title == title &&
+      other.slogan == slogan &&
       other.picture == picture &&
       other.banner == banner &&
       other.company == company &&
@@ -119,8 +119,8 @@ class BioLink {
 
   @override
   int get hashCode {
-    return name.hashCode ^
-      description.hashCode ^
+    return title.hashCode ^
+      slogan.hashCode ^
       picture.hashCode ^
       banner.hashCode ^
       company.hashCode ^

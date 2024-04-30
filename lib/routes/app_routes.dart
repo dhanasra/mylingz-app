@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mylingz_app/pages/auth/login/login_view.dart';
 import 'package:mylingz_app/pages/auth/signup/signup_view.dart';
+import 'package:mylingz_app/pages/biolink/basic_info/basic_info_view.dart';
+import 'package:mylingz_app/pages/biolink/edit/biolink_edit_view.dart';
 import 'package:mylingz_app/pages/links/create/create_link_view.dart';
 import 'package:mylingz_app/pages/links/details/link_details_view.dart';
 import 'package:mylingz_app/pages/settings/settings_view.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../pages/auth/bloc/auth_bloc.dart';
+import '../pages/biolink/bloc/bio_link_bloc.dart';
 import '../pages/home/bloc/home_bloc.dart';
 import '../pages/home/cubit/home_cubit.dart';
 import '../pages/home/home_view.dart';
@@ -27,6 +30,9 @@ class Routes {
 
   static const createLink = '/createLink';
   static const linkDetails = '/linkDetails';
+
+  static const bioLinkEdit = '/bioLinkEdit';
+  static const bioLinkBasicInfo = '/bioLinkBasicInfo';
 }
 
 class RouteGenerator {
@@ -66,7 +72,14 @@ class RouteGenerator {
         ));
       case Routes.linkDetails:
         return getTransistionPage(
-          LinkDetailsView(linkId: settings.arguments as String));
+            LinkDetailsView(linkId: settings.arguments as String));
+      case Routes.bioLinkEdit:
+        return getTransistionPage(const BioLinkEditView());
+      case Routes.bioLinkBasicInfo:
+        return getTransistionPage(BlocProvider(
+          create: (context) => BioLinkBloc(),
+          child: const BasicInfoView(),
+        ));
       default:
         return unDefinedRoute();
     }

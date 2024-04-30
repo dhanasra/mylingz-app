@@ -4,6 +4,7 @@ import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/network/models/bio_link.dart';
+import 'package:mylingz_app/routes/app_routes.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
 
 class BioLinkItem extends StatelessWidget {
@@ -24,9 +25,9 @@ class BioLinkItem extends StatelessWidget {
               children: [
                 Container(
                   height: 140,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
-                    color: Color(0xFFf4f6fa),
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
+                    color: context.theme().colorScheme.background,
                   ),
                 ),
                 const Align(
@@ -42,7 +43,7 @@ class BioLinkItem extends StatelessWidget {
             ),
           ),
           16.h(),
-          bioLink.name.hm(context),
+          bioLink.title.hm(context),
           Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -51,8 +52,8 @@ class BioLinkItem extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(horizontal: 0, vertical: 16),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    border: Border.all(color: const Color(0xFFf4f6fa)),
-                    color: const Color(0xFFf4f6fa),
+                    border: Border.all(color: context.theme().colorScheme.background),
+                    color: context.theme().colorScheme.background,
                     borderRadius: BorderRadius.circular(8)
                   ),
                   child: Column(
@@ -98,7 +99,11 @@ class BioLinkItem extends StatelessWidget {
                     children: options.map(
                       (e) => Expanded(
                         child: InkWell(
-                          onTap: (){},
+                          onTap: (){
+                            if(e["id"]=="edit"){
+                              context.goto(Routes.bioLinkEdit);
+                            }
+                          },
                           child: Column(
                             children: [
                               Container(

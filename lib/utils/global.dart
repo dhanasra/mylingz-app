@@ -9,7 +9,7 @@ class Global {
   static ThemeMode mode = ThemeMode.light;
 
   static UserData? user;
-  static BioLink? bioLink;
+  static ValueNotifier<BioLink?> bioLink = ValueNotifier(null);
 
   static List<ShortLink> links = [];
 

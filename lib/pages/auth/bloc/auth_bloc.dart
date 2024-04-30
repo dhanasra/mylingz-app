@@ -1,9 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/constants/url_const.dart';
 import 'package:mylingz_app/network/firebase_client.dart';
+import 'package:mylingz_app/network/models/bio_link.dart';
 import 'package:mylingz_app/network/models/user_data.dart';
 import 'package:mylingz_app/utils/global.dart';
+import 'package:mylingz_app/utils/utils.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -25,7 +28,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         email: event.email,
         password: event.password
       );
-      var userId = userCredential.user?.uid;
+      var userId = userCredential.user!.uid;
       var data = {
         "id": userId,
         "firstName": event.fname,
@@ -34,6 +37,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       };
       await _client.userDB.doc(userId).set(data);
       Global.user = UserData.fromMap(data);
+
+      var bioId = generateUniqueString();
+      var bioLink = BioLink(
+        title: "${event.fname} ${event.lname}", 
+        bioId: bioId, 
+        domainName: UrlConst.domainName
+      );
+      await _client.myBiolink.set(bioLink.toMap());
+      Global.bioLink.value = bioLink;
       emit(Success());
     }catch(e){
       emit(Error());

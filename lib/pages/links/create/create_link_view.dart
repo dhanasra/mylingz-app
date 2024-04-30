@@ -93,8 +93,8 @@ class _CreateLinkViewState extends State<CreateLinkView> {
                     ],
                   ),
                   12.h(),
-                  const Divider(
-                    color: Color(0xFFf4f6fa),
+                  Divider(
+                    color: context.theme().colorScheme.background,
                   ),
                   ListTile(
                     title: "Use This Link In Bio"
@@ -114,7 +114,7 @@ class _CreateLinkViewState extends State<CreateLinkView> {
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
-                          color: const Color(0xFFf4f6fa)),
+                          color: context.theme().colorScheme.background),
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

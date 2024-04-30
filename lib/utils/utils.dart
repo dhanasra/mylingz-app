@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 String? colorToString(Color? color) {
@@ -36,4 +38,17 @@ String getLanguage(String languageCode){
     case "hi": return "हिंदी";
     default: return "ENGLISH";
   }
+}
+
+String generateUniqueString() {
+  String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
+  String randomChars = generateRandomChars(5);
+  String uniqueString = timestamp.substring(timestamp.length - 5) + randomChars;
+  return uniqueString;
+}
+
+String generateRandomChars(int length) {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  final random = Random();
+  return String.fromCharCodes(Iterable.generate(length, (_) => chars.codeUnitAt(random.nextInt(chars.length))));
 }

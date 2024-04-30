@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:like_button/like_button.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/pages/links/details/link_details_viewmodel.dart';
@@ -66,7 +67,7 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
                     radius: const Radius.circular(4),
                     borderType: BorderType.RRect,
                     child: Container(
-                      color: const Color(0xFFf4f6fa),
+                      color: context.theme().colorScheme.background,
                       padding: const EdgeInsets.all(14),
                       child: Row(
                         children: [
