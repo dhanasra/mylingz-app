@@ -52,6 +52,7 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
               ),
               16.h(),
               DottedWrapper(
+                onClick: ()=>context.goto(Routes.bioLinkIcons),
                 child: biolink.icons.isEmpty
                 ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,

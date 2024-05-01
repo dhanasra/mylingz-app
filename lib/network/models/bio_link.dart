@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:mylingz_app/network/models/company.dart';
 import 'package:mylingz_app/network/models/contact_fields.dart';
-import 'package:mylingz_app/network/models/social_icon.dart';
+import 'package:mylingz_app/network/models/social_link.dart';
 
 import 'bio_link_button.dart';
 
@@ -18,7 +18,7 @@ class BioLink {
   final String bioId;
   final String domainName;
   final List<BioLinkButton> buttons;
-  final List<SocialIcon> icons;
+  final List<SocialLink> icons;
   final List<ContactFields> contactFields;
 
   BioLink({
@@ -44,7 +44,7 @@ class BioLink {
     String? bioId,
     String? domainName,
     List<BioLinkButton>? buttons,
-    List<SocialIcon>? icons,
+    List<SocialLink>? icons,
     List<ContactFields>? contactFields,
   }) {
     return BioLink(
@@ -86,7 +86,7 @@ class BioLink {
       bioId: map['bioId'] as String,
       domainName: map['domainName'] as String,
       buttons: List<BioLinkButton>.from((map['buttons']).map<BioLinkButton>((x) => BioLinkButton.fromMap(x as Map<String,dynamic>),),),
-      icons: List<SocialIcon>.from((map['icons']).map<SocialIcon>((x) => SocialIcon.fromMap(x as Map<String,dynamic>),),),
+      icons: List<SocialLink>.from((map['icons']).map<SocialLink>((x) => SocialLink.fromMap(x as Map<String,dynamic>),),),
       contactFields: List<ContactFields>.from((map['contactFields']).map<ContactFields>((x) => ContactFields.fromMap(x as Map<String,dynamic>),),),
     );
   }

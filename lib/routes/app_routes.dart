@@ -5,6 +5,7 @@ import 'package:mylingz_app/pages/auth/signup/signup_view.dart';
 import 'package:mylingz_app/pages/biolink/basic_info/basic_info_view.dart';
 import 'package:mylingz_app/pages/biolink/buttons/buttons_view.dart';
 import 'package:mylingz_app/pages/biolink/edit/biolink_edit_view.dart';
+import 'package:mylingz_app/pages/biolink/social_icons/social_icons_view.dart';
 import 'package:mylingz_app/pages/links/create/create_link_view.dart';
 import 'package:mylingz_app/pages/links/details/link_details_view.dart';
 import 'package:mylingz_app/pages/settings/settings_view.dart';
@@ -13,6 +14,7 @@ import 'package:page_transition/page_transition.dart';
 import '../common/image/image_bloc.dart';
 import '../pages/auth/bloc/auth_bloc.dart';
 import '../pages/biolink/bloc/bio_link_bloc.dart';
+import '../pages/biolink/icons_lib/icons_lib_view.dart';
 import '../pages/home/bloc/home_bloc.dart';
 import '../pages/home/cubit/home_cubit.dart';
 import '../pages/home/home_view.dart';
@@ -36,6 +38,8 @@ class Routes {
   static const bioLinkEdit = '/bioLinkEdit';
   static const bioLinkBasicInfo = '/bioLinkBasicInfo';
   static const bioLinkButtons = '/bioLinkButtons';
+  static const bioLinkIcons = '/bioLinkIcons';
+  static const iconsLib = '/iconsLib';
 }
 
 class RouteGenerator {
@@ -78,10 +82,20 @@ class RouteGenerator {
             LinkDetailsView(linkId: settings.arguments as String));
       case Routes.bioLinkEdit:
         return getTransistionPage(const BioLinkEditView());
+      case Routes.bioLinkIcons:
+        return getTransistionPage(BlocProvider(
+          create: (context) => BioLinkBloc(),
+          child: const SocialIconsView(),
+        ));
       case Routes.bioLinkButtons:
         return getTransistionPage(BlocProvider(
           create: (context) => BioLinkBloc(),
           child: const ButtonsView(),
+        ));
+      case Routes.iconsLib:
+        return getTransistionPage(BlocProvider(
+          create: (context) => BioLinkBloc(),
+          child: const IconsLibView(),
         ));
       case Routes.bioLinkBasicInfo:
         return getTransistionPage(MultiBlocProvider(

@@ -1,42 +1,53 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class SocialIcon {
   final String name;
-  final String url;
-  final String link;
+  final String icon;
+  final String type;
+  final String id;
+  final String category;
 
   SocialIcon({
     required this.name,
-    required this.url,
-    required this.link,
+    required this.icon,
+    required this.type,
+    required this.id,
+    required this.category,
   });
 
   SocialIcon copyWith({
     String? name,
-    String? url,
-    String? link,
+    String? icon,
+    String? type,
+    String? id,
+    String? category,
   }) {
     return SocialIcon(
       name: name ?? this.name,
-      url: url ?? this.url,
-      link: link ?? this.link,
+      icon: icon ?? this.icon,
+      type: type ?? this.type,
+      id: id ?? this.id,
+      category: category ?? this.category,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
-      'url': url,
-      'link': link,
+      'icon': icon,
+      'type': type,
+      'id': id,
+      'category': category,
     };
   }
 
-  factory SocialIcon.fromMap(Map<String, dynamic> map) {
+  factory SocialIcon.fromMap(map) {
     return SocialIcon(
       name: map['name'] as String,
-      url: map['url'] as String,
-      link: map['link'] as String,
+      icon: map['icon'] as String,
+      type: map['type'] as String,
+      id: map['id'] as String,
+      category: map['category'] as String,
     );
   }
 
@@ -45,7 +56,9 @@ class SocialIcon {
   factory SocialIcon.fromJson(String source) => SocialIcon.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'SocialIcon(name: $name, url: $url, link: $link)';
+  String toString() {
+    return 'SocialIcon(name: $name, icon: $icon, type: $type, id: $id, category: $category)';
+  }
 
   @override
   bool operator ==(covariant SocialIcon other) {
@@ -53,10 +66,18 @@ class SocialIcon {
   
     return 
       other.name == name &&
-      other.url == url &&
-      other.link == link;
+      other.icon == icon &&
+      other.type == type &&
+      other.id == id &&
+      other.category == category;
   }
 
   @override
-  int get hashCode => name.hashCode ^ url.hashCode ^ link.hashCode;
+  int get hashCode {
+    return name.hashCode ^
+      icon.hashCode ^
+      type.hashCode ^
+      id.hashCode ^
+      category.hashCode;
+  }
 }

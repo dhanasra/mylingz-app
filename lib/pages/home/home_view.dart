@@ -21,6 +21,8 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   late HomeViewModel _viewModel;
 
+  int i = 0;
+
   @override
   void initState() {
     _viewModel = HomeViewModel(context);
@@ -29,6 +31,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<HomeCubit, int>(
       builder: (_, idx) {
 
@@ -38,7 +41,8 @@ class _HomeViewState extends State<HomeView> {
             child: HomeDrawer()),
           floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
-            onPressed: ()=>context.goto(Routes.createLink)),
+            onPressed: ()=>context.goto(Routes.createLink)
+          ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           appBar: AppBar(
             automaticallyImplyLeading: false,
