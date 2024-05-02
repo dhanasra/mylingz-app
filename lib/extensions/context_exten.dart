@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 extension ContextExtensions on BuildContext {
   
-  Future goto(String path, {Object? args, bool clear = false})async{
+  Future<dynamic> goto(String path, {Object? args, bool clear = false})async{
     if(clear){
       return await Navigator.pushNamedAndRemoveUntil(this, path, (route) => false, arguments: args);
     }else{
@@ -10,8 +10,8 @@ extension ContextExtensions on BuildContext {
     }
   }
 
-  back(){
-    Navigator.pop(this);
+  back({Object? args}){
+    Navigator.pop(this, args);
   }
 
   ThemeData theme(){

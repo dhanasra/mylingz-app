@@ -6,7 +6,8 @@ class StyledWrapper extends StatelessWidget {
   final EdgeInsets? p;
   final double? r;
   final VoidCallback? onClick;
-  const StyledWrapper({super.key, required this.child, this.m, this.p, this.onClick, this.r});
+  final Alignment? align;
+  const StyledWrapper({super.key, required this.child, this.m, this.p, this.onClick, this.r, this.align});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class StyledWrapper extends StatelessWidget {
       onTap: onClick,
       child: Container(
         margin: m,
+        alignment: align,
         padding: p,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(r ?? 8),

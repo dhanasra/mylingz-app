@@ -38,5 +38,33 @@ class StringConst {
   static const create = "create";
 
 
+  // forms
+
+  static const genrateQRCode ="genrateQRCode";
+  static const textHelper ="textHelper";
+  static const textHint ="textHint";
+  static const webHint ="webHint";
+  static const networkHint ="networkHint";
+  static const passwordHint ="passwordHint";
+  static const nameHint ="nameHint";
+  static const phoneHint ="phoneHint";
+  static const emailHint ="emailHint";
+  static const subjectHint ="subjectHint";
+  static const bodyHint ="bodyHint";
+  static const messageHint ="messageHint";
+  static const eventNameHint ="eventNameHint";
+  static const locationHint ="locationHint";
+  static const startTimeHint ="startTimeHint";
+  static const startDateHint ="startDateHint";
+  static const endTimeHint ="endTimeHint";
+  static const endDateHint ="endDateHint";
+  static const descHint ="descHint";
+  static const addrHint ="addrHint";
+  static const companyHint ="companyHint";
+  static const jobTitleHint ="jobTitleHint";
+  static const websiteHint ="websiteHint";
+  static const noteHint ="noteHint";
+
+
 
 }

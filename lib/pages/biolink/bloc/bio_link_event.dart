@@ -21,3 +21,10 @@ class SaveButtonsEvent extends BioLinkEvent {
     required this.buttons
   });
 }
+
+class SaveSocialLinksEvent extends BioLinkEvent {
+  final List<SocialLink> links;
+  SaveSocialLinksEvent({
+    required this.links
+  });
+}

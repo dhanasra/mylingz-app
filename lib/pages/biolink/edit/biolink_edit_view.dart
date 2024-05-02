@@ -7,8 +7,6 @@ import 'package:mylingz_app/utils/global.dart';
 import 'package:mylingz_app/widgets/dotted_wrapper.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
 
-import '../../../widgets/styled_button.dart';
-
 class BioLinkEditView extends StatefulWidget {
   const BioLinkEditView({super.key});
 
@@ -62,17 +60,18 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                     "Add Social Links".ts(context, color: Theme.of(context).primaryColor)
                   ],
                 ): GridView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 3
+                    crossAxisCount: 4,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 20,
+                    childAspectRatio: 1
                   ), 
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: biolink.icons.length,
                   itemBuilder: (_, idx){
-                    return const Icon(Icons.abc);
+                    return Image.network(biolink.icons[idx].icon);
                   }
                 )
               ),
@@ -96,19 +95,18 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                   itemBuilder: (_, idx){
                     return AbsorbPointer(
                       child: StyledWrapper(
+                        align: Alignment.center,
                         m: const EdgeInsets.all(10),
-                        child: StyledButton(
-                          onClick: (){}, 
-                          secondary: true,
-                          text: (biolink.buttons[idx].text).trim()
-                        )),
+                        p: const EdgeInsets.all(16),
+                        r: 100,
+                        child: (biolink.buttons[idx].text).trim().tl(context)),
                     );
                   }
                 )
               ),
               16.h(),
               DottedWrapper(
-                child: biolink.icons.isEmpty
+                child: biolink.contactFields.isEmpty
                 ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

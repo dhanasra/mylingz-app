@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mylingz_app/network/models/social_icon.dart';
 import 'package:mylingz_app/pages/auth/login/login_view.dart';
 import 'package:mylingz_app/pages/auth/signup/signup_view.dart';
 import 'package:mylingz_app/pages/biolink/basic_info/basic_info_view.dart';
 import 'package:mylingz_app/pages/biolink/buttons/buttons_view.dart';
 import 'package:mylingz_app/pages/biolink/edit/biolink_edit_view.dart';
+import 'package:mylingz_app/pages/biolink/icon_create/icon_create_view.dart';
 import 'package:mylingz_app/pages/biolink/social_icons/social_icons_view.dart';
 import 'package:mylingz_app/pages/links/create/create_link_view.dart';
 import 'package:mylingz_app/pages/links/details/link_details_view.dart';
@@ -14,7 +16,6 @@ import 'package:page_transition/page_transition.dart';
 import '../common/image/image_bloc.dart';
 import '../pages/auth/bloc/auth_bloc.dart';
 import '../pages/biolink/bloc/bio_link_bloc.dart';
-import '../pages/biolink/icons_lib/icons_lib_view.dart';
 import '../pages/home/bloc/home_bloc.dart';
 import '../pages/home/cubit/home_cubit.dart';
 import '../pages/home/home_view.dart';
@@ -40,6 +41,7 @@ class Routes {
   static const bioLinkButtons = '/bioLinkButtons';
   static const bioLinkIcons = '/bioLinkIcons';
   static const iconsLib = '/iconsLib';
+  static const iconsCreate = '/iconCreate';
 }
 
 class RouteGenerator {
@@ -92,10 +94,10 @@ class RouteGenerator {
           create: (context) => BioLinkBloc(),
           child: const ButtonsView(),
         ));
-      case Routes.iconsLib:
+      case Routes.iconsCreate:
         return getTransistionPage(BlocProvider(
           create: (context) => BioLinkBloc(),
-          child: const IconsLibView(),
+          child: IconCreateView(icon: settings.arguments as SocialIcon)
         ));
       case Routes.bioLinkBasicInfo:
         return getTransistionPage(MultiBlocProvider(
