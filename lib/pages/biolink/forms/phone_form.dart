@@ -1,19 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 
 import '../../../constants/string_const.dart';
 
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 
-import '../../../constants/string_const.dart';
-import '../../../constants/string_const.dart';
-import '../../../routes/app_routes.dart';
+import '../../../network/models/social_icon.dart';
+import '../../../network/models/social_link.dart';
+import '../../../utils/utils.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/styled_button.dart';
 
 class PhoneForm extends StatelessWidget {
-  const PhoneForm({super.key});
+  final SocialIcon icon;
+  const PhoneForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +51,16 @@ class PhoneForm extends StatelessWidget {
                     return;
                   }
                   var data = "tel:${controller.trim()}";
-                  // context.goto(Routes.customize, args: { 
-                  //   "data": {
-                  //     "value": data,
-                  //     "phone": controller.trim()
-                  //   }, 
-                  //   "name": "Phone" 
-                  // });
+                  context.back(args: SocialLink(
+                      id: generateUniqueString(), 
+                      name: icon.name, 
+                      icon: icon.icon, 
+                      data: {
+                        "value": data,
+                        "phone": controller.trim()
+                      }, 
+                      type: icon.type
+                  ));
                 }, 
                 text: StringConst.create.toUpperCase()
               )

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
-
-import '../../../../routes/app_routes.dart';
 import '../../../../utils/global.dart';
 
 class IconsLibView extends StatelessWidget {

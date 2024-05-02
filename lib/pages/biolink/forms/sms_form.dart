@@ -1,17 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
+import 'package:mylingz_app/utils/utils.dart';
 
 import '../../../constants/string_const.dart';
-import '../../../constants/string_const.dart';
-import '../../../routes/app_routes.dart';
+import '../../../network/models/social_icon.dart';
+import '../../../network/models/social_link.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/styled_button.dart';
 
 class SmsForm extends StatelessWidget {
-  const SmsForm({super.key});
+  final SocialIcon icon;
+  const SmsForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +62,17 @@ class SmsForm extends StatelessWidget {
                     return;
                   }
                   var data = "smsto:${numberController.trim()}:${messageController.trim()}";
-                  // context.goto(Routes.customize, args: { 
-                  //   "data": {
-                  //     "value": data,
-                  //     "phone": numberController.trim(),
-                  //     "message": messageController.trim()
-                  //   }, 
-                  //   "name": "SMS" 
-                  // });
+                  context.back(args: SocialLink(
+                      id: generateUniqueString(), 
+                      name: icon.name, 
+                      icon: icon.icon, 
+                      data: {
+                        "value": data,
+                        "phone": numberController.trim(),
+                        "message": messageController.trim()
+                      }, 
+                      type: icon.type
+                  ));
                 }, 
                 text: StringConst.create.toUpperCase()
               )

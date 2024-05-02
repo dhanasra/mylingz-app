@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 
 import '../../../constants/string_const.dart';
 
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 
-import '../../../constants/string_const.dart';
-import '../../../constants/string_const.dart';
-import '../../../routes/app_routes.dart';
+import '../../../network/models/social_icon.dart';
+import '../../../network/models/social_link.dart';
+import '../../../utils/utils.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/styled_button.dart';
 
 class InterNumberForm extends StatelessWidget {
-  final String name;
-  final String image;
-  const InterNumberForm({super.key, required this.name, required this.image});
+  final SocialIcon icon;
+  const InterNumberForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +31,16 @@ class InterNumberForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(image),
+              Image.network(icon.icon),
               16.h(),
-              name.ts(context),
+              icon.name.ts(context),
               8.h(),
               TextFormField(
                 controller: controller,
                 validator: (v)=>Validator.validatePhoneNumber(v),
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.phone_android_outlined),
-                  hintText: "Enter ${name.toLowerCase()} number here"
+                  hintText: "Enter ${icon.name.toLowerCase()} number here"
                 ),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
@@ -53,20 +53,22 @@ class InterNumberForm extends StatelessWidget {
                   }
                   
                   var data = "";
-                  var app = name.toLowerCase();
+                  var app = icon.name.toLowerCase();
 
                   switch(app){
                     case "whatsapp": "whatsapp:${controller.trim()}";
                     case "viber": data = "viber://add?number=${controller.trim()}";
                   }
-
-                  // context.goto(Routes.customize, args: { 
-                  //   "data": {
-                  //     "value": data,
-                  //     "phone": controller.trim()
-                  //   }, 
-                  //   "name": name 
-                  // });
+                  context.back(args: SocialLink(
+                      id: generateUniqueString(), 
+                      name: icon.name, 
+                      icon: icon.icon, 
+                      data: {
+                        "value": data,
+                        "phone": controller.trim()
+                      }, 
+                      type: icon.type
+                  ));
                 }, 
                 text: StringConst.create.toUpperCase()
               )

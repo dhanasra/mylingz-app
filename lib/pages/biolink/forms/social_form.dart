@@ -12,8 +12,8 @@ import '../../../utils/validator.dart';
 import '../../../widgets/styled_button.dart';
 
 class SocialForm extends StatelessWidget {
-  final SocialIcon link;
-  const SocialForm({super.key, required this.link});
+  final SocialIcon icon;
+  const SocialForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +30,18 @@ class SocialForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(link.icon),
+              Image.network(icon.icon),
               16.h(),
-              link.name.ts(context),
+              icon.name.ts(context),
               8.h(),
               TextFormField(
                 controller: controller,
-                validator: (v)=>Validator.validateNonNullOrEmpty(v, link.name),
+                validator: (v)=>Validator.validateNonNullOrEmpty(v, icon.name),
                 decoration: InputDecoration(
-                  prefixIcon: Icon(link.type=="username" ? Icons.edit_outlined: Icons.link_outlined),
-                  hintText: link.type=="username" 
-                    ? "Enter ${link.name.toLowerCase()} username here" 
-                    : "Enter ${link.name.toLowerCase()} profile link here" 
+                  prefixIcon: Icon(icon.type=="username" ? Icons.edit_outlined: Icons.link_outlined),
+                  hintText: icon.type=="username" 
+                    ? "Enter ${icon.name.toLowerCase()} username here" 
+                    : "Enter ${icon.name.toLowerCase()} profile link here" 
                 ),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
@@ -54,7 +54,7 @@ class SocialForm extends StatelessWidget {
                   }
 
                   var data = "";
-                  var app = link.name.toLowerCase();
+                  var app = icon.name.toLowerCase();
 
                   switch(app){
                     case "instagram": data = "https://www.instagram.com/${controller.trim()}";
@@ -67,13 +67,13 @@ class SocialForm extends StatelessWidget {
 
                   context.back(args: SocialLink(
                       id: generateUniqueString(), 
-                      name: link.name, 
-                      icon: link.icon, 
+                      name: icon.name, 
+                      icon: icon.icon, 
                       data: {
                         "value": data,
                         "text": controller.trim()
                       }, 
-                      type: link.type
+                      type: icon.type
                   ));
                 }, 
                 text: StringConst.create.toUpperCase()

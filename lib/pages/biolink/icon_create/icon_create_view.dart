@@ -16,7 +16,6 @@ import '../forms/vcard_form.dart';
 import '../forms/website_form.dart';
 import '../forms/wifi_form.dart';
 import '../forms/youtube_form.dart';
-import 'icon_create_viewmodel.dart';
 
 class IconCreateView extends StatefulWidget {
   final SocialIcon icon;
@@ -27,14 +26,6 @@ class IconCreateView extends StatefulWidget {
 }
 
 class _IconCreateViewState extends State<IconCreateView> {
-  late IconCreateViewModel _viewModel;
-
-  @override
-  void initState() {
-    _viewModel = IconCreateViewModel();
-    super.initState();
-  }
-
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +40,17 @@ class _IconCreateViewState extends State<IconCreateView> {
         child: ListView(
           children: [
             if(widget.icon.name=="Text")
-              const TextForm()
+              TextForm(icon: widget.icon,)
             else if(widget.icon.name=="Website")
-              const WebsiteForm()
+              WebsiteForm(icon: widget.icon)
             else if(widget.icon.name=="Wifi")
               const WifiForm()
             else if(widget.icon.name=="Phone")
-              const PhoneForm()
+              PhoneForm(icon: widget.icon)
             else if(widget.icon.name=="Email")
               const EmailForm()
             else if(widget.icon.name=="SMS")
-              const SmsForm() 
+              SmsForm(icon: widget.icon) 
             else if(widget.icon.name=="Contact")
               const ContactForm()
             else if(widget.icon.name=="Event")
@@ -69,33 +60,33 @@ class _IconCreateViewState extends State<IconCreateView> {
             else if(widget.icon.name=="Youtube")
               const YoutubeForm()
             else if(widget.icon.name=="Facebook")
-              const FacebookForm()
+              FacebookForm(icon: widget.icon)
             else if(widget.icon.name=="Spotify")
               const SpotifyForm()
             else if(widget.icon.name=="Crypto")
               const CryptoForm()
             else if(widget.icon.name=="Pinterest")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Line")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Wechat")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Paypal")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Snapchat")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Linkedin")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="TikTok")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="X")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Instagram")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Whatsapp")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Viber")
-              SocialForm(link: widget.icon)
+              SocialForm(icon: widget.icon)
           ],
         ),
       ),
