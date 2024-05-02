@@ -33,7 +33,7 @@ class CryptoForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset("res/images/crypto.png"),
+              Image.network(icon.icon),
               16.h(),
               "Crypto Currency".ts(context),
               8.h(),

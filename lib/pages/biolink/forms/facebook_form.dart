@@ -34,7 +34,7 @@ class FacebookForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset("res/images/facebook.png"),
+              Image.network(icon.icon),
               16.h(),
               "Type".ts(context),
               8.h(),

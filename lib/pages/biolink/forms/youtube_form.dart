@@ -34,7 +34,7 @@ class YoutubeForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset("res/images/youtube.png"),
+              Image.network(icon.icon),
               16.h(),
               "Type".ts(context),
               8.h(),

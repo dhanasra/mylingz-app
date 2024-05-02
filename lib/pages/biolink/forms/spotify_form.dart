@@ -31,7 +31,7 @@ class SpotifyForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset("res/images/spotify.png"),
+              Image.network(icon.icon),
               16.h(),
               "Artist Name".ts(context),
               8.h(),
