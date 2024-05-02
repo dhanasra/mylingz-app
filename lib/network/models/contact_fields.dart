@@ -3,23 +3,26 @@ import 'dart:convert';
 
 class ContactFields {
   final int idx;
+  final String id;
   final String label;
   final bool required;
-  
+
   ContactFields({
     required this.idx,
+    required this.id,
     required this.label,
     required this.required,
   });
 
-
   ContactFields copyWith({
     int? idx,
+    String? id,
     String? label,
     bool? required,
   }) {
     return ContactFields(
       idx: idx ?? this.idx,
+      id: id ?? this.id,
       label: label ?? this.label,
       required: required ?? this.required,
     );
@@ -28,6 +31,7 @@ class ContactFields {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'idx': idx,
+      'id': id,
       'label': label,
       'required': required,
     };
@@ -36,6 +40,7 @@ class ContactFields {
   factory ContactFields.fromMap(Map<String, dynamic> map) {
     return ContactFields(
       idx: map['idx'] as int,
+      id: map['id'] as String,
       label: map['label'] as String,
       required: map['required'] as bool,
     );
@@ -46,7 +51,9 @@ class ContactFields {
   factory ContactFields.fromJson(String source) => ContactFields.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'ContactFields(idx: $idx, label: $label, required: $required)';
+  String toString() {
+    return 'ContactFields(idx: $idx, id: $id, label: $label, required: $required)';
+  }
 
   @override
   bool operator ==(covariant ContactFields other) {
@@ -54,10 +61,16 @@ class ContactFields {
   
     return 
       other.idx == idx &&
+      other.id == id &&
       other.label == label &&
       other.required == required;
   }
 
   @override
-  int get hashCode => idx.hashCode ^ label.hashCode ^ required.hashCode;
+  int get hashCode {
+    return idx.hashCode ^
+      id.hashCode ^
+      label.hashCode ^
+      required.hashCode;
+  }
 }

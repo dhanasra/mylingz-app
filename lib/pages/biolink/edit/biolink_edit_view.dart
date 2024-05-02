@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/constants/color_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/routes/app_routes.dart';
 import 'package:mylingz_app/utils/global.dart';
 import 'package:mylingz_app/widgets/dotted_wrapper.dart';
+import 'package:mylingz_app/widgets/styled_button.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
 
 class BioLinkEditView extends StatefulWidget {
@@ -106,6 +108,10 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
               ),
               16.h(),
               DottedWrapper(
+                p: EdgeInsets.zero,
+                onClick: ()=>{
+                  context.goto(Routes.contactFields).then((value) => setState(() {}))
+                },
                 child: biolink.contactFields.isEmpty
                 ? Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -114,15 +120,34 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                     8.w(),
                     "Add Contact Form".ts(context, color: Theme.of(context).primaryColor)
                   ],
-                ): ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: biolink.icons.length,
-                  itemBuilder: (_, idx){
-                    return StyledWrapper(
-                      p: const EdgeInsets.all(8),
-                      child: "Button Label".tl(context));
-                  }
+                ): AbsorbPointer(
+                  child: Container(
+                    margin: const EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: ColorConst.primaryLight),
+                      borderRadius: BorderRadius.circular(8)
+                    ),
+                    child: Column(
+                      children: [
+                        "Contact Us".hm(context),
+                        24.h(),
+                        ...biolink.contactFields.map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: e.label
+                              ),
+                            ),
+                          )),
+                        32.h(),
+                        StyledButton(onClick: (){}, text: "Submit Request"),
+                        16.h(),
+                        "By Submitting Your Contact Details, You Allow The Link Owner To Contact You".bs(context, color: Colors.grey)
+                      ],
+                    ),
+                  ),
                 )
               ),
             ],

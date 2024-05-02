@@ -22,6 +22,13 @@ class SaveButtonsEvent extends BioLinkEvent {
   });
 }
 
+class SaveContactFieldsEvent extends BioLinkEvent {
+  final List<ContactFields> fields;
+  SaveContactFieldsEvent({
+    required this.fields
+  });
+}
+
 class SaveSocialLinksEvent extends BioLinkEvent {
   final List<SocialLink> links;
   SaveSocialLinksEvent({

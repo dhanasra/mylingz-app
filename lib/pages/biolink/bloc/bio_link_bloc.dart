@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mylingz_app/network/firebase_client.dart';
+import 'package:mylingz_app/network/models/contact_fields.dart';
 import 'package:mylingz_app/network/models/social_link.dart';
 import 'package:mylingz_app/utils/global.dart';
 
@@ -14,6 +15,7 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     on<SaveBasicInfoEvent>(_onSaveBasicInfo);
     on<SaveButtonsEvent>(_onSaveButtons);
     on<SaveSocialLinksEvent>(_onSaveSocialLinks);
+    on<SaveContactFieldsEvent>(_onSaveContactFields);
   }
 
   final FirebaseClient _client =  FirebaseClient();
@@ -50,6 +52,16 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     try{
       await _client.myBiolink.update({"icons": event.links.map((e) => e.toMap()).toList()});
       Global.bioLink.value = Global.bioLink.value!.copyWith(icons: event.links);
+      emit(Success());
+    }catch(e){
+      emit(Error());
+    }
+  }
+
+  _onSaveContactFields(SaveContactFieldsEvent event, Emitter emit)async{
+    try{
+      await _client.myBiolink.update({"contactFields": event.fields.map((e) => e.toMap()).toList()});
+      Global.bioLink.value = Global.bioLink.value!.copyWith(contactFields: event.fields);
       emit(Success());
     }catch(e){
       emit(Error());

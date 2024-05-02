@@ -5,6 +5,7 @@ import 'package:mylingz_app/pages/auth/login/login_view.dart';
 import 'package:mylingz_app/pages/auth/signup/signup_view.dart';
 import 'package:mylingz_app/pages/biolink/basic_info/basic_info_view.dart';
 import 'package:mylingz_app/pages/biolink/buttons/buttons_view.dart';
+import 'package:mylingz_app/pages/biolink/contact_fields/contact_fields_view.dart';
 import 'package:mylingz_app/pages/biolink/edit/biolink_edit_view.dart';
 import 'package:mylingz_app/pages/biolink/icon_create/icon_create_view.dart';
 import 'package:mylingz_app/pages/biolink/social_icons/social_icons_view.dart';
@@ -38,6 +39,7 @@ class Routes {
 
   static const bioLinkEdit = '/bioLinkEdit';
   static const bioLinkBasicInfo = '/bioLinkBasicInfo';
+  static const contactFields = '/contactFields';
   static const bioLinkButtons = '/bioLinkButtons';
   static const bioLinkIcons = '/bioLinkIcons';
   static const iconsLib = '/iconsLib';
@@ -93,6 +95,11 @@ class RouteGenerator {
         return getTransistionPage(BlocProvider(
           create: (context) => BioLinkBloc(),
           child: const ButtonsView(),
+        ));
+      case Routes.contactFields:
+        return getTransistionPage(BlocProvider(
+          create: (context) => BioLinkBloc(),
+          child: const ContactFieldsView(),
         ));
       case Routes.iconsCreate:
         return getTransistionPage(BlocProvider(

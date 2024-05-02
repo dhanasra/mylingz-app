@@ -4,8 +4,9 @@ import 'package:mylingz_app/extensions/context_exten.dart';
 
 class DottedWrapper extends StatelessWidget {
   final Widget child;
+  final EdgeInsets? p;
   final VoidCallback? onClick;
-  const DottedWrapper({super.key, required this.child, this.onClick});
+  const DottedWrapper({super.key, required this.child, this.onClick, this.p});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class DottedWrapper extends StatelessWidget {
         color: Colors.lightBlue[300]!,
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(16),
+          padding: p ?? const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: context.theme().colorScheme.background.withOpacity(0.7)
           ),
