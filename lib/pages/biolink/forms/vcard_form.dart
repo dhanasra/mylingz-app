@@ -1,16 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 
 import '../../../constants/string_const.dart';
-import '../../../constants/string_const.dart';
-import '../../../routes/app_routes.dart';
+import '../../../network/models/social_icon.dart';
+import '../../../network/models/social_link.dart';
+import '../../../utils/utils.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/styled_button.dart';
 
 class VcardForm extends StatelessWidget {
-  const VcardForm({super.key});
+  final SocialIcon icon;
+  const VcardForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -162,21 +165,23 @@ class VcardForm extends StatelessWidget {
                   }
 
                   data += ";END:VCARD";
-
-                  // context.goto(Routes.customize, args: { 
-                  //   "data": {
-                  //     "value": data,
-                  //     "name": nameController.trim(),
-                  //     "phone": phoneController.trim(),
-                  //     "email": mailController.trim(),
-                  //     "company": companyNameController.trim(),
-                  //     "jobTitle": jobTitleController.trim(),
-                  //     "address": addressController.trim(),
-                  //     "website": websiteController.trim(),
-                  //     "note": noteController.trim()
-                  //   }, 
-                  //   "name": "VCard" 
-                  // });
+                  context.back(args: SocialLink(
+                      id: generateUniqueString(), 
+                      name: icon.name, 
+                      icon: icon.icon, 
+                      data: {
+                        "value": data,
+                        "name": nameController.trim(),
+                        "phone": phoneController.trim(),
+                        "email": mailController.trim(),
+                        "company": companyNameController.trim(),
+                        "jobTitle": jobTitleController.trim(),
+                        "address": addressController.trim(),
+                        "website": websiteController.trim(),
+                        "note": noteController.trim()
+                      }, 
+                      type: icon.type
+                  ));
                 }, 
                 text: StringConst.create.toUpperCase()
               )

@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 
 import '../../../constants/string_const.dart';
-import '../../../routes/app_routes.dart';
+import '../../../network/models/social_icon.dart';
+import '../../../network/models/social_link.dart';
+import '../../../utils/utils.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/single_select.dart';
 import '../../../widgets/styled_button.dart';
 
 class CryptoForm extends StatelessWidget {
-  const CryptoForm({super.key});
+  final SocialIcon icon;
+  const CryptoForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -95,17 +99,19 @@ class CryptoForm extends StatelessWidget {
                     "Litecoin": "litecoin",
                   }[currency.value];
                   var data = "$currencyCode:${addressController.trim()}?amount=${amountController.trim()}&message=${messageController.trim()}";
-
-                  // context.goto(Routes.customize, args: { 
-                  //   "data": {
-                  //     "value": data,
-                  //     "currency": currency.value,
-                  //     "address": addressController.trim(),
-                  //     "amount": amountController.trim(),
-                  //     "message": messageController.trim()
-                  //   }, 
-                  //   "name": "Crypto" 
-                  // });
+                  context.back(args: SocialLink(
+                      id: generateUniqueString(), 
+                      name: icon.name, 
+                      icon: icon.icon, 
+                      data: {
+                        "value": data,
+                        "currency": currency.value,
+                        "address": addressController.trim(),
+                        "amount": amountController.trim(),
+                        "message": messageController.trim()
+                      }, 
+                      type: icon.type
+                  ));
                 }, 
                 text: StringConst.create.toUpperCase()
               )

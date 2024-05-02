@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 
 import '../../../constants/string_const.dart';
-import '../../../constants/string_const.dart';
-import '../../../routes/app_routes.dart';
+import '../../../network/models/social_icon.dart';
+import '../../../network/models/social_link.dart';
+import '../../../utils/utils.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/styled_button.dart';
 
-import '../../../constants/string_const.dart';
-
 class SpotifyForm extends StatelessWidget {
-  const SpotifyForm({super.key});
+  final SocialIcon icon;
+  const SpotifyForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +64,17 @@ class SpotifyForm extends StatelessWidget {
                     return;
                   }
                   var data = "spotify:search:${songNameController.trim()}:${artistNameController.trim()}";
-                  // context.goto(Routes.customize, args: { 
-                  //   "data": {
-                  //     "value": data,
-                  //     "song": songNameController.trim(),
-                  //     "artist": artistNameController.trim()
-                  //   }, 
-                  //   "name": "Spotify" 
-                  // });
+                  context.back(args: SocialLink(
+                      id: generateUniqueString(), 
+                      name: icon.name, 
+                      icon: icon.icon, 
+                      data: {
+                        "value": data,
+                        "song": songNameController.trim(),
+                        "artist": artistNameController.trim()
+                      }, 
+                      type: icon.type
+                  ));
                 }, 
                 text: StringConst.create.toUpperCase()
               )

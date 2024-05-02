@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 
 import '../../../constants/string_const.dart';
-import '../../../constants/string_const.dart';
-import '../../../routes/app_routes.dart';
+import '../../../network/models/social_icon.dart';
+import '../../../network/models/social_link.dart';
+import '../../../utils/utils.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/styled_button.dart';
 
-import '../../../constants/string_const.dart';
 import '../../../widgets/single_select.dart';
 
 class YoutubeForm extends StatelessWidget {
-  const YoutubeForm({super.key});
+  final SocialIcon icon;
+  const YoutubeForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -109,16 +111,19 @@ class YoutubeForm extends StatelessWidget {
                   : type.value == "Channel ID" 
                   ? "https://www.youtube.com/${channelIdController.trim()}"
                   : urlController.trim();
-                  // context.goto(Routes.customize, args: { 
-                  //   "data": {
-                  //     "value": data,
-                  //     "type": type.value,
-                  //     "videoId": videoIdController.trim(),
-                  //     "channelId": channelIdController.trim(),
-                  //     "url": urlController.trim()
-                  //   }, 
-                  //   "name": "Youtube" 
-                  // });
+                  context.back(args: SocialLink(
+                      id: generateUniqueString(), 
+                      name: icon.name, 
+                      icon: icon.icon, 
+                      data: {
+                        "value": data,
+                        "type": type.value,
+                        "videoId": videoIdController.trim(),
+                        "channelId": channelIdController.trim(),
+                        "url": urlController.trim()
+                      }, 
+                      type: icon.type
+                  ));
                 }, 
                 text: StringConst.create.toUpperCase()
               )

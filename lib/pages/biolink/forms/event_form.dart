@@ -6,15 +6,17 @@ import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 
 import '../../../constants/string_const.dart';
-import '../../../constants/string_const.dart';
-import '../../../routes/app_routes.dart';
+import '../../../network/models/social_icon.dart';
+import '../../../network/models/social_link.dart';
+import '../../../utils/utils.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/date_picker_field.dart';
 import '../../../widgets/styled_button.dart';
 import '../../../widgets/time_picker_field.dart';
 
 class EventForm extends StatelessWidget {
-  const EventForm({super.key});
+  final SocialIcon icon;
+  const EventForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +137,13 @@ class EventForm extends StatelessWidget {
                     "DESCRIPTION:${descController.trim()}\n"
                     "END:VEVENT";
 
-                  // context.goto(Routes.customize, args: { "data": {"value": qrData}, "name": "Event" });
+                  context.back(args: SocialLink(
+                      id: generateUniqueString(), 
+                      name: icon.name, 
+                      icon: icon.icon, 
+                      data: {"value": qrData}, 
+                      type: icon.type
+                  ));
                 }, 
                 text: StringConst.create.toUpperCase()
               )

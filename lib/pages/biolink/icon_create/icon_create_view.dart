@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mylingz_app/network/models/social_icon.dart';
 
-import '../forms/contact_form.dart';
 import '../forms/crypto_form.dart';
 import '../forms/email_form.dart';
 import '../forms/event_form.dart';
@@ -44,27 +43,25 @@ class _IconCreateViewState extends State<IconCreateView> {
             else if(widget.icon.name=="Website")
               WebsiteForm(icon: widget.icon)
             else if(widget.icon.name=="Wifi")
-              const WifiForm()
+              WifiForm(icon: widget.icon)
             else if(widget.icon.name=="Phone")
               PhoneForm(icon: widget.icon)
             else if(widget.icon.name=="Email")
-              const EmailForm()
+              EmailForm(icon: widget.icon)
             else if(widget.icon.name=="SMS")
               SmsForm(icon: widget.icon) 
-            else if(widget.icon.name=="Contact")
-              const ContactForm()
             else if(widget.icon.name=="Event")
-              const EventForm()
+              EventForm(icon: widget.icon)
             else if(widget.icon.name=="VCard")
-              const VcardForm()
+              VcardForm(icon: widget.icon)
             else if(widget.icon.name=="Youtube")
-              const YoutubeForm()
+              YoutubeForm(icon: widget.icon)
             else if(widget.icon.name=="Facebook")
               FacebookForm(icon: widget.icon)
             else if(widget.icon.name=="Spotify")
-              const SpotifyForm()
+              SpotifyForm(icon: widget.icon)
             else if(widget.icon.name=="Crypto")
-              const CryptoForm()
+              CryptoForm(icon: widget.icon)
             else if(widget.icon.name=="Pinterest")
               SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Line")

@@ -1,19 +1,20 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 
 import '../../../constants/string_const.dart';
-import '../../../constants/string_const.dart';
-import '../../../routes/app_routes.dart';
+import '../../../network/models/social_icon.dart';
+import '../../../network/models/social_link.dart';
+import '../../../utils/utils.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/single_select.dart';
 import '../../../widgets/styled_button.dart';
 
-import '../../../constants/string_const.dart';
-
 class WifiForm extends StatelessWidget {
-  const WifiForm({super.key});
+  final SocialIcon icon;
+  const WifiForm({super.key, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -86,15 +87,18 @@ class WifiForm extends StatelessWidget {
                     return;
                   }
                   var data = "WIFI:S:${nameController.trim()};T:$security;P:${passwordController.trim()}";
-                  // context.goto(Routes.customize, args: { 
-                  //   "data": {
-                  //     "value": data,
-                  //     "name": nameController.trim(),
-                  //     "mode": security,
-                  //     "password": passwordController.trim()
-                  //   }, 
-                  //   "name": "Wifi" 
-                  // });
+                  context.back(args: SocialLink(
+                      id: generateUniqueString(), 
+                      name: icon.name, 
+                      icon: icon.icon, 
+                      data: {
+                        "value": data,
+                        "name": nameController.trim(),
+                        "mode": security,
+                        "password": passwordController.trim()
+                      }, 
+                      type: icon.type
+                  ));
                 }, 
                 text: StringConst.create.toUpperCase()
               )
