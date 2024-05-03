@@ -11,6 +11,7 @@ part 'links_state.dart';
 class LinksBloc extends Bloc<LinksEvent, LinksState> {
   LinksBloc() : super(LinksInitial()) {
     on<SaveLinkEvent>(_onSaveLink);
+    on<RemoveLinkEvent>(_onRemoveLink);
   }
 
   final FirebaseClient _client = FirebaseClient();
@@ -46,6 +47,17 @@ class LinksBloc extends Bloc<LinksEvent, LinksState> {
       }
 
       emit(Success());
+    }catch(e){
+      emit(Error());
+    }
+  }
+
+  _onRemoveLink(RemoveLinkEvent event, Emitter emit) async {
+    try{
+      emit(Loading());
+      await _client.linksDB.doc(event.id).delete();
+      Global.links.removeWhere((e)=>e.id==event.id);
+      emit(Deleted());
     }catch(e){
       emit(Error());
     }

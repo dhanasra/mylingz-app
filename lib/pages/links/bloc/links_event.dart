@@ -22,3 +22,10 @@ class SaveLinkEvent extends LinksEvent {
     this.btnLabel,
   });
 }
+
+class RemoveLinkEvent extends LinksEvent {
+  final String id;
+  RemoveLinkEvent({
+    required this.id
+  });
+}

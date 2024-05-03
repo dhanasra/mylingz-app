@@ -9,6 +9,7 @@ class Loading extends LinksState {}
 
 class Success extends LinksState {}
 
+class Deleted extends LinksState {}
 class Error extends LinksState {
   final String? msg;
   Error({this.msg});
