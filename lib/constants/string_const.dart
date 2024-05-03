@@ -70,6 +70,9 @@ class StringConst {
   static const noFavTitle = "noFavTitle";
   static const noFavSub = "noFavSub";
 
+  // launch view
+  static const noLingzTitle = "noLingzTitle";
+  static const noLingzSub = "noLingzSub";
 
 
 }

@@ -7,5 +7,6 @@ class AssetsConst {
   
   static const placeholder = "$imagesFolder/placeholder.jpeg";
   static const empty = "$jsonFolder/empty.json";
+  static const launch = "$jsonFolder/launch.json";
 
 }

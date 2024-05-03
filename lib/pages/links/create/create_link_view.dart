@@ -36,11 +36,7 @@ class _CreateLinkViewState extends State<CreateLinkView> {
     return BlocListener<LinksBloc, LinksState>(
       listener: (context, state) {
         if(state is Success){
-          if(_viewModel.link!=null){
-            context.goto(Routes.home, clear: true);
-            return;
-          } 
-          context.back();
+          context.goto(Routes.home, clear: true);
         }
       },
       child: Scaffold(
