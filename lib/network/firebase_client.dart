@@ -11,6 +11,7 @@ class Collection {
   static const String users = 'USERS';
   static const String links = 'LINKS';
   static const String bioLinks = 'BIOLINKS';
+  static const String analytics = 'ANALYTICS';
   static const String icons = 'ICONS';
   static const String config = 'config';
 }
@@ -24,6 +25,7 @@ class FirebaseClient {
   CollectionReference get bioLinksDB => firestore.collection(Collection.bioLinks);
   CollectionReference get iconsDB => firestore.collection(Collection.icons);
   DocumentReference get myBiolink => firestore.collection(Collection.bioLinks).doc(FirebaseAuth.instance.currentUser?.uid);
+  DocumentReference get userAnalytics => firestore.collection(Collection.analytics).doc(FirebaseAuth.instance.currentUser?.uid);
 
   CollectionReference get configDB => firestore.collection(Collection.config);
   Reference get storageReference => FirebaseStorage.instance.ref().child("free");

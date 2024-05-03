@@ -1,7 +1,15 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'links_bloc.dart';
 
 @immutable
 sealed class LinksEvent {}
+
+class GetLinkAnalyticsEvent extends LinksEvent {
+  final String linkId;
+  GetLinkAnalyticsEvent({
+    required this.linkId,
+  });
+}
 
 class SaveLinkEvent extends LinksEvent {
   final String? id;

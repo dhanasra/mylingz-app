@@ -83,9 +83,10 @@ class RouteGenerator {
           child: CreateLinkView(link: settings.arguments as ShortLink?),
         ));
       case Routes.linkDetails:
+        var linkId = settings.arguments as String;
         return getTransistionPage(BlocProvider(
           create: (context) => LinksBloc(),
-          child: LinkDetailsView(linkId: settings.arguments as String),
+          child: LinkDetailsView(linkId: linkId),
         ));
       case Routes.bioLinkEdit:
         return getTransistionPage(const BioLinkEditView());

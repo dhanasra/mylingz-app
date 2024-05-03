@@ -10,6 +10,7 @@ import 'package:mylingz_app/network/models/social_link.dart';
 import 'bio_link_button.dart';
 
 class BioLink {
+  final String id;
   final String title;
   final String? slogan;
   final String? picture;
@@ -22,6 +23,7 @@ class BioLink {
   final List<ContactFields> contactFields;
 
   BioLink({
+    required this.id,
     required this.title,
     this.slogan,
     this.picture,
@@ -36,6 +38,7 @@ class BioLink {
 
 
   BioLink copyWith({
+    String? id,
     String? title,
     String? slogan,
     String? picture,
@@ -48,6 +51,7 @@ class BioLink {
     List<ContactFields>? contactFields,
   }) {
     return BioLink(
+      id: id ?? this.id,
       title: title ?? this.title,
       slogan: slogan ?? this.slogan,
       picture: picture,
@@ -63,6 +67,7 @@ class BioLink {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'title': title,
       'slogan': slogan,
       'picture': picture,
@@ -78,6 +83,7 @@ class BioLink {
 
   factory BioLink.fromMap(map) {
     return BioLink(
+      id: map['id'] as String,
       title: map['title'] as String,
       slogan: map['slogan'] != null ? map['slogan'] as String : null,
       picture: map['picture'] != null ? map['picture'] as String : null,

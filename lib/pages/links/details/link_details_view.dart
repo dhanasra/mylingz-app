@@ -27,7 +27,8 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
 
   @override
   void initState() {
-    _viewModel = LinkDetailsViewModel(widget.linkId);
+    _viewModel = LinkDetailsViewModel(widget.linkId, context);
+    
     super.initState();
   }
 
@@ -35,7 +36,7 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
   Widget build(BuildContext context) {
     return BlocListener<LinksBloc, LinksState>(
       listener: (context, state) {
-        if(state is Deleted){
+        if (state is Deleted) {
           context.goto(Routes.home, clear: true);
         }
       },
@@ -148,49 +149,66 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
               child: "Analytics".hm(context),
             ),
             18.h(),
-            GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 16,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 2.5),
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: _viewModel.analytics.length,
-                itemBuilder: (_, idx) {
-                  var item = _viewModel.analytics[idx];
-                  return StyledWrapper(
-                      p: const EdgeInsets.all(8),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor:
-                                (item["color"] as Color).withOpacity(0.1),
-                            child: item["icon"],
-                          ),
-                          8.w(),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("${item["label"]}",
-                                    style: const TextStyle(fontSize: 12)),
-                                4.h(),
-                                "${item["value"]}".tl(context)
-                              ],
-                            ),
-                          )
-                        ],
-                      ));
-                }),
-            18.h(),
-            StyledWrapper(
-              p: const EdgeInsets.all(16),
-              child: LineChart(
-                title: "Click Performance",
-                data: _viewModel.chartData,
-              ),
+            BlocBuilder<LinksBloc, LinksState>(
+              builder: (context, state) {
+
+                if(state is AnalyticsFetched){
+                  _viewModel.setupStatistics(state);
+                }
+                
+                return Column(
+                  children: [
+                    GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                mainAxisSpacing: 16,
+                                crossAxisSpacing: 16,
+                                childAspectRatio: 2.5),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: _viewModel.analytics.length,
+                        itemBuilder: (_, idx) {
+                          var item = _viewModel.analytics[idx];
+                          return StyledWrapper(
+                              p: const EdgeInsets.all(8),
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: (item["color"] as Color)
+                                        .withOpacity(0.1),
+                                    child: item["icon"],
+                                  ),
+                                  8.w(),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text("${item["label"]}",
+                                            style:
+                                                const TextStyle(fontSize: 12)),
+                                        4.h(),
+                                        "${item["value"]}".tl(context)
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ));
+                        }),
+                    18.h(),
+                    StyledWrapper(
+                      p: const EdgeInsets.all(16),
+                      child: LineChart(
+                        title: "Click Performance",
+                        data: _viewModel.chartData,
+                      ),
+                    )
+                  ],
+                );
+              },
             )
           ],
         ),

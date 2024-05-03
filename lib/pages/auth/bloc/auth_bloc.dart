@@ -42,7 +42,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       var bioLink = BioLink(
         title: "${event.fname} ${event.lname}", 
         bioId: bioId, 
-        domainName: "${UrlConst.domainName}/m"
+        domainName: "${UrlConst.domainName}/m",
+        id: userId
       );
       await _client.myBiolink.set(bioLink.toMap());
       Global.bioLink.value = bioLink;
