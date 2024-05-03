@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mylingz_app/constants/assets_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
@@ -9,6 +7,7 @@ import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/pages/auth/login/login_viewmodel.dart';
 import 'package:mylingz_app/routes/app_routes.dart';
+import 'package:mylingz_app/utils/toast.dart';
 
 import '../../../utils/validator.dart';
 import '../../../widgets/styled_button.dart';
@@ -34,8 +33,10 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if(state is Success){
+        if (state is Success) {
           context.goto(Routes.home, clear: true);
+        } else if (state is Error && state.msg != null) {
+          Toast.show(context, message: state.msg!, type: "error");
         }
       },
       child: Scaffold(
@@ -54,12 +55,10 @@ class _LoginViewState extends State<LoginView> {
                     8.h(),
                     TextFormField(
                       controller: _viewModel.emailController,
-                      validator: (v) =>
-                          Validator.validateNonNullOrEmpty(v, "Email address"),
-                      decoration:
-                          InputDecoration(
-                            prefixIcon: const Icon(Icons.email_outlined),
-                            hintText: "Enter email address".tr()),
+                      validator: (v) => Validator.validateEmail(v),
+                      decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.email_outlined),
+                          hintText: "Enter email address".tr()),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     12.h(),
@@ -70,10 +69,10 @@ class _LoginViewState extends State<LoginView> {
                         builder: (_, value, __) {
                           return TextFormField(
                             controller: _viewModel.pwController,
-                            validator: (v) =>
-                                Validator.validateNonNullOrEmpty(v, "Password"),
+                            validator: (v) => Validator.isValidPassword(v),
                             obscureText: !value,
                             decoration: InputDecoration(
+                                errorMaxLines: 2,
                                 prefixIcon: const Icon(Icons.lock_outlined),
                                 hintText: "Enter password",
                                 suffixIcon: IconButton(
@@ -87,22 +86,23 @@ class _LoginViewState extends State<LoginView> {
                           );
                         }),
                     64.h(),
-                    StyledButton(
-                        onClick: ()=>_viewModel.loginAccount(context),
-                        text: "LOGIN".toUpperCase()),
+                    BlocBuilder<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                        return StyledButton(
+                            loading: state is Loading,
+                            onClick: () => _viewModel.loginAccount(context),
+                            text: "LOGIN".toUpperCase());
+                      },
+                    ),
                     32.h(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(
-                          width: 80,
-                          child: Divider()),
+                        const SizedBox(width: 80, child: Divider()),
                         8.w(),
                         "OR".tl(context),
                         8.w(),
-                        const SizedBox(
-                          width: 80,
-                          child: Divider())
+                        const SizedBox(width: 80, child: Divider())
                       ],
                     ),
                     32.h(),
@@ -110,12 +110,16 @@ class _LoginViewState extends State<LoginView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InkWell(
-                          onTap: ()=>context.read<AuthBloc>().add(GoogleLoginEvent()),
-                          child: Image.asset(AssetsConst.google, width: 54)),
+                            onTap: () => context
+                                .read<AuthBloc>()
+                                .add(GoogleLoginEvent()),
+                            child: Image.asset(AssetsConst.google, width: 54)),
                         24.w(),
                         InkWell(
-                          onTap: ()=>context.read<AuthBloc>().add(GithubLoginEvent()),
-                          child: Image.asset(AssetsConst.github, width: 54))
+                            onTap: () => context
+                                .read<AuthBloc>()
+                                .add(GithubLoginEvent()),
+                            child: Image.asset(AssetsConst.github, width: 54))
                       ],
                     ),
                     64.h(),

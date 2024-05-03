@@ -69,7 +69,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       Global.bioLink.value = BioLink.fromMap(biolink);
       emit(Success());
     }catch(e){
-      emit(Error());
+      emit(Error(msg: "Invalid login credentials."));
     }
   }
 

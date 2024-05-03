@@ -31,7 +31,7 @@ class _SignupViewState extends State<SignupView> {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if(state is Success){
+        if (state is Success) {
           context.goto(Routes.home, clear: true);
         }
       },
@@ -94,9 +94,9 @@ class _SignupViewState extends State<SignupView> {
                     TextFormField(
                       controller: _viewModel.emailController,
                       validator: (v) => Validator.validateEmail(v),
-                      decoration:InputDecoration(
-                            prefixIcon: const Icon(Icons.email_outlined),
-                            hintText: "Enter email address".tr()),
+                      decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.email_outlined),
+                          hintText: "Enter email address".tr()),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     12.h(),
@@ -107,10 +107,10 @@ class _SignupViewState extends State<SignupView> {
                         builder: (_, value, __) {
                           return TextFormField(
                             controller: _viewModel.pwController,
-                            validator: (v) =>
-                                Validator.validateNonNullOrEmpty(v, "Password"),
+                            validator: (v) => Validator.isValidPassword(v),
                             obscureText: !value,
                             decoration: InputDecoration(
+                                errorMaxLines: 2,
                                 prefixIcon: const Icon(Icons.lock_outlined),
                                 hintText: "Enter password",
                                 suffixIcon: IconButton(
@@ -124,9 +124,14 @@ class _SignupViewState extends State<SignupView> {
                           );
                         }),
                     64.h(),
-                    StyledButton(
-                        onClick: () => _viewModel.createAccount(context),
-                        text: "SIGNUP".toUpperCase()),
+                    BlocBuilder<AuthBloc, AuthState>(
+                      builder: (context, state) {
+                        return StyledButton(
+                          loading: state is Loading,
+                          onClick: () => _viewModel.createAccount(context),
+                          text: "SIGNUP".toUpperCase());
+                      },
+                    ),
                     32.h(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

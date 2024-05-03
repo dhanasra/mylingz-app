@@ -26,6 +26,24 @@ class Validator {
     }
   }
 
+  static isValidPassword(value, {bool required = true}) {
+    final RegExp passwordRegex = RegExp(
+      r'^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$',
+    );
+    if (value == null || value.toString().trim().isEmpty) {
+      if(!required){
+        return null;
+      }
+      return 'Password is required';
+    } 
+    var isPasswordValid = passwordRegex.hasMatch(value);
+    if(!isPasswordValid){
+      return 'Password must be at least 8 characters long and contain at least one letter, one special character and one number';
+    }else{
+      return null;
+    }
+  }
+
   static validatePhoneNumber(
     String? value, {
     String? fieldName,
