@@ -83,8 +83,10 @@ class RouteGenerator {
           child: CreateLinkView(link: settings.arguments as ShortLink?),
         ));
       case Routes.linkDetails:
-        return getTransistionPage(
-            LinkDetailsView(linkId: settings.arguments as String));
+        return getTransistionPage(BlocProvider(
+          create: (context) => LinksBloc(),
+          child: LinkDetailsView(linkId: settings.arguments as String),
+        ));
       case Routes.bioLinkEdit:
         return getTransistionPage(const BioLinkEditView());
       case Routes.bioLinkIcons:
@@ -104,9 +106,8 @@ class RouteGenerator {
         ));
       case Routes.iconsCreate:
         return getTransistionPage(BlocProvider(
-          create: (context) => BioLinkBloc(),
-          child: IconCreateView(icon: settings.arguments as SocialIcon)
-        ));
+            create: (context) => BioLinkBloc(),
+            child: IconCreateView(icon: settings.arguments as SocialIcon)));
       case Routes.bioLinkBasicInfo:
         return getTransistionPage(MultiBlocProvider(
           providers: [

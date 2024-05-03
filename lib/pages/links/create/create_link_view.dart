@@ -10,6 +10,7 @@ import 'package:mylingz_app/pages/links/create/create_link_viewmodel.dart';
 import 'package:mylingz_app/widgets/styled_button.dart';
 
 import '../../../constants/string_const.dart';
+import '../../../routes/app_routes.dart';
 import '../../../utils/validator.dart';
 import '../bloc/links_bloc.dart';
 
@@ -35,6 +36,10 @@ class _CreateLinkViewState extends State<CreateLinkView> {
     return BlocListener<LinksBloc, LinksState>(
       listener: (context, state) {
         if(state is Success){
+          if(_viewModel.link!=null){
+            context.goto(Routes.home, clear: true);
+            return;
+          } 
           context.back();
         }
       },

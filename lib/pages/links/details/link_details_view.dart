@@ -107,10 +107,10 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
                                         Clipboard.setData(ClipboardData(
                                             text:
                                                 "${_viewModel.shortLink.domain}/${_viewModel.shortLink.short}"));
-                                      } else if (e["share"] == "share") {
+                                      } else if (e["id"] == "share") {
                                         Share.share(
                                             "${_viewModel.shortLink.domain}/${_viewModel.shortLink.short}");
-                                      } else if (e["remove"]) {
+                                      } else if (e["id"] == "remove") {
                                         context.read<LinksBloc>().add(
                                             RemoveLinkEvent(
                                                 id: _viewModel.shortLink.id));
