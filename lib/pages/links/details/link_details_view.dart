@@ -7,6 +7,7 @@ import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/pages/links/details/link_details_viewmodel.dart';
+import 'package:mylingz_app/routes/app_routes.dart';
 import 'package:mylingz_app/widgets/line_chart.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
 
@@ -85,7 +86,11 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
                   children: _viewModel.options.map(
                     (e) => Expanded(
                       child: InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          if(e["id"]=="edit"){
+                            context.goto(Routes.createLink, args: _viewModel.shortLink);
+                          }
+                        },
                         child: Column(
                           children: [
                             Container(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/network/models/social_icon.dart';
 import 'package:mylingz_app/pages/auth/login/login_view.dart';
 import 'package:mylingz_app/pages/auth/signup/signup_view.dart';
@@ -79,7 +80,7 @@ class RouteGenerator {
       case Routes.createLink:
         return getTransistionPage(BlocProvider(
           create: (context) => LinksBloc(),
-          child: const CreateLinkView(),
+          child: CreateLinkView(link: settings.arguments as ShortLink?),
         ));
       case Routes.linkDetails:
         return getTransistionPage(

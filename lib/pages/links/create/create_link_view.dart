@@ -5,6 +5,7 @@ import 'package:mylingz_app/constants/color_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
+import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/pages/links/create/create_link_viewmodel.dart';
 import 'package:mylingz_app/widgets/styled_button.dart';
 
@@ -13,7 +14,8 @@ import '../../../utils/validator.dart';
 import '../bloc/links_bloc.dart';
 
 class CreateLinkView extends StatefulWidget {
-  const CreateLinkView({super.key});
+  final ShortLink? link;
+  const CreateLinkView({super.key, this.link});
 
   @override
   State<CreateLinkView> createState() => _CreateLinkViewState();
@@ -24,7 +26,7 @@ class _CreateLinkViewState extends State<CreateLinkView> {
 
   @override
   void initState() {
-    _viewModel = CreateLinkViewModel();
+    _viewModel = CreateLinkViewModel(widget.link);
     super.initState();
   }
 
@@ -38,7 +40,7 @@ class _CreateLinkViewState extends State<CreateLinkView> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(StringConst.create).tr(),
+          title: Text( _viewModel.link!=null ? "Edit": StringConst.create).tr(),
         ),
         body: ValueListenableBuilder(
           valueListenable: _viewModel.mode,
@@ -136,7 +138,7 @@ class _CreateLinkViewState extends State<CreateLinkView> {
                     ),
                   ),
                   34.h(),
-                  StyledButton(onClick: ()=>_viewModel.save(context), text: StringConst.create.toUpperCase())
+                  StyledButton(onClick: ()=>_viewModel.save(context), text: (_viewModel.link!=null ? "Save": StringConst.create).toUpperCase())
                 ],
               ),
             );

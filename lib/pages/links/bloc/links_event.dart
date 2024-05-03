@@ -4,6 +4,7 @@ part of 'links_bloc.dart';
 sealed class LinksEvent {}
 
 class SaveLinkEvent extends LinksEvent {
+  final String? id;
   final String url;
   final String? title;
   final String short;
@@ -12,6 +13,7 @@ class SaveLinkEvent extends LinksEvent {
   final String? btnLabel;
 
   SaveLinkEvent({
+    this.id,
     required this.url,
     this.title,
     required this.short,

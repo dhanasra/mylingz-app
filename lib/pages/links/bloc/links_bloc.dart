@@ -28,11 +28,23 @@ class LinksBloc extends Bloc<LinksEvent, LinksState> {
         "createdBy": Global.user!.id,
         "createdAt": DateTime.now().millisecondsSinceEpoch
       };
-      
-      DocumentReference ref = await _client.linksDB.add(data);
-      data["id"] = ref.id;
-      
-      Global.links.add(ShortLink.fromMap(data));
+
+      if(event.id!=null){
+        await _client.linksDB.doc(event.id).update(data);
+        data["id"] = event.id;
+        Global.links = Global.links.map((e){
+          if(e.id == event.id){
+            return ShortLink.fromMap(data);
+          }else{
+            return e;
+          }
+        }).toList();
+      }else{
+        DocumentReference ref = await _client.linksDB.add(data);
+        data["id"] = ref.id; 
+        Global.links.add(ShortLink.fromMap(data));
+      }
+
       emit(Success());
     }catch(e){
       emit(Error());
