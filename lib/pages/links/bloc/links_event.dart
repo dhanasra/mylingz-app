@@ -37,3 +37,10 @@ class RemoveLinkEvent extends LinksEvent {
     required this.id
   });
 }
+
+class AddLinkToBioEvent extends LinksEvent {
+  final ShortLink link;
+  AddLinkToBioEvent({
+    required this.link
+  });
+}

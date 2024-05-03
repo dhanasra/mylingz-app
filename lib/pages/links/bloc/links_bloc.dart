@@ -16,10 +16,24 @@ class LinksBloc extends Bloc<LinksEvent, LinksState> {
   LinksBloc() : super(LinksInitial()) {
     on<SaveLinkEvent>(_onSaveLink);
     on<RemoveLinkEvent>(_onRemoveLink);
+    on<AddLinkToBioEvent>(_onAddLinkToBio);
     on<GetLinkAnalyticsEvent>(_onGetLinkAnalytics);
   }
 
   final FirebaseClient _client = FirebaseClient();
+
+  _onAddLinkToBio(AddLinkToBioEvent event, Emitter emit) async {
+    try{
+      emit(Loading());
+      var link = event.link;
+      var bioLink = Global.bioLink.value!;
+      var newBtn = BioLinkButton(idx: bioLink.buttons.length, id: link.id, text: link.title!, url: link.url);
+      Global.bioLink.value = Global.bioLink.value!.copyWith(buttons: [ ...bioLink.buttons, newBtn ]);
+      await _client.myBiolink.update({"buttons": Global.bioLink.value!.buttons.map((e) => e.toMap()).toList()});
+    }catch(e){
+      emit(Error());
+    }
+  }
 
   _onGetLinkAnalytics(GetLinkAnalyticsEvent event, Emitter emit) async {
     try{

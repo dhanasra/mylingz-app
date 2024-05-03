@@ -9,6 +9,7 @@ import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/routes/app_routes.dart';
+import 'package:mylingz_app/utils/global.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -68,7 +69,7 @@ class LinkItem extends StatelessWidget {
                   }else if(v=="share"){
                     Share.share(shortLink);
                   }else if(v=="bioLink"){
-
+                    context.read<LinksBloc>().add(AddLinkToBioEvent(link: link));
                   }else if(v=="delete"){
                     context.read<LinksBloc>().add(
                       RemoveLinkEvent(
@@ -76,67 +77,78 @@ class LinkItem extends StatelessWidget {
                   }
                 },
                 itemBuilder: (_){
-                return[
-                  PopupMenuItem<String>(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    value: 'view',
-                    child: Row(
-                      children: [
-                        const Icon(Icons.remove_red_eye_outlined, size: 20),
-                        24.w(),
-                        "View Link Detail".ts(context)
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem<String>(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    value: 'copy',
-                    child: Row(
-                      children: [
-                        const Icon(Icons.copy_outlined, size: 20),
-                        24.w(),
-                        "Copy Link".ts(context)
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem<String>(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    value: 'share',
-                    child: Row(
-                      children: [
-                        const Icon(Icons.share_outlined, size: 20),
-                        24.w(),
-                        "Share Link".ts(context)
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem<String>(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    value: 'bioLink',
-                    child: Row(
-                      children: [
-                        const Icon(Icons.person_add_alt_outlined, size: 20),
-                        24.w(),
-                        "Add Link In Bio".ts(context)
-                      ],
-                    ),
-                  ),
-                  PopupMenuItem<String>(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    value: 'delete',
-                    child: Row(
-                      children: [
-                        const Icon(Icons.delete_outlined, size: 20, color: Colors.red),
-                        24.w(),
-                        "Delete Link".ts(context, color: Colors.red)
-                      ],
-                    ),
-                  ),
-                ];
+                return getMenuItem(context, link.id);
               }),
           )
         ],
       ),
     );
+  }
+
+  List<PopupMenuEntry> getMenuItem(BuildContext context, String id){
+    var items = [
+          PopupMenuItem<String>(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            value: 'view',
+            child: Row(
+              children: [
+                const Icon(Icons.remove_red_eye_outlined, size: 20),
+                24.w(),
+                "View Link Detail".ts(context)
+              ],
+            ),
+          ),
+          PopupMenuItem<String>(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            value: 'copy',
+            child: Row(
+              children: [
+                const Icon(Icons.copy_outlined, size: 20),
+                24.w(),
+                "Copy Link".ts(context)
+              ],
+            ),
+          ),
+          PopupMenuItem<String>(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            value: 'share',
+            child: Row(
+              children: [
+                const Icon(Icons.share_outlined, size: 20),
+                24.w(),
+                "Share Link".ts(context)
+              ],
+            ),
+          ),
+          PopupMenuItem<String>(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            value: 'bioLink',
+            child: Row(
+              children: [
+                const Icon(Icons.person_add_alt_outlined, size: 20),
+                24.w(),
+                "Add Link In Bio".ts(context)
+              ],
+            ),
+          ),
+
+          PopupMenuItem<String>(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            value: 'delete',
+            child: Row(
+              children: [
+                const Icon(Icons.delete_outlined, size: 20, color: Colors.red),
+                24.w(),
+                "Delete Link".ts(context, color: Colors.red)
+              ],
+            ),
+          ),
+        ];
+
+    if(Global.bioLink.value!.buttons.any((element) => element.id==id)){
+      items.removeAt(3);
+    }
+
+    return items;
   }
 }
