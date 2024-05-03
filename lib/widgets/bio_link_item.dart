@@ -8,6 +8,8 @@ import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/network/models/bio_link.dart';
 import 'package:mylingz_app/routes/app_routes.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class BioLinkItem extends StatelessWidget {
   final BioLink bioLink;
@@ -16,6 +18,8 @@ class BioLinkItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var link = "${bioLink.domainName}/${bioLink.bioId}";
     
     return StyledWrapper(
       child: Column(
@@ -73,7 +77,7 @@ class BioLinkItem extends StatelessWidget {
                         dashPattern: const [6, 3],
                         child: GestureDetector(
                           onTap: (){
-                            Clipboard.setData(ClipboardData(text: "${bioLink.domainName}/${bioLink.bioId}"));
+                            Clipboard.setData(ClipboardData(text: link));
                           },
                           child: Container(
                             padding: const EdgeInsets.all(14),
@@ -114,6 +118,12 @@ class BioLinkItem extends StatelessWidget {
                           onTap: (){
                             if(e["id"]=="edit"){
                               context.goto(Routes.bioLinkEdit);
+                            }else if(e["id"]=="view"){
+                              launchUrlString(link);
+                            }else if(e["id"]=="share"){
+                              Share.share(link);
+                            }else if(e["id"]=="stats"){
+
                             }
                           },
                           child: Column(
