@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
-import 'package:mylingz_app/pages/home/fragments/analytics_fragment.dart';
 import 'package:mylingz_app/pages/home/fragments/dashboard_fragment.dart';
 import 'package:mylingz_app/pages/home/fragments/biolink_fragment.dart';
+import 'package:mylingz_app/pages/home/fragments/favourites_fragment.dart';
 import 'package:mylingz_app/routes/app_routes.dart';
 
 import '../../base/base_viewmodel.dart';
@@ -14,7 +14,7 @@ class HomeViewModel extends BaseViewModel {
   final List<Map> bottomNavItems = [
     {'label': 'Home', 'icon': Icons.home_outlined, 'active': Icons.home_rounded},
     {'label': 'Bio Link', 'icon': Icons.person_pin_outlined, 'active': Icons.person_pin_rounded},
-    {'label': 'Analytics', 'icon': Icons.pie_chart_outline_outlined, 'active': Icons.pie_chart},
+    {'label': 'Favourites', 'icon': Icons.star_border, 'active': Icons.star},
     {'label': 'Settings', 'icon': Icons.settings_outlined, 'active': Icons.settings}
   ];
 
@@ -40,7 +40,7 @@ class HomeViewModel extends BaseViewModel {
     items = [
       const DashboardFragment(),
       BioLinkFragment(vm: this),
-      const AnalyticsFragment()
+      const FavouritesFragment()
     ];
     ctx = context;
   }

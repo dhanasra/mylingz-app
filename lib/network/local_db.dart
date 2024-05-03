@@ -9,7 +9,7 @@ import '../utils/utils.dart';
 
 class LocalDB {
 
-  static CollectionBox? history;
+  static CollectionBox? favs;
   static CollectionBox? settings;
 
   static init()async{
@@ -17,12 +17,22 @@ class LocalDB {
     await Hive.initFlutter();
     final boxCollection = await BoxCollection.open(
       'MYLingz', 
-      {'settings'}, 
+      {'favourites', 'settings'}, 
       path: appDocDirectory.path
     );
+    favs = await boxCollection.openBox<Map>('favourites');
     settings = await boxCollection.openBox<Map>('settings');
     var data = await settings?.getAllValues();
     Global.mode = ThemeMode.values.firstWhere((element) => element.name == data?['theme']?['mode'], orElse: ()=>ThemeMode.light);
+  }
+
+  Future<void> saveFavourite(String id) async =>await favs?.put(id, id);
+  removeFavourites(String id) async =>await favs?.delete(id);
+  clearFavourites() async =>await favs?.clear();
+
+  Future<Map> getFavs()async{
+    var data = await favs?.getAllValues();
+    return data ?? {};
   }
 
   Future<void> saveSettings(key, value) async =>await settings?.put(key, value);

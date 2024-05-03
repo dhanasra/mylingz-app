@@ -65,6 +65,11 @@ class StringConst {
   static const websiteHint ="websiteHint";
   static const noteHint ="noteHint";
 
+  // favourites view
+  static const favourites = "favourites";
+  static const noFavTitle = "noFavTitle";
+  static const noFavSub = "noFavSub";
+
 
 
 }

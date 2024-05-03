@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:mylingz_app/network/local_db.dart';
 import 'package:mylingz_app/network/models/bio_link.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/network/models/social_icon.dart';
@@ -61,6 +62,10 @@ class FirebaseClient {
         icons.add(SocialIcon.fromMap(data));
       } 
       Global.icons = icons;
+
+      var favIds = (await LocalDB().getFavs()).keys;
+      Global.favourites.value = links.where((element) => favIds.contains(element.id)).toList();
+
     } 
   }
 

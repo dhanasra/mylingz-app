@@ -44,8 +44,9 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
         appBar: AppBar(
           actions: [
             LikeButton(
-              isLiked: true,
+              isLiked: _viewModel.isFavourite,
               onTap: (isLiked) async {
+                _viewModel.updateFavourite(!isLiked);
                 return !isLiked;
               },
               likeBuilder: (bool isLiked) {

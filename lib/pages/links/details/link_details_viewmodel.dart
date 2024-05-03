@@ -6,8 +6,11 @@ import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/pages/links/bloc/links_bloc.dart';
 import 'package:mylingz_app/utils/global.dart';
 
+import '../../../network/local_db.dart';
+
 class LinkDetailsViewModel extends BaseViewModel {
   late ShortLink shortLink;
+  late bool isFavourite;
 
   final List options = [
     { "label": "Remove", "icon": Icons.delete_outlined, "id": "remove" },
@@ -27,6 +30,16 @@ class LinkDetailsViewModel extends BaseViewModel {
   LinkDetailsViewModel(String linkId, BuildContext context){
     shortLink = Global.links.firstWhere((element) => element.id==linkId);
     context.read<LinksBloc>().add(GetLinkAnalyticsEvent(linkId: shortLink.short));
+    isFavourite = Global.favourites.value.any((element) => element.id == shortLink.id);
+  }
+
+  updateFavourite(isLiked){
+    LocalDB().saveFavourite(shortLink.id);
+    if(isLiked){
+      Global.favourites.value = [ ...Global.favourites.value, shortLink ];
+    }else{
+      Global.favourites.value = Global.favourites.value.where((element) => element.id!=shortLink.id).toList();
+    }
   }
 
   setupStatistics(AnalyticsFetched item){

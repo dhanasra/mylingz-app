@@ -13,6 +13,7 @@ class Global {
   static ValueNotifier<BioLink?> bioLink = ValueNotifier(null);
 
   static List<ShortLink> links = [];
+  static ValueNotifier<List<ShortLink>> favourites = ValueNotifier([]);
   static List<SocialIcon> icons = [];
 
 }
