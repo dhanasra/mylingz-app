@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/date_exten.dart';
@@ -11,6 +12,7 @@ import 'package:mylingz_app/routes/app_routes.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../pages/links/bloc/links_bloc.dart';
 import '../utils/toast.dart';
 
 class LinkItem extends StatelessWidget {
@@ -68,7 +70,9 @@ class LinkItem extends StatelessWidget {
                   }else if(v=="bioLink"){
 
                   }else if(v=="delete"){
-
+                    context.read<LinksBloc>().add(
+                      RemoveLinkEvent(
+                          id: link.id));
                   }
                 },
                 itemBuilder: (_){
