@@ -23,6 +23,7 @@ import '../pages/home/bloc/home_bloc.dart';
 import '../pages/home/cubit/home_cubit.dart';
 import '../pages/home/home_view.dart';
 import '../pages/links/bloc/links_bloc.dart';
+import '../pages/settings/bloc/account_bloc.dart';
 import '../pages/splash/splash_view.dart';
 
 class Routes {
@@ -78,7 +79,10 @@ class RouteGenerator {
           ),
         ], child: const HomeView()));
       case Routes.settings:
-        return getTransistionPage(const SettingsView());
+        return getTransistionPage(BlocProvider(
+          create: (context) => AccountBloc(),
+          child: const SettingsView(),
+        ));
       case Routes.createLink:
         return getTransistionPage(BlocProvider(
           create: (context) => LinksBloc(),

@@ -61,7 +61,6 @@ class _SignupViewState extends State<SignupView> {
                                     Validator.validateNonNullOrEmpty(
                                         v, "First Name"),
                                 decoration: InputDecoration(
-                                    prefixIcon: const Icon(Icons.email_outlined),
                                     hintText: "Enter first name".tr()),
                                 style: Theme.of(context).textTheme.titleMedium,
                               ),
@@ -95,8 +94,9 @@ class _SignupViewState extends State<SignupView> {
                     TextFormField(
                       controller: _viewModel.emailController,
                       validator: (v) => Validator.validateEmail(v),
-                      decoration:
-                          InputDecoration(hintText: "Enter email address".tr()),
+                      decoration:InputDecoration(
+                            prefixIcon: const Icon(Icons.email_outlined),
+                            hintText: "Enter email address".tr()),
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     12.h(),

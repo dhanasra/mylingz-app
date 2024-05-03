@@ -32,6 +32,14 @@ class FirebaseClient {
   Reference get storageReference => FirebaseStorage.instance.ref().child("free");
   String get userId => FirebaseAuth.instance.currentUser!.uid;
 
+  logout()async{
+    await FirebaseAuth.instance.signOut();
+  }
+
+  delete()async{
+    await FirebaseAuth.instance.currentUser!.delete();
+  }
+
   Future initApp(User? user)async{
     if(user!=null){
       var userId = user.uid;
