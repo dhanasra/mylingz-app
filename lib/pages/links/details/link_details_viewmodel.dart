@@ -34,7 +34,7 @@ class LinkDetailsViewModel extends BaseViewModel {
     analytics[1]["value"] = item.todayClicks;
     analytics[2]["value"] = item.location;
     analytics[3]["value"] = item.device;
-
+    chartData = item.chart;
   }
   
   @override

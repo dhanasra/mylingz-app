@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/date_exten.dart';
 import 'package:mylingz_app/network/firebase_client.dart';
 import 'package:mylingz_app/network/models/analytics.dart';
+import 'package:mylingz_app/network/models/chart_data.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/utils/global.dart';
 
@@ -50,13 +52,26 @@ class LinksBloc extends Bloc<LinksEvent, LinksState> {
 
       String mostCommonLocation = locationCounts.entries.reduce((a, b) => a.value > b.value ? a : b).key;
       String mostCommonDevice = deviceCounts.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+
+      List<ChartData> last7DaysAnalytics = List.generate(7, (index) {
+        DateTime dayStart = today.subtract(Duration(days: index + 1));
+        DateTime dayEnd = today.subtract(Duration(days: index));
+        int count = 0;
+        for (var doc in snapshots.docs) {
+          DateTime docDateTime = DateTime.fromMillisecondsSinceEpoch(doc.data()["dateTime"]);
+          if (docDateTime.isAfter(dayStart) && docDateTime.isBefore(dayEnd)) {
+            count++;
+          }
+        }
+        return ChartData(dayStart.format("dd MMM"), count.toDouble());
+      });
       
       emit(AnalyticsFetched(
         todayClicks: todayAnalytics,
         totalClicks: analytics.length,
         device: mostCommonLocation,
         location: mostCommonDevice,
-        data: analytics
+        chart: last7DaysAnalytics
       ));
     }catch(e){
       emit(Error());
