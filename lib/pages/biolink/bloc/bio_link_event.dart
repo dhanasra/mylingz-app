@@ -35,3 +35,5 @@ class SaveSocialLinksEvent extends BioLinkEvent {
     required this.links
   });
 }
+
+class GetBioLinkAnalyticsEvent extends BioLinkEvent {}

@@ -123,7 +123,7 @@ class BioLinkItem extends StatelessWidget {
                             }else if(e["id"]=="share"){
                               Share.share(link);
                             }else if(e["id"]=="stats"){
-
+                              context.goto(Routes.bioLinkAnalytics);
                             }
                           },
                           child: Column(
