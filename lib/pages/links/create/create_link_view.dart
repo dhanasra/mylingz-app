@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mylingz_app/constants/color_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
@@ -87,10 +88,32 @@ class _CreateLinkViewState extends State<CreateLinkView> {
                       12.w(),
                       Expanded(
                         flex: 6,
-                        child: TextFormField(
-                          controller: _viewModel.backHalfController,
-                          decoration: InputDecoration(hintText: "Enter Title".tr()),
-                          style: Theme.of(context).textTheme.titleMedium,
+                        child: ValueListenableBuilder(
+                          valueListenable: _viewModel.availability,
+                          builder: (_, val, __) {
+                            return TextFormField(
+                              enabled: _viewModel.link==null,
+                              controller: _viewModel.backHalfController,
+                              onChanged: (e)=>_viewModel.checkAvailability(e),
+                              decoration: InputDecoration(
+                                hintText: "Enter back half".tr(),
+                                suffixIcon: val==null
+                                ? SizedBox.shrink(
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Container(
+                                    width: 16, height: 16,
+                                    margin: const EdgeInsets.only(right: 12),
+                                    child: const CircularProgressIndicator(strokeWidth: 2,)),
+                                  ),
+                                )
+                                : val 
+                                  ? const Icon(Icons.check, color: Colors.green)  
+                                  : const Icon(Icons.close, color: Colors.red)  
+                              ),
+                              style: Theme.of(context).textTheme.titleMedium,
+                            );
+                          }
                         ),
                       )
                     ],

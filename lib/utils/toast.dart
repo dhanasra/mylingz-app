@@ -19,7 +19,7 @@ class Toast {
               Image.asset("res/images/$type.png", width: 32,),
               16.w(),
               Expanded(child: message.tl(context, color: type=="success" 
-                ? Colors.green: type=="failure" ? Colors.red : Colors.deepOrange))
+                ? Colors.green: type=="error" ? Colors.red : Colors.deepOrange))
             ],
           ),
         ),
