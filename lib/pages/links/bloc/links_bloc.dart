@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/date_exten.dart';
 import 'package:mylingz_app/network/firebase_client.dart';
 import 'package:mylingz_app/network/models/analytics.dart';
+import 'package:mylingz_app/network/models/bio_link_button.dart';
 import 'package:mylingz_app/network/models/chart_data.dart';
 import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/utils/global.dart';
@@ -102,12 +103,50 @@ class LinksBloc extends Bloc<LinksEvent, LinksState> {
             return e;
           }
         }).toList();
+
+        var bioLink = Global.bioLink.value!;
+        var buttonToUpdate = bioLink.buttons.firstWhere((element) => element.id==event.id, orElse: () => BioLinkButton(idx: -1, id: event.id!, text: event.btnLabel!, url: event.url));
+
+        if(event.isBioLink && event.btnLabel!=null){
+
+          if(buttonToUpdate.idx==-1){
+            buttonToUpdate.copyWith(idx: bioLink.buttons.length);
+          }else{
+            buttonToUpdate = buttonToUpdate.copyWith(
+              text: event.btnLabel!,
+              url: event.url
+            );
+          }
+
+          var newButtons = bioLink.buttons.map((e){
+            if(e.id == event.id){
+              return buttonToUpdate;
+            }else{
+              return e;
+            }
+          }).toList();
+
+          Global.bioLink.value = Global.bioLink.value!.copyWith(buttons: newButtons);
+          await _client.myBiolink.update({"buttons": Global.bioLink.value!.buttons.map((e) => e.toMap()).toList()});
+        }else{
+          if(buttonToUpdate.idx!=-1){
+            bioLink.buttons.removeWhere((element) => element.id==event.id);
+            Global.bioLink.value = Global.bioLink.value!.copyWith(buttons: bioLink.buttons);
+            await _client.myBiolink.update({"buttons": bioLink.buttons.map((e) => e.toMap()).toList()});
+          }
+        }
+
       }else{
         DocumentReference ref = await _client.linksDB.add(data);
         data["id"] = ref.id; 
+        if(event.isBioLink && event.btnLabel!=null){
+          var bioLink = Global.bioLink.value!;
+          var newBtn = BioLinkButton(idx: bioLink.buttons.length, id: ref.id, text: event.btnLabel!, url: event.url);
+          Global.bioLink.value = Global.bioLink.value!.copyWith(buttons: [ ...bioLink.buttons, newBtn ]);
+          await _client.myBiolink.update({"buttons": Global.bioLink.value!.buttons.map((e) => e.toMap()).toList()});
+        }
         Global.links.add(ShortLink.fromMap(data));
       }
-
       emit(Success());
     }catch(e){
       emit(Error());
