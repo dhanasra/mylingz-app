@@ -46,6 +46,7 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                     16.h(),
                     biolink.title.hm(context),
                     6.h(),
+                    if(biolink.slogan!=null)
                     biolink.slogan?.ts(context)
                   ],
                 )
@@ -113,13 +114,16 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                   context.goto(Routes.contactFields).then((value) => setState(() {}))
                 },
                 child: biolink.contactFields.isEmpty
-                ? Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.add, color: Theme.of(context).primaryColor),
-                    8.w(),
-                    "Add Contact Form".ts(context, color: Theme.of(context).primaryColor)
-                  ],
+                ? Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.add, color: Theme.of(context).primaryColor),
+                      8.w(),
+                      "Add Contact Form".ts(context, color: Theme.of(context).primaryColor)
+                    ],
+                  ),
                 ): AbsorbPointer(
                   child: Container(
                     margin: const EdgeInsets.all(0),
