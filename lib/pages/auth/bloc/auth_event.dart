@@ -29,3 +29,5 @@ class LoginEvent extends AuthEvent {
 }
 
 class GoogleLoginEvent extends AuthEvent{}
+
+class GithubLoginEvent extends AuthEvent{}

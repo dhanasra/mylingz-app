@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mylingz_app/constants/assets_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
@@ -88,6 +91,34 @@ class _LoginViewState extends State<LoginView> {
                         onClick: ()=>_viewModel.loginAccount(context),
                         text: "LOGIN".toUpperCase()),
                     32.h(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          width: 80,
+                          child: Divider()),
+                        8.w(),
+                        "OR".tl(context),
+                        8.w(),
+                        const SizedBox(
+                          width: 80,
+                          child: Divider())
+                      ],
+                    ),
+                    32.h(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: ()=>context.read<AuthBloc>().add(GoogleLoginEvent()),
+                          child: Image.asset(AssetsConst.google, width: 54)),
+                        24.w(),
+                        InkWell(
+                          onTap: ()=>context.read<AuthBloc>().add(GithubLoginEvent()),
+                          child: Image.asset(AssetsConst.github, width: 54))
+                      ],
+                    ),
+                    64.h(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
