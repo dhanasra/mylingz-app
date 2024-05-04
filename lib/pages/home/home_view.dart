@@ -1,6 +1,7 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mylingz_app/constants/string_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
@@ -46,7 +47,7 @@ class _HomeViewState extends State<HomeView> {
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Text( idx==1 ? "My BioLink" : idx==2 ? "Analytics" : "MYLingz"),
+            title: Text( idx==1 ? "My BioLink" : idx==2 ? StringConst.favourites : "MYLingz"),
             centerTitle: false,
             actions: [
               IconButton(onPressed: (){

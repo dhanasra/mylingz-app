@@ -17,6 +17,9 @@ class StringConst {
   static const rateOpt = "rateOpt";
   static const reportOpt = "reportOpt";
   static const feedbackOpt = "feedbackOpt";
+  static const account = "account";
+  static const signOutOpt = "signOutOpt";
+  static const deleteOpt = "deleteOpt";
 
   // drawer
   static const welcomeText1 = "welcomeText1";
@@ -40,6 +43,7 @@ class StringConst {
 
   // forms
 
+  static const generatedLinks ="generatedLinks";
   static const genrateQRCode ="genrateQRCode";
   static const textHelper ="textHelper";
   static const textHint ="textHint";

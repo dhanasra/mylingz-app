@@ -101,20 +101,20 @@ class _SettingsViewState extends State<SettingsView> {
 
             16.h(),
 
-            "ACCOUNT".ts(context),
+            StringConst.account.ts(context),
 
             8.h(),
             ListTile(
               onTap: () => _viewModel.openConfirmSheet(context, "signout"),
               leading: const Icon(Icons.logout, size: 20),
-              title: const Text("Signout").tr(),
+              title: const Text(StringConst.signOutOpt).tr(),
             ),
             ListTile(
               textColor: Colors.red,
               iconColor: Colors.red,
               onTap: () => _viewModel.openConfirmSheet(context, "delete"),
               leading: const Icon(Icons.delete_outline, size: 20),
-              title: const Text("Delete Account").tr(),
+              title: const Text(StringConst.deleteOpt).tr(),
             ),
           ],
         ),

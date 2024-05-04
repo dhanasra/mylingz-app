@@ -39,7 +39,7 @@ class DashboardFragment extends StatelessWidget {
                 ]
               : [
                   16.h(),
-                  "GENERATED LINKS".ts(context),
+                  StringConst.generatedLinks.ts(context),
                   20.h(),
                   ...Global.links.map((e) => LinkItem(link: e))
                 ],
