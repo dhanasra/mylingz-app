@@ -33,9 +33,9 @@ class LinkItem extends StatelessWidget {
           CircleAvatar(
             radius: 25,
             backgroundColor: context.theme().primaryColorLight,
-            child: const CircleAvatar(
+            child: CircleAvatar(
               radius: 20,
-              backgroundImage: NetworkImage("http://www.google.com/s2/favicons?domain=buizcard.com")
+              backgroundImage: NetworkImage("http://www.google.com/s2/favicons?domain=${link.url}")
             ),
           ),
           8.w(),
