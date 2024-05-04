@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mylingz_app/constants/color_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
@@ -124,7 +122,7 @@ class _CreateLinkViewState extends State<CreateLinkView> {
                   ),
                   ListTile(
                     title: "Use This Link In Bio"
-                        .ts(context, color: ColorConst.primary, align: TextAlign.end),
+                        .ts(context, color: context.theme().primaryColor, align: TextAlign.end),
                     trailing: Checkbox(
                       value: _viewModel.isBioLink,
                       onChanged: (v) {

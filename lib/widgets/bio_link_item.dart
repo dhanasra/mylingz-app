@@ -22,6 +22,7 @@ class BioLinkItem extends StatelessWidget {
     var link = "${bioLink.domainName}/${bioLink.bioId}";
     
     return StyledWrapper(
+      p: const EdgeInsets.only(bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

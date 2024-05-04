@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 
 extension TextExtensions on String {
 
@@ -21,17 +22,17 @@ extension TextExtensions on String {
 
   tl(BuildContext context, {int? maxLines, Color? color, bool isLink = false}){
     return Text(this, maxLines: maxLines, style: Theme.of(context).textTheme.titleLarge!.copyWith(
-      color: color ?? (isLink ? const Color(0xFF0000FF) : null),
+      color: color ?? (isLink ? context.theme().secondaryHeaderColor : null),
       decoration: isLink ? TextDecoration.underline : null,
-      decorationColor: const Color(0xFF0000FF)
+      decorationColor: context.theme().secondaryHeaderColor
     )).tr();
   }
 
   ts(BuildContext context, {Color? color, TextAlign? align, bool isLink = false}){
     return Text(this, textAlign: align, style: Theme.of(context).textTheme.titleSmall!.copyWith(
-      color: color ?? (isLink ? const Color(0xFF0000FF) : null), 
+      color: color ?? (isLink ? context.theme().secondaryHeaderColor : null), 
       decoration: isLink ? TextDecoration.underline : null,
-      decorationColor: const Color(0xFF0000FF)
+      decorationColor: context.theme().secondaryHeaderColor
     )).tr();
   }
 

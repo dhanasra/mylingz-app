@@ -27,6 +27,8 @@ class ThemeConst {
       primaryColor: isDark ? ColorConst.primaryLight: ColorConst.primary,
       primaryColorLight: ColorConst.primaryLight,
 
+      secondaryHeaderColor: isDark ? const Color.fromARGB(255, 143, 143, 236) :const Color(0xFF0000FF),
+
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30)
@@ -51,7 +53,7 @@ class ThemeConst {
         primary: ColorConst.primary,
         secondary: Colors.white,
         tertiary: ColorConst.primaryLight.withOpacity(0.4),
-        background: const Color(0xFFf4f6fa)
+        background: !isDark ? const Color(0xFFf4f6fa) : const Color(0xFF000000)
       ),
 
       iconTheme: IconThemeData(
