@@ -51,7 +51,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       Global.bioLink.value = bioLink;
       emit(Success());
     }catch(e){
-      emit(Error());
+      if(e is FirebaseAuthException){
+        emit(Error(msg: e.message));
+        return;
+      }
+
+      emit(Error(msg: "Something went wrong! Try again later"));
     }
   }
 
@@ -69,7 +74,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       Global.bioLink.value = BioLink.fromMap(biolink);
       emit(Success());
     }catch(e){
-      emit(Error(msg: "Invalid login credentials."));
+      if(e is FirebaseAuthException){
+        emit(Error(msg: e.message));
+        return;
+      }
+
+      emit(Error(msg: "Something went wrong! Try again later"));
     }
   }
 

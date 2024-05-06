@@ -8,6 +8,7 @@ import 'package:mylingz_app/pages/auth/signup/signup_viewmodel.dart';
 import 'package:mylingz_app/routes/app_routes.dart';
 import 'package:mylingz_app/utils/validator.dart';
 
+import '../../../utils/toast.dart';
 import '../../../widgets/styled_button.dart';
 import '../bloc/auth_bloc.dart';
 
@@ -33,6 +34,8 @@ class _SignupViewState extends State<SignupView> {
       listener: (context, state) {
         if (state is Success) {
           context.goto(Routes.home, clear: true);
+        } else if (state is Error && state.msg != null) {
+          Toast.show(context, message: state.msg!, type: "error");
         }
       },
       child: Scaffold(

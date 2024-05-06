@@ -28,17 +28,18 @@ extension TextExtensions on String {
     )).tr();
   }
 
-  ts(BuildContext context, {Color? color, TextAlign? align, bool isLink = false}){
+  ts(BuildContext context, {Color? color, TextAlign? align, bool isLink = false, bool light = false}){
     return Text(this, textAlign: align, style: Theme.of(context).textTheme.titleSmall!.copyWith(
       color: color ?? (isLink ? context.theme().secondaryHeaderColor : null), 
       decoration: isLink ? TextDecoration.underline : null,
-      decorationColor: context.theme().secondaryHeaderColor
+      decorationColor: context.theme().secondaryHeaderColor, 
+      fontWeight: light ? FontWeight.w400 : null
     )).tr();
   }
 
-  bs(BuildContext context, {Color? color}){
+  bs(BuildContext context, {Color? color, bool light = false}){
     return Text(this, textAlign: TextAlign.center, style: Theme.of(context).textTheme.bodySmall!.copyWith(
-      color: color
+      color: color, fontWeight: light ? FontWeight.w500 : null
     )).tr();
   }
 
