@@ -22,6 +22,13 @@ class SaveButtonsEvent extends BioLinkEvent {
   });
 }
 
+class UpdatePromoteEvent extends BioLinkEvent {
+  final bool promote;
+  UpdatePromoteEvent({
+    required this.promote
+  });
+}
+
 class SaveContactFieldsEvent extends BioLinkEvent {
   final List<ContactFields> fields;
   SaveContactFieldsEvent({

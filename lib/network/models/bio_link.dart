@@ -21,6 +21,7 @@ class BioLink {
   final List<BioLinkButton> buttons;
   final List<SocialLink> icons;
   final List<ContactFields> contactFields;
+  final bool promote;
 
   BioLink({
     required this.id,
@@ -33,8 +34,10 @@ class BioLink {
     required this.domainName,
     this.buttons = const [],
     this.icons = const [],
-    this.contactFields = const []
+    this.contactFields = const [],
+    this.promote = false,
   });
+
 
 
   BioLink copyWith({
@@ -49,12 +52,13 @@ class BioLink {
     List<BioLinkButton>? buttons,
     List<SocialLink>? icons,
     List<ContactFields>? contactFields,
+    bool? promote,
   }) {
     return BioLink(
       id: id ?? this.id,
       title: title ?? this.title,
       slogan: slogan ?? this.slogan,
-      picture: picture,
+      picture: picture ?? this.picture,
       banner: banner ?? this.banner,
       company: company ?? this.company,
       bioId: bioId ?? this.bioId,
@@ -62,6 +66,7 @@ class BioLink {
       buttons: buttons ?? this.buttons,
       icons: icons ?? this.icons,
       contactFields: contactFields ?? this.contactFields,
+      promote: promote ?? this.promote,
     );
   }
 
@@ -78,6 +83,7 @@ class BioLink {
       'buttons': buttons.map((x) => x.toMap()).toList(),
       'icons': icons.map((x) => x.toMap()).toList(),
       'contactFields': contactFields.map((x) => x.toMap()).toList(),
+      'promote': promote,
     };
   }
 
@@ -94,6 +100,7 @@ class BioLink {
       buttons: List<BioLinkButton>.from((map['buttons']).map<BioLinkButton>((x) => BioLinkButton.fromMap(x as Map<String,dynamic>),),),
       icons: List<SocialLink>.from((map['icons']).map<SocialLink>((x) => SocialLink.fromMap(x as Map<String,dynamic>),),),
       contactFields: List<ContactFields>.from((map['contactFields']).map<ContactFields>((x) => ContactFields.fromMap(x as Map<String,dynamic>),),),
+      promote: map['promote'] ?? false,
     );
   }
 
@@ -103,7 +110,7 @@ class BioLink {
 
   @override
   String toString() {
-    return 'BioLink(title: $title, slogan: $slogan, picture: $picture, banner: $banner, company: $company, bioId: $bioId, domainName: $domainName, buttons: $buttons, icons: $icons, contactFields: $contactFields)';
+    return 'BioLink(id: $id, title: $title, slogan: $slogan, picture: $picture, banner: $banner, company: $company, bioId: $bioId, domainName: $domainName, buttons: $buttons, icons: $icons, contactFields: $contactFields, promote: $promote)';
   }
 
   @override
@@ -111,6 +118,7 @@ class BioLink {
     if (identical(this, other)) return true;
   
     return 
+      other.id == id &&
       other.title == title &&
       other.slogan == slogan &&
       other.picture == picture &&
@@ -120,12 +128,14 @@ class BioLink {
       other.domainName == domainName &&
       listEquals(other.buttons, buttons) &&
       listEquals(other.icons, icons) &&
-      listEquals(other.contactFields, contactFields);
+      listEquals(other.contactFields, contactFields) &&
+      other.promote == promote;
   }
 
   @override
   int get hashCode {
-    return title.hashCode ^
+    return id.hashCode ^
+      title.hashCode ^
       slogan.hashCode ^
       picture.hashCode ^
       banner.hashCode ^
@@ -134,6 +144,7 @@ class BioLink {
       domainName.hashCode ^
       buttons.hashCode ^
       icons.hashCode ^
-      contactFields.hashCode;
+      contactFields.hashCode ^
+      promote.hashCode;
   }
 }

@@ -1,8 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/pages/home/home_viewmodel.dart';
+import 'package:mylingz_app/routes/app_routes.dart';
 import 'package:mylingz_app/utils/global.dart';
 import 'package:mylingz_app/widgets/bio_link_item.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
@@ -53,6 +54,7 @@ class BioLinkFragment extends StatelessWidget {
 
         16.h(),
         StyledWrapper(
+          onClick: ()=>context.goto(Routes.promote),
           p: const EdgeInsets.all(20),
           child: Row(
             children: [

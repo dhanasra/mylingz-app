@@ -10,6 +10,7 @@ import 'package:mylingz_app/pages/biolink/buttons/buttons_view.dart';
 import 'package:mylingz_app/pages/biolink/contact_fields/contact_fields_view.dart';
 import 'package:mylingz_app/pages/biolink/edit/biolink_edit_view.dart';
 import 'package:mylingz_app/pages/biolink/icon_create/icon_create_view.dart';
+import 'package:mylingz_app/pages/biolink/promote/promote_view.dart';
 import 'package:mylingz_app/pages/biolink/social_icons/social_icons_view.dart';
 import 'package:mylingz_app/pages/links/create/create_link_view.dart';
 import 'package:mylingz_app/pages/links/details/link_details_view.dart';
@@ -48,6 +49,7 @@ class Routes {
   static const bioLinkIcons = '/bioLinkIcons';
   static const iconsLib = '/iconsLib';
   static const iconsCreate = '/iconCreate';
+  static const promote = '/promote';
 }
 
 class RouteGenerator {
@@ -131,6 +133,11 @@ class RouteGenerator {
             ),
           ],
           child: const BasicInfoView(),
+        ));
+      case Routes.promote:
+        return getTransistionPage(BlocProvider(
+          create: (context) => BioLinkBloc(),
+          child: const PromoteView(),
         ));
       default:
         return unDefinedRoute();

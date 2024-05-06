@@ -20,6 +20,7 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     on<SaveSocialLinksEvent>(_onSaveSocialLinks);
     on<SaveContactFieldsEvent>(_onSaveContactFields);
     on<GetBioLinkAnalyticsEvent>(_onGetBioLinkAnalytics);
+    on<UpdatePromoteEvent>(_onUpdatePromote);
   }
 
   final FirebaseClient _client =  FirebaseClient();
@@ -93,6 +94,20 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
         title: event.title,
         slogan: event.slogan,
         picture: event.picture
+      );
+      emit(Success());
+    }catch(e){
+      emit(Error());
+    }
+  }
+
+  _onUpdatePromote(UpdatePromoteEvent event, Emitter emit)async{
+    try{
+      await _client.myBiolink.update({
+        "promote": event.promote
+      });
+      Global.bioLink.value = Global.bioLink.value!.copyWith(
+        promote: event.promote
       );
       emit(Success());
     }catch(e){
