@@ -12,6 +12,7 @@ class Collection {
   static const String users = 'USERS';
   static const String links = 'LINKS';
   static const String bioLinks = 'BIOLINKS';
+  static const String messages = 'MESSAGES';
   static const String analytics = 'ANALYTICS';
   static const String icons = 'ICONS';
   static const String config = 'config';
@@ -24,6 +25,7 @@ class FirebaseClient {
   CollectionReference get userDB => firestore.collection(Collection.users);
   CollectionReference get linksDB => firestore.collection(Collection.links);
   CollectionReference get bioLinksDB => firestore.collection(Collection.bioLinks);
+  CollectionReference get messagesDB => firestore.collection(Collection.bioLinks).doc(FirebaseAuth.instance.currentUser?.uid).collection(Collection.messages);
   CollectionReference get iconsDB => firestore.collection(Collection.icons);
   DocumentReference get myBiolink => firestore.collection(Collection.bioLinks).doc(FirebaseAuth.instance.currentUser?.uid);
   DocumentReference get userAnalytics => firestore.collection(Collection.analytics).doc(FirebaseAuth.instance.currentUser?.uid);

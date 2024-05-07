@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/date_exten.dart';
 import 'package:mylingz_app/network/firebase_client.dart';
 import 'package:mylingz_app/network/models/contact_fields.dart';
+import 'package:mylingz_app/network/models/form_message.dart';
 import 'package:mylingz_app/network/models/social_link.dart';
 import 'package:mylingz_app/utils/global.dart';
 
@@ -21,6 +22,8 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     on<SaveContactFieldsEvent>(_onSaveContactFields);
     on<GetBioLinkAnalyticsEvent>(_onGetBioLinkAnalytics);
     on<UpdatePromoteEvent>(_onUpdatePromote);
+    on<GetFormMessagesEvent>(_onGetFormMessages);
+    on<DeleteMessagesEvent>(_onDeleteMessages);
   }
 
   final FirebaseClient _client =  FirebaseClient();
@@ -140,6 +143,34 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
       await _client.myBiolink.update({"contactFields": event.fields.map((e) => e.toMap()).toList()});
       Global.bioLink.value = Global.bioLink.value!.copyWith(contactFields: event.fields);
       emit(Success());
+    }catch(e){
+      emit(Error());
+    }
+  }
+
+  _onGetFormMessages(GetFormMessagesEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      var snapshots = await _client.messagesDB.get();
+
+      final List<FormMessage> messages = [];
+      for (var shot in snapshots.docs) { 
+        var data = shot.data() as Map;
+        data['id'] = shot.id;
+        var message = FormMessage.fromMap(data);
+        messages.add(message);
+      }
+      emit(MessagesFetched(messages: messages));
+    }catch(e){
+      emit(Error());
+    }
+  }
+
+  _onDeleteMessages(DeleteMessagesEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      await _client.messagesDB.doc(event.messageId).delete();
+      emit(MessageDeleted());
     }catch(e){
       emit(Error());
     }

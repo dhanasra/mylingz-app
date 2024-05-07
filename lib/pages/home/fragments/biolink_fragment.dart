@@ -27,6 +27,34 @@ class BioLinkFragment extends StatelessWidget {
 
         16.h(),
         StyledWrapper(
+          onClick: ()=>context.goto(Routes.formMessages),
+          p: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(Icons.message_outlined, size: 20,),
+                        8.w(),
+                        Expanded(
+                          child: "Form Messages".tl(context),
+                        ),
+                      ],
+                    ),
+                    8.h(),
+                    "All form message in this link are controlled here".ts(context, light: true, color: Colors.grey)
+                  ],
+                ),
+              ),
+              const Icon(Icons.keyboard_arrow_right_outlined)
+            ],
+          )),
+
+        16.h(),
+        StyledWrapper(
           p: const EdgeInsets.all(20),
           child: Row(
             children: [
@@ -80,32 +108,7 @@ class BioLinkFragment extends StatelessWidget {
             ],
           )),
 
-        16.h(),
-        StyledWrapper(
-          p: const EdgeInsets.all(20),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        const Icon(Icons.message_outlined, size: 20,),
-                        8.w(),
-                        Expanded(
-                          child: "Form Messages".tl(context),
-                        ),
-                      ],
-                    ),
-                    8.h(),
-                    "All form message in this link are controlled here".ts(context, light: true, color: Colors.grey)
-                  ],
-                ),
-              ),
-              const Icon(Icons.keyboard_arrow_right_outlined)
-            ],
-          )),
+        
 
           24.h(),
           TextButton(onPressed: (){}, child: "UNPUBLISH".tl(context, color: Colors.red)),

@@ -52,3 +52,21 @@ String generateRandomChars(int length) {
   final random = Random();
   return String.fromCharCodes(Iterable.generate(length, (_) => chars.codeUnitAt(random.nextInt(chars.length))));
 }
+
+IconData getDeviceIcon(String device){
+  if(device == "Android"){
+    return Icons.android;
+  }else if(device == "iPad"){
+    return Icons.tablet_android;
+  }else if(device == "iPod"){
+    return Icons.tablet_mac;
+  }else if(device == "iOS"){
+    return Icons.apple;
+  }else if(device == "Mobile"){
+    return Icons.phone_android;
+  }else if(device == "Tablet"){
+    return Icons.tablet_outlined;
+  }else{
+    return Icons.web_asset_rounded;
+  }
+}

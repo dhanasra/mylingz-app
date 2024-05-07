@@ -12,5 +12,6 @@ class AssetsConst {
   static const empty = "$jsonFolder/empty.json";
   static const launch = "$jsonFolder/launch.json";
   static const promote = "$jsonFolder/promoting.json";
+  static const notFound = "$jsonFolder/not_found.json";
 
 }

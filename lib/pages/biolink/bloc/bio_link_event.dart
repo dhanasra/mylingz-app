@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'bio_link_bloc.dart';
 
 @immutable
@@ -41,6 +42,15 @@ class SaveSocialLinksEvent extends BioLinkEvent {
   SaveSocialLinksEvent({
     required this.links
   });
+}
+
+class GetFormMessagesEvent extends BioLinkEvent {}
+
+class DeleteMessagesEvent extends BioLinkEvent {
+  final String messageId;
+  DeleteMessagesEvent({
+    required this.messageId,
+  }); 
 }
 
 class GetBioLinkAnalyticsEvent extends BioLinkEvent {}

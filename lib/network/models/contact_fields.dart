@@ -5,12 +5,14 @@ class ContactFields {
   final int idx;
   final String id;
   final String label;
+  final String? value;
   final bool required;
 
   ContactFields({
     required this.idx,
     required this.id,
     required this.label,
+    this.value,
     required this.required,
   });
 
@@ -19,11 +21,13 @@ class ContactFields {
     String? id,
     String? label,
     bool? required,
+    String? value,
   }) {
     return ContactFields(
       idx: idx ?? this.idx,
       id: id ?? this.id,
       label: label ?? this.label,
+      value: value,
       required: required ?? this.required,
     );
   }
@@ -43,6 +47,7 @@ class ContactFields {
       id: map['id'] as String,
       label: map['label'] as String,
       required: map['required'] as bool,
+      value: map['value']
     );
   }
 
