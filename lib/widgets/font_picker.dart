@@ -37,7 +37,7 @@ class FontPicker extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   color: isSelected
                   ? context.theme().primaryColor
-                  : context.theme().colorScheme.primary
+                  : context.theme().primaryColorLight
                 ),
                 child: Text("${DataConst.fontFamilies[idx]["name"]}", 
                 style: (DataConst.fontFamilies[idx]["style"] as TextStyle).copyWith(

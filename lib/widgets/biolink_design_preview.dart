@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/constants/data_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
@@ -30,6 +31,8 @@ class BioLinkDesignPreview extends StatelessWidget {
 
     var profileImageSize = (design.profileDesign?.size!=null
                     ? ( design.profileDesign!.size!<15 ? (design.profileDesign!.size! + 15 ): design.profileDesign!.size ) : 34)!.ceilToDouble();
+
+    var fontFamily = design.font!=null ? (DataConst.fontFamilies.firstWhere((element) => element["name"]==design.font)["style"] as TextStyle).fontFamily : null;
 
     return Container(
       width: double.infinity,
@@ -63,7 +66,7 @@ class BioLinkDesignPreview extends StatelessWidget {
                 4.h(),
                 Visibility(
                   visible: textAlign!=null,
-                  replacement: "Jhon Kennady".tl(context, color: textColor),
+                  replacement: "Jhon Kennady".tl(context, color: textColor, fontFamily: fontFamily),
                   child: Align(
                     alignment: textAlign ?? Alignment.center,
                     child: "Jhon Kennady".tl(context, color: textColor),
@@ -75,7 +78,7 @@ class BioLinkDesignPreview extends StatelessWidget {
                   replacement: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor)),
                   child: Align(
                     alignment: textAlign ?? Alignment.center,
-                    child: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor))),
+                    child: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor, fontFamily: fontFamily))),
                 ),
               ],
             ),
@@ -93,12 +96,12 @@ class BioLinkDesignPreview extends StatelessWidget {
                   children: [
                     Align(
                       alignment: textAlign ?? Alignment.centerLeft,
-                      child: "Jhon Kennady".tl(context, color: textColor ),
+                      child: "Jhon Kennady".tl(context, color: textColor, fontFamily: fontFamily),
                     ),
                     2.h(),
                     Align(
                       alignment: textAlign ?? Alignment.centerLeft,
-                      child: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor))),
+                      child: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor, fontFamily: fontFamily))),
                   ],
                 ),
               )
@@ -128,7 +131,7 @@ class BioLinkDesignPreview extends StatelessWidget {
                 borderRadius: BorderRadius.circular(borderRadius),
                 border: Border.all(color: outlineColor, width: borderWidth)
               ),
-              child: e.bs(context, color: textColor)
+              child: e.bs(context, color: textColor, fontFamily: fontFamily)
             );
           }),
 
@@ -143,12 +146,12 @@ class BioLinkDesignPreview extends StatelessWidget {
             ),
             child: Column(
               children: [
-                "Contact Us".ts(context, color: textColor),
+                "Contact Us".ts(context, color: textColor, fontFamily: fontFamily),
                 8.h(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    "Name".ls(context, color: textColor),
+                    "Name".ls(context, color: textColor, fontFamily: fontFamily),
                     6.h(),
                     Container(
                       width: double.infinity,
@@ -158,7 +161,7 @@ class BioLinkDesignPreview extends StatelessWidget {
                         border: Border.all(color: outlineColor, width: borderWidth)
                       ),
                       alignment: Alignment.centerLeft,
-                      child: "Enter your name".bs(context, color: textColor.withOpacity(0.5))
+                      child: "Enter your name".bs(context, color: textColor.withOpacity(0.5), fontFamily: fontFamily)
                     ),
                   ],
                 ),
@@ -166,7 +169,7 @@ class BioLinkDesignPreview extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    "Email".ls(context, color: textColor),
+                    "Email".ls(context, color: textColor, fontFamily: fontFamily),
                     6.h(),
                     Container(
                       width: double.infinity,
@@ -176,7 +179,7 @@ class BioLinkDesignPreview extends StatelessWidget {
                         border: Border.all(color: outlineColor, width: borderWidth)
                       ),
                       alignment: Alignment.centerLeft,
-                      child: "Enter your email".bs(context, color: textColor.withOpacity(0.5))
+                      child: "Enter your email".bs(context, color: textColor.withOpacity(0.5), fontFamily: fontFamily)
                     ),
                   ],
                 ),
@@ -189,7 +192,7 @@ class BioLinkDesignPreview extends StatelessWidget {
                     borderRadius: BorderRadius.circular(borderRadius),
                     border: Border.all(color: stringToColor(design.actionBtnStyle?.borderColor) ??  outlineColor, width: borderWidth)
                   ),
-                  child: "SEND".bs(context, color: stringToColor(design.actionBtnStyle?.color) ?? textColor)
+                  child: "SEND".bs(context, color: stringToColor(design.actionBtnStyle?.color) ?? textColor, fontFamily: fontFamily)
                 ),
               ],
             ),

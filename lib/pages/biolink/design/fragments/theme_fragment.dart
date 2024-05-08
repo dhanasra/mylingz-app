@@ -27,7 +27,10 @@ class ThemeFragment extends StatelessWidget {
         12.h(),
         FontPicker(
           onChanged: (e){
-            
+            vm.design.value = vm.design.value.copyWith(
+              font: e["name"]
+            );
+            vm.design.notifyListeners();
           }),
         20.h(),
         "Text".ts(context),
