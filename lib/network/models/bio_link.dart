@@ -104,9 +104,9 @@ class BioLink {
       company: map['company'] != null ? Company.fromMap(map['company'] as Map<String,dynamic>) : null,
       bioId: map['bioId'] as String,
       domainName: map['domainName'] as String,
-      buttons: List<BioLinkButton>.from((map['buttons'] as List<int>).map<BioLinkButton>((x) => BioLinkButton.fromMap(x as Map<String,dynamic>),),),
-      icons: List<SocialLink>.from((map['icons'] as List<int>).map<SocialLink>((x) => SocialLink.fromMap(x as Map<String,dynamic>),),),
-      contactFields: List<ContactFields>.from((map['contactFields'] as List<int>).map<ContactFields>((x) => ContactFields.fromMap(x as Map<String,dynamic>),),),
+      buttons: List<BioLinkButton>.from((map['buttons']).map<BioLinkButton>((x) => BioLinkButton.fromMap(x as Map<String,dynamic>),),),
+      icons: List<SocialLink>.from((map['icons']).map<SocialLink>((x) => SocialLink.fromMap(x as Map<String,dynamic>),),),
+      contactFields: List<ContactFields>.from((map['contactFields']).map<ContactFields>((x) => ContactFields.fromMap(x as Map<String,dynamic>),),),
       promote: map['promote'] as bool,
       design: map['design'] != null ? BioLinkDesign.fromMap(map['design']) : null,
     );
