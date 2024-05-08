@@ -55,6 +55,7 @@ class BioLinkFragment extends StatelessWidget {
 
         16.h(),
         StyledWrapper(
+          onClick: ()=>context.goto(Routes.design),
           p: const EdgeInsets.all(20),
           child: Row(
             children: [
@@ -67,12 +68,12 @@ class BioLinkFragment extends StatelessWidget {
                         const Icon(Icons.color_lens_outlined, size: 20),
                         8.w(),
                         Expanded(
-                          child: "Templates & Theme".tl(context),
+                          child: "Appearence & Theme".tl(context),
                         ),
                       ],
                     ),
                     8.h(),
-                    "Design your page with more attractive templates".ts(context, light: true, color: Colors.grey)
+                    "Design your page with more attractive appearence & theme".ts(context, light: true, color: Colors.grey)
                   ],
                 ),
               ),
@@ -107,8 +108,6 @@ class BioLinkFragment extends StatelessWidget {
               const Icon(Icons.keyboard_arrow_right_outlined)
             ],
           )),
-
-        
 
           24.h(),
           TextButton(onPressed: (){}, child: "UNPUBLISH".tl(context, color: Colors.red)),

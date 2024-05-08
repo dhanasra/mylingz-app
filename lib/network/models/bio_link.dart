@@ -3,11 +3,15 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import 'package:mylingz_app/network/models/biolink_design.dart';
 import 'package:mylingz_app/network/models/company.dart';
 import 'package:mylingz_app/network/models/contact_fields.dart';
 import 'package:mylingz_app/network/models/social_link.dart';
 
 import 'bio_link_button.dart';
+
+
+
 
 class BioLink {
   final String id;
@@ -22,6 +26,7 @@ class BioLink {
   final List<SocialLink> icons;
   final List<ContactFields> contactFields;
   final bool promote;
+  final BioLinkDesign? design;
 
   BioLink({
     required this.id,
@@ -36,9 +41,8 @@ class BioLink {
     this.icons = const [],
     this.contactFields = const [],
     this.promote = false,
+    this.design
   });
-
-
 
   BioLink copyWith({
     String? id,
@@ -53,6 +57,7 @@ class BioLink {
     List<SocialLink>? icons,
     List<ContactFields>? contactFields,
     bool? promote,
+    BioLinkDesign? design,
   }) {
     return BioLink(
       id: id ?? this.id,
@@ -67,6 +72,7 @@ class BioLink {
       icons: icons ?? this.icons,
       contactFields: contactFields ?? this.contactFields,
       promote: promote ?? this.promote,
+      design: design ?? this.design,
     );
   }
 
@@ -84,6 +90,7 @@ class BioLink {
       'icons': icons.map((x) => x.toMap()).toList(),
       'contactFields': contactFields.map((x) => x.toMap()).toList(),
       'promote': promote,
+      'design': design?.toMap(),
     };
   }
 
@@ -97,10 +104,11 @@ class BioLink {
       company: map['company'] != null ? Company.fromMap(map['company'] as Map<String,dynamic>) : null,
       bioId: map['bioId'] as String,
       domainName: map['domainName'] as String,
-      buttons: List<BioLinkButton>.from((map['buttons']).map<BioLinkButton>((x) => BioLinkButton.fromMap(x as Map<String,dynamic>),),),
-      icons: List<SocialLink>.from((map['icons']).map<SocialLink>((x) => SocialLink.fromMap(x as Map<String,dynamic>),),),
-      contactFields: List<ContactFields>.from((map['contactFields']).map<ContactFields>((x) => ContactFields.fromMap(x as Map<String,dynamic>),),),
-      promote: map['promote'] ?? false,
+      buttons: List<BioLinkButton>.from((map['buttons'] as List<int>).map<BioLinkButton>((x) => BioLinkButton.fromMap(x as Map<String,dynamic>),),),
+      icons: List<SocialLink>.from((map['icons'] as List<int>).map<SocialLink>((x) => SocialLink.fromMap(x as Map<String,dynamic>),),),
+      contactFields: List<ContactFields>.from((map['contactFields'] as List<int>).map<ContactFields>((x) => ContactFields.fromMap(x as Map<String,dynamic>),),),
+      promote: map['promote'] as bool,
+      design: map['design'] != null ? BioLinkDesign.fromMap(map['design']) : null,
     );
   }
 
@@ -110,7 +118,7 @@ class BioLink {
 
   @override
   String toString() {
-    return 'BioLink(id: $id, title: $title, slogan: $slogan, picture: $picture, banner: $banner, company: $company, bioId: $bioId, domainName: $domainName, buttons: $buttons, icons: $icons, contactFields: $contactFields, promote: $promote)';
+    return 'BioLink(id: $id, title: $title, slogan: $slogan, picture: $picture, banner: $banner, company: $company, bioId: $bioId, domainName: $domainName, buttons: $buttons, icons: $icons, contactFields: $contactFields, promote: $promote, design: $design)';
   }
 
   @override
@@ -129,7 +137,8 @@ class BioLink {
       listEquals(other.buttons, buttons) &&
       listEquals(other.icons, icons) &&
       listEquals(other.contactFields, contactFields) &&
-      other.promote == promote;
+      other.promote == promote &&
+      other.design == design;
   }
 
   @override
@@ -145,6 +154,7 @@ class BioLink {
       buttons.hashCode ^
       icons.hashCode ^
       contactFields.hashCode ^
-      promote.hashCode;
+      promote.hashCode ^
+      design.hashCode;
   }
 }
