@@ -16,4 +16,6 @@ class Global {
   static ValueNotifier<List<ShortLink>> favourites = ValueNotifier([]);
   static List<SocialIcon> icons = [];
 
+  static String storageDomain = "https://firebasestorage.googleapis.com/v0/b/mylingz.appspot.com/o";
+
 }

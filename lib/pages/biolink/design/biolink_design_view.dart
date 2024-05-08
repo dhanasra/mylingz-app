@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
+import 'package:mylingz_app/pages/biolink/design/fragments/block_fragment.dart';
+import 'package:mylingz_app/pages/biolink/design/fragments/profile_fragment.dart';
 import 'package:mylingz_app/pages/biolink/design/fragments/theme_fragment.dart';
 
 class BioLinkDesignView extends StatefulWidget {
@@ -166,15 +168,15 @@ class _BioLinkDesignViewState extends State<BioLinkDesignView> {
               const TabBar(tabs: [
                 Tab(text: "Theme"),
                 Tab(text: "Block"),
-                Tab(text: "More")
+                Tab(text: "Profile")
               ]),
-              Expanded(
+              const Expanded(
                 flex: 4,
                 child: TabBarView(
                   children: [
-                    const ThemeFragment(),
-                    ListView(),
-                    ListView()
+                    ThemeFragment(),
+                    BlockFragment(),
+                    ProfileFragment()
                   ]),
               )
             ],

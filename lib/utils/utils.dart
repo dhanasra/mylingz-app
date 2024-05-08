@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/utils/global.dart';
 
 String? colorToString(Color? color) {
     if(color==null){
@@ -69,4 +70,8 @@ IconData getDeviceIcon(String device){
   }else{
     return Icons.web_asset_rounded;
   }
+}
+
+String getIconUrl(String type, String icon){
+  return "${Global.storageDomain}/icons%2F$type%2F$icon.png?alt=media";
 }
