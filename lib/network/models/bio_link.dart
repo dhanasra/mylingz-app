@@ -107,7 +107,7 @@ class BioLink {
       buttons: List<BioLinkButton>.from((map['buttons']).map<BioLinkButton>((x) => BioLinkButton.fromMap(x as Map<String,dynamic>),),),
       icons: List<SocialLink>.from((map['icons']).map<SocialLink>((x) => SocialLink.fromMap(x as Map<String,dynamic>),),),
       contactFields: List<ContactFields>.from((map['contactFields']).map<ContactFields>((x) => ContactFields.fromMap(x as Map<String,dynamic>),),),
-      promote: map['promote'] as bool,
+      promote: map['promote'] ?? false,
       design: map['design'] != null ? BioLinkDesign.fromMap(map['design']) : null,
     );
   }

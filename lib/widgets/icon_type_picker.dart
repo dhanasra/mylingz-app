@@ -41,7 +41,7 @@ class _IconTypePickerState extends State<IconTypePicker> {
           onTap: ()=>update("outlined"),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: context.theme().shadowColor,
               border: Border.all(
                   width: selected=="outlined" ? 3 : 1,
                   color: selected=="outlined" ? context.theme().primaryColor : Colors.white)
@@ -54,7 +54,7 @@ class _IconTypePickerState extends State<IconTypePicker> {
           onTap: ()=>update("filled"),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: context.theme().shadowColor,
               border: Border.all(
                   width: selected=="filled" ? 3 : 1,
                   color: selected=="filled" ? context.theme().primaryColor : Colors.white),
@@ -67,7 +67,7 @@ class _IconTypePickerState extends State<IconTypePicker> {
           onTap: ()=>update("dotted"),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: context.theme().shadowColor,
               border: Border.all(
                   width: selected=="dotted" ? 3 : 1,
                   color: selected=="dotted" ? context.theme().primaryColor : Colors.white),
@@ -80,7 +80,7 @@ class _IconTypePickerState extends State<IconTypePicker> {
           onTap: ()=>update("gradient"),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: context.theme().shadowColor,
               border: Border.all(
                   width: selected=="gradient" ? 3 : 1,
                   color: selected=="gradient" ? context.theme().primaryColor : Colors.white),

@@ -2,13 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
+import 'package:mylingz_app/network/models/biolink_design.dart';
 import 'package:mylingz_app/utils/utils.dart';
 
 class BioLinkDesignPreview extends StatelessWidget {
-  const BioLinkDesignPreview({super.key});
+  final BioLinkDesign design;
+  const BioLinkDesignPreview({super.key, required this.design});
 
   @override
   Widget build(BuildContext context) {
+
+    var borderWidth = (design.outline ?? 10)/10;
+    var borderRadius = (design.cornerRadius ?? 32)/4;
+    Color textColor = stringToColor(design.color) ?? context.theme().textTheme.headlineSmall!.color!;
+    Color? outlineColor = stringToColor(design.wrapper?.borderColor) ??  stringToColor(design.color) ?? Colors.grey[300]!;
+    Color? iconColor = stringToColor(design.color) ??  Colors.grey[300]!;
+
+    var layout = design.profileDesign?.layout;
+    var alignment = layout=="layout3"
+      ? CrossAxisAlignment.end : layout=="layout2" 
+      ? CrossAxisAlignment.start : CrossAxisAlignment.center; 
+
+    var textAlignment = design.profileDesign?.alignment;
+    var textAlign = textAlignment=="left"
+      ? Alignment.centerLeft : textAlignment=="right" 
+      ? Alignment.centerRight : textAlignment=="center" ? Alignment.center : null; 
+
+    var profileImageSize = (design.profileDesign?.size!=null
+                    ? ( design.profileDesign!.size!<15 ? (design.profileDesign!.size! + 15 ): design.profileDesign!.size ) : 34)!.ceilToDouble();
+
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 12),
@@ -19,67 +41,96 @@ class BioLinkDesignPreview extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const CircleAvatar(
-            radius: 34,
-            backgroundImage: NetworkImage("https://imagesbucketaws.s3.ap-south-1.amazonaws.com/doctor/2024-05-07T14%3A47%3A03.777Z-2024-05-07T13_59_54.887Z-icons8-google-96.png"),  
-          ),
-          4.h(),
-          Align(
-            alignment: Alignment.center,
-            child: "Jhon Kennady".tl(context),
-          ),
-          2.h(),
-          const Align(
-            alignment: Alignment.center,
-            child: Text("Software Developer", style: TextStyle(fontSize: 12)),
+          layout!="layout4"
+          ? SizedBox(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: alignment,
+              children: [
+                Container(
+                  height: profileImageSize,
+                  width: profileImageSize,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      (design.profileDesign?.corner ?? 200 )
+                    ),
+                    image: const DecorationImage(
+                      image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/mylingz.appspot.com/o/placeholders%2F656c976063564c91d4930236_hero-video-1.webp?alt=media&token=61f8d858-aa8d-4a3e-bc74-12e0048a9674"),
+                      fit: BoxFit.cover
+                    )
+                  ),
+                ),
+                4.h(),
+                Visibility(
+                  visible: textAlign!=null,
+                  replacement: "Jhon Kennady".tl(context, color: textColor),
+                  child: Align(
+                    alignment: textAlign ?? Alignment.center,
+                    child: "Jhon Kennady".tl(context, color: textColor),
+                  ),
+                ),
+                2.h(),
+                Visibility(
+                  visible: textAlign!=null,
+                  replacement: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor)),
+                  child: Align(
+                    alignment: textAlign ?? Alignment.center,
+                    child: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor))),
+                ),
+              ],
+            ),
+          )
+          : Row(
+            children: [
+              const CircleAvatar(
+                radius: 34,
+                backgroundImage: NetworkImage("https://firebasestorage.googleapis.com/v0/b/mylingz.appspot.com/o/placeholders%2F656c976063564c91d4930236_hero-video-1.webp?alt=media&token=61f8d858-aa8d-4a3e-bc74-12e0048a9674"),  
+              ),
+              8.w(),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Align(
+                      alignment: textAlign ?? Alignment.centerLeft,
+                      child: "Jhon Kennady".tl(context, color: textColor ),
+                    ),
+                    2.h(),
+                    Align(
+                      alignment: textAlign ?? Alignment.centerLeft,
+                      child: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor))),
+                  ],
+                ),
+              )
+            ],
           ),
 
           24.h(),
 
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.network(getIconUrl('outlined', 'facebook'), width: 24),
-              16.w(),
-              Image.network(getIconUrl('outlined', 'instagram'), width: 24),
-              16.w(),
-              Image.network(getIconUrl('outlined', 'twitter'), width: 24),
-              16.w(),
-              Image.network(getIconUrl('outlined', 'snapchat'), width: 24)
-            ],
+            children: ['facebook', 'instagram', 'twitter', 'snapchat'].map(
+              (e) => Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Image.network(
+                  getIconUrl(design.thumbnail?.style ?? "outlined", e), width: 32, color: design.thumbnail?.style!="gradient" ? iconColor: null),
+              )).toList()
           ),
 
           24.h(),
 
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: context.theme().dialogBackgroundColor)
-            ),
-            child: "Services".bs(context)
-          ),
-          12.h(),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: context.theme().dialogBackgroundColor)
-            ),
-            child: "Industries".bs(context)
-          ),
-          12.h(),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: context.theme().dialogBackgroundColor)
-            ),
-            child: "Products".bs(context)
-          ),
+          ...['Services', 'Industries', 'Products'].map((e){
+            return Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(borderRadius),
+                border: Border.all(color: outlineColor, width: borderWidth)
+              ),
+              child: e.bs(context, color: textColor)
+            );
+          }),
 
           32.h(),
 
@@ -87,26 +138,27 @@ class BioLinkDesignPreview extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: context.theme().dialogBackgroundColor)
+              borderRadius: BorderRadius.circular(borderRadius),
+              border: Border.all(color: outlineColor, width: borderWidth)
             ),
             child: Column(
               children: [
-                "Contact Us".ts(context),
+                "Contact Us".ts(context, color: textColor),
                 8.h(),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    "Name".ls(context),
+                    "Name".ls(context, color: textColor),
                     6.h(),
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: context.theme().dialogBackgroundColor)
+                        borderRadius: BorderRadius.circular(borderRadius),
+                        border: Border.all(color: outlineColor, width: borderWidth)
                       ),
-                      child: "Enter your name".bs(context)
+                      alignment: Alignment.centerLeft,
+                      child: "Enter your name".bs(context, color: textColor.withOpacity(0.5))
                     ),
                   ],
                 ),
@@ -114,16 +166,17 @@ class BioLinkDesignPreview extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    "Email".ls(context),
+                    "Email".ls(context, color: textColor),
                     6.h(),
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: context.theme().dialogBackgroundColor)
+                        borderRadius: BorderRadius.circular(borderRadius),
+                        border: Border.all(color: outlineColor, width: borderWidth)
                       ),
-                      child: "Enter your email".bs(context)
+                      alignment: Alignment.centerLeft,
+                      child: "Enter your email".bs(context, color: textColor.withOpacity(0.5))
                     ),
                   ],
                 ),
@@ -132,10 +185,11 @@ class BioLinkDesignPreview extends StatelessWidget {
                   width: double.infinity,
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: context.theme().dialogBackgroundColor)
+                    color: stringToColor(design.actionBtnStyle?.bgColor) ?? Colors.transparent,
+                    borderRadius: BorderRadius.circular(borderRadius),
+                    border: Border.all(color: stringToColor(design.actionBtnStyle?.borderColor) ??  outlineColor, width: borderWidth)
                   ),
-                  child: "SEND".bs(context)
+                  child: "SEND".bs(context, color: stringToColor(design.actionBtnStyle?.color) ?? textColor)
                 ),
               ],
             ),

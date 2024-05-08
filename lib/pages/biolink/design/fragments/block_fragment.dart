@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/pages/biolink/design/biolink_design_viewmodel.dart';
 import 'package:mylingz_app/pages/biolink/design/fragments/action_fragment.dart';
 import 'package:mylingz_app/pages/biolink/design/fragments/color_fragment.dart';
 import 'package:mylingz_app/pages/biolink/design/fragments/style_fragment.dart';
 import 'package:mylingz_app/pages/biolink/design/fragments/thumbnail_fragment.dart';
 
 class BlockFragment extends StatelessWidget {
-  const BlockFragment({super.key});
+  final BioLinkDesignViewModel vm;
+  const BlockFragment({super.key, required this.vm});
 
   @override
   Widget build(BuildContext context) {
-    return const DefaultTabController(
+    return DefaultTabController(
       length: 4,
       child: Column(
         children: [
-          TabBar(
+          const TabBar(
             tabAlignment: TabAlignment.start,
             isScrollable: true,
             tabs: [
@@ -25,10 +27,10 @@ class BlockFragment extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: [
-                StyleFragment(),
-                ColorFragment(),
-                ThumbnailFragment(),
-                ActionFragment()
+                StyleFragment(vm: vm),
+                ColorFragment(vm: vm),
+                ThumbnailFragment(vm: vm),
+                ActionFragment(vm: vm)
               ]),
           )
         ],

@@ -2,11 +2,11 @@
 import 'dart:convert';
 
 class Thumbnail {
-  final String? style;
+  final String style;
   final String? color;
 
   Thumbnail({
-    this.style,
+    this.style = "outlined",
     this.color,
   });
 
@@ -29,7 +29,7 @@ class Thumbnail {
 
   factory Thumbnail.fromMap(map) {
     return Thumbnail(
-      style: map['style'] != null ? map['style'] as String : null,
+      style: map['style'] != null ? map['style'] as String : "outlined",
       color: map['color'] != null ? map['color'] as String : null,
     );
   }

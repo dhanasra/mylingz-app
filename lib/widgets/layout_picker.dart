@@ -30,11 +30,11 @@ class _LayoutPickerState extends State<LayoutPicker> {
     return GridView(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 16,
         crossAxisSpacing: 16,
-        childAspectRatio: 1.8
+        childAspectRatio: (context.sh()/context.sw())*0.7
       ), 
       children: [
         InkWell(

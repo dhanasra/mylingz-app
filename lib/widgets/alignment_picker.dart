@@ -35,46 +35,24 @@ class _AlignmentPickerState extends State<AlignmentPicker> {
         crossAxisSpacing: 16,
         childAspectRatio: 1.5
       ), 
-      children: [
-        InkWell(
-          onTap: ()=>update("left"),
+      children: ["left", "center", "right"].map(
+        (e) => InkWell(
+          onTap: ()=>update(e),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.grey,
+              color: context.theme().shadowColor,
               border: Border.all(
-                  width: selected=="left" ? 3 : 1,
-                  color: selected=="left" ? context.theme().primaryColor : Colors.white)
+                  width: selected==e ? 3 : 1,
+                  color: selected==e ? context.theme().primaryColor : Colors.white)
             ),
             padding: const EdgeInsets.all(8),
-            child: const Icon(Icons.format_align_left_outlined, size: 28, color: Colors.black),
+            child: Icon(
+              e == "left"
+                ? Icons.format_align_left_outlined
+                : e== "center"
+                ? Icons.format_align_center_outlined
+                : Icons.format_align_right_outlined, size: 28, color: Colors.black),
           ),
-        ),
-        InkWell(
-          onTap: ()=>update("center"),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              border: Border.all(
-                  width: selected=="center" ? 3 : 1,
-                  color: selected=="center" ? context.theme().primaryColor : Colors.white),
-            ),
-            padding: const EdgeInsets.all(8),
-            child: const Icon(Icons.format_align_center_outlined, size: 28, color: Colors.black),
-          ),
-        ),
-        InkWell(
-          onTap: ()=>update("right"),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              border: Border.all(
-                  width: selected=="right" ? 3 : 1,
-                  color: selected=="right" ? context.theme().primaryColor : Colors.white),
-            ),
-            padding: const EdgeInsets.all(8),
-            child: const Icon(Icons.format_align_right_outlined, size: 28, color: Colors.black,),
-          ),
-        ),
-      ]);
+        )).toList());
   }
 }
