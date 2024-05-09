@@ -9,6 +9,9 @@ import 'package:mylingz_app/widgets/alignment_picker.dart';
 import 'package:mylingz_app/widgets/layout_picker.dart';
 import 'package:mylingz_app/widgets/slide_picker.dart';
 
+import '../../../../utils/utils.dart';
+import '../../../../widgets/color_picker.dart';
+
 class ProfileFragment extends StatelessWidget {
   final BioLinkDesignViewModel vm;
   const ProfileFragment({super.key, required this.vm});
@@ -71,7 +74,39 @@ class ProfileFragment extends StatelessWidget {
                 ?.copyWith(corner: v) ?? ProfileDesign(corner: v)
             );
             vm.design.notifyListeners();
-          })
+          }),
+        20.h(),
+        "Title".ts(context),
+        12.h(),
+        ColorPicker(
+          value: stringToColor(vm.design.value.wrapper?.borderColor),
+          onChanged: (e){
+            if(e!=null){
+              var design = vm.design.value;
+              vm.design.value = design.copyWith(
+                profileDesign: design.profileDesign?.copyWith(titleColor: colorToString(e))
+                  ?? ProfileDesign(titleColor: colorToString(e))
+              );
+              vm.design.notifyListeners();
+            }
+          },
+        ),
+        20.h(),
+        "Slogan".ts(context),
+        12.h(),
+        ColorPicker(
+          value: stringToColor(vm.design.value.wrapper?.borderColor),
+          onChanged: (e){
+            if(e!=null){
+              var design = vm.design.value;
+              vm.design.value = design.copyWith(
+                profileDesign: design.profileDesign?.copyWith(sloganColor: colorToString(e))
+                  ?? ProfileDesign(sloganColor: colorToString(e))
+              );
+              vm.design.notifyListeners();
+            }
+          },
+        )
       ],
     );
   }

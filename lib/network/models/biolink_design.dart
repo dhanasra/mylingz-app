@@ -10,6 +10,7 @@ import 'content.dart';
 
 class BioLinkDesign {
   final String? color;
+  final String? background;
   final String? style;
   final String? font;
   final double? cornerRadius;
@@ -23,6 +24,7 @@ class BioLinkDesign {
 
   BioLinkDesign({
     this.color,
+    this.background,
     this.style,
     this.font,
     this.cornerRadius,
@@ -38,6 +40,7 @@ class BioLinkDesign {
 
   BioLinkDesign copyWith({
     String? color,
+    String? background,
     String? style,
     String? font,
     double? cornerRadius,
@@ -51,6 +54,7 @@ class BioLinkDesign {
   }) {
     return BioLinkDesign(
       color: color ?? this.color,
+      background: background ?? this.background,
       style: style ?? this.style,
       font: font ?? this.font,
       cornerRadius: cornerRadius ?? this.cornerRadius,
@@ -67,6 +71,7 @@ class BioLinkDesign {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'color': color,
+      'background': background,
       'style': style,
       'font': font,
       'cornerRadius': cornerRadius,
@@ -83,6 +88,7 @@ class BioLinkDesign {
   factory BioLinkDesign.fromMap(map) {
     return BioLinkDesign(
       color: map['color'] != null ? map['color'] as String : null,
+      background: map['background'] != null ? map['background'] as String : null,
       style: map['style'] != null ? map['style'] as String : null,
       font: map['font'] != null ? map['font'] as String : null,
       cornerRadius: map['cornerRadius'] != null ? map['cornerRadius'] as double : null,
@@ -102,7 +108,7 @@ class BioLinkDesign {
 
   @override
   String toString() {
-    return 'BioLinkDesign(color: $color, style: $style, font: $font, cornerRadius: $cornerRadius, outline: $outline, alignment: $alignment, thumbnail: $thumbnail, wrapper: $wrapper, content: $content, actionBtnStyle: $actionBtnStyle, profileDesign: $profileDesign)';
+    return 'BioLinkDesign(color: $color, background: $background, style: $style, font: $font, cornerRadius: $cornerRadius, outline: $outline, alignment: $alignment, thumbnail: $thumbnail, wrapper: $wrapper, content: $content, actionBtnStyle: $actionBtnStyle, profileDesign: $profileDesign)';
   }
 
   @override
@@ -111,6 +117,7 @@ class BioLinkDesign {
   
     return 
       other.color == color &&
+      other.background == background &&
       other.style == style &&
       other.font == font &&
       other.cornerRadius == cornerRadius &&
@@ -126,6 +133,7 @@ class BioLinkDesign {
   @override
   int get hashCode {
     return color.hashCode ^
+      background.hashCode ^
       style.hashCode ^
       font.hashCode ^
       cornerRadius.hashCode ^

@@ -6,6 +6,7 @@ import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/pages/biolink/design/biolink_design_viewmodel.dart';
 import 'package:mylingz_app/utils/utils.dart';
 import 'package:mylingz_app/widgets/font_picker.dart';
+import 'package:mylingz_app/widgets/gradient_picker.dart';
 import 'package:mylingz_app/widgets/wrapper_type_picker.dart';
 
 import '../../../../widgets/color_picker.dart';
@@ -39,13 +40,25 @@ class ThemeFragment extends StatelessWidget {
             vm.design.notifyListeners();
           }),
         20.h(),
-        "Text".ts(context),
+        "Theme".ts(context),
         12.h(),
         ColorPicker(
           value: stringToColor(vm.design.value.color),
           onChanged: (e){
             if(e!=null){
               vm.design.value = vm.design.value.copyWith(color: colorToString(e));
+              vm.design.notifyListeners();
+            }
+          },
+        ),
+        20.h(),
+        "Background".ts(context),
+        12.h(),
+        GradientPicker(
+          value: vm.design.value.background,
+          onChanged: (e){
+            if(e!=null){
+              vm.design.value = vm.design.value.copyWith(background: e);
               vm.design.notifyListeners();
             }
           },

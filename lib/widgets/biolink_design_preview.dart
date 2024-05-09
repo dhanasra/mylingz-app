@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mylingz_app/constants/color_const.dart';
 import 'package:mylingz_app/constants/data_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
@@ -34,13 +35,17 @@ class BioLinkDesignPreview extends StatelessWidget {
 
     var fontFamily = design.font!=null ? (DataConst.fontFamilies.firstWhere((element) => element["name"]==design.font)["style"] as TextStyle).fontFamily : null;
 
+    var background = design.background !=null ? ColorConst.gradients[design.background] : null;
+
+
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.symmetric(vertical: 12),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey, width: 3)
+        border: Border.all(color: Colors.grey, width: 3),
+        gradient: background
       ),
       child: Column(
         children: [
@@ -66,19 +71,19 @@ class BioLinkDesignPreview extends StatelessWidget {
                 4.h(),
                 Visibility(
                   visible: textAlign!=null,
-                  replacement: "Jhon Kennady".tl(context, color: textColor, fontFamily: fontFamily),
+                  replacement: "Jhon Kennady".tl(context, color: stringToColor(design.profileDesign?.titleColor) ?? textColor, fontFamily: fontFamily),
                   child: Align(
                     alignment: textAlign ?? Alignment.center,
-                    child: "Jhon Kennady".tl(context, color: textColor),
+                    child: "Jhon Kennady".tl(context, color: stringToColor(design.profileDesign?.titleColor) ?? textColor),
                   ),
                 ),
                 2.h(),
                 Visibility(
                   visible: textAlign!=null,
-                  replacement: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor)),
+                  replacement: Text("Software Developer", style: TextStyle(fontSize: 12, color: stringToColor(design.profileDesign?.sloganColor) ?? textColor)),
                   child: Align(
                     alignment: textAlign ?? Alignment.center,
-                    child: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor, fontFamily: fontFamily))),
+                    child: Text("Software Developer", style: TextStyle(fontSize: 12, color: stringToColor(design.profileDesign?.sloganColor) ?? textColor, fontFamily: fontFamily))),
                 ),
               ],
             ),
@@ -105,12 +110,12 @@ class BioLinkDesignPreview extends StatelessWidget {
                   children: [
                     Align(
                       alignment: textAlign ?? Alignment.centerLeft,
-                      child: "Jhon Kennady".tl(context, color: textColor, fontFamily: fontFamily),
+                      child: "Jhon Kennady".tl(context, color: stringToColor(design.profileDesign?.titleColor) ?? textColor, fontFamily: fontFamily),
                     ),
                     2.h(),
                     Align(
                       alignment: textAlign ?? Alignment.centerLeft,
-                      child: Text("Software Developer", style: TextStyle(fontSize: 12, color: textColor, fontFamily: fontFamily))),
+                      child: Text("Software Developer", style: TextStyle(fontSize: 12, color: stringToColor(design.profileDesign?.sloganColor) ?? textColor, fontFamily: fontFamily))),
                   ],
                 ),
               )
