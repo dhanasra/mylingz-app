@@ -44,7 +44,7 @@ class BioLinkDesignPreview extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey, width: 3),
+        border: Border.all(color: Colors.grey[300]!, width: 3),
         gradient: background
       ),
       child: Column(
