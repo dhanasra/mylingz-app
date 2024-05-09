@@ -54,3 +54,10 @@ class DeleteMessagesEvent extends BioLinkEvent {
 }
 
 class GetBioLinkAnalyticsEvent extends BioLinkEvent {}
+
+class SaveDesignEvent extends BioLinkEvent {
+  final BioLinkDesign design;
+  SaveDesignEvent({
+    required this.design,
+  }); 
+}

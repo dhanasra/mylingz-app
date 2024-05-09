@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/date_exten.dart';
 import 'package:mylingz_app/network/firebase_client.dart';
+import 'package:mylingz_app/network/models/biolink_design.dart';
 import 'package:mylingz_app/network/models/contact_fields.dart';
 import 'package:mylingz_app/network/models/form_message.dart';
 import 'package:mylingz_app/network/models/social_link.dart';
@@ -24,6 +25,7 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     on<UpdatePromoteEvent>(_onUpdatePromote);
     on<GetFormMessagesEvent>(_onGetFormMessages);
     on<DeleteMessagesEvent>(_onDeleteMessages);
+    on<SaveDesignEvent>(_onSaveDesign);
   }
 
   final FirebaseClient _client =  FirebaseClient();
@@ -142,6 +144,16 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     try{
       await _client.myBiolink.update({"contactFields": event.fields.map((e) => e.toMap()).toList()});
       Global.bioLink.value = Global.bioLink.value!.copyWith(contactFields: event.fields);
+      emit(Success());
+    }catch(e){
+      emit(Error());
+    }
+  }
+
+  _onSaveDesign(SaveDesignEvent event, Emitter emit)async{
+    try{
+      await _client.myBiolink.update({"design": event.design.toMap()});
+      Global.bioLink.value = Global.bioLink.value!.copyWith(design: event.design);
       emit(Success());
     }catch(e){
       emit(Error());
