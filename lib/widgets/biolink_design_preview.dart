@@ -17,7 +17,7 @@ class BioLinkDesignPreview extends StatelessWidget {
     var borderRadius = (design.cornerRadius ?? 32)/4;
     Color textColor = stringToColor(design.color) ?? context.theme().textTheme.headlineSmall!.color!;
     Color? outlineColor = stringToColor(design.wrapper?.borderColor) ??  stringToColor(design.color) ?? Colors.grey[300]!;
-    Color? iconColor = stringToColor(design.color) ??  Colors.grey[300]!;
+    Color? iconColor = stringToColor(design.color) ??  Colors.black;
 
     var layout = design.profileDesign?.layout;
     var alignment = layout=="layout3"
@@ -85,10 +85,19 @@ class BioLinkDesignPreview extends StatelessWidget {
           )
           : Row(
             children: [
-              const CircleAvatar(
-                radius: 34,
-                backgroundImage: NetworkImage("https://firebasestorage.googleapis.com/v0/b/mylingz.appspot.com/o/placeholders%2F656c976063564c91d4930236_hero-video-1.webp?alt=media&token=61f8d858-aa8d-4a3e-bc74-12e0048a9674"),  
-              ),
+              Container(
+                  height: profileImageSize,
+                  width: profileImageSize,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      (design.profileDesign?.corner ?? 200 )
+                    ),
+                    image: const DecorationImage(
+                      image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/mylingz.appspot.com/o/placeholders%2F656c976063564c91d4930236_hero-video-1.webp?alt=media&token=61f8d858-aa8d-4a3e-bc74-12e0048a9674"),
+                      fit: BoxFit.cover
+                    )
+                  ),
+                ),
               8.w(),
               Expanded(
                 child: Column(
@@ -128,10 +137,16 @@ class BioLinkDesignPreview extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
+                color: (design.style=="filled" || design.style=="shadow") 
+                  ? (stringToColor(design.wrapper?.bgColor) ?? outlineColor.withOpacity(0.5)) : null,
                 borderRadius: BorderRadius.circular(borderRadius),
-                border: Border.all(color: outlineColor, width: borderWidth)
+                border: Border.all(color: outlineColor, width: borderWidth),
+                boxShadow: design.style=="shadow" ? [
+                  BoxShadow(offset: const Offset(-3, -3), color: Theme.of(context).shadowColor, blurRadius: 10),
+                  BoxShadow(offset: const Offset(3, 3), color: Theme.of(context).shadowColor, blurRadius: 10)
+                ] : null
               ),
-              child: e.bs(context, color: textColor, fontFamily: fontFamily)
+              child: e.bs(context, color: stringToColor(design.wrapper?.color) ?? textColor, fontFamily: fontFamily)
             );
           }),
 
@@ -141,8 +156,14 @@ class BioLinkDesignPreview extends StatelessWidget {
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
+              color: (design.style=="filled" || design.style=="shadow") 
+              ? (stringToColor(design.wrapper?.bgColor) ?? outlineColor.withOpacity(0.5)) : null,
               borderRadius: BorderRadius.circular(borderRadius),
-              border: Border.all(color: outlineColor, width: borderWidth)
+              border: Border.all(color: outlineColor, width: borderWidth),
+              boxShadow: design.style=="shadow" ? [
+                BoxShadow(offset: const Offset(-3, -3), color: Theme.of(context).shadowColor, blurRadius: 10),
+                BoxShadow(offset: const Offset(3, 3), color: Theme.of(context).shadowColor, blurRadius: 10)
+              ] : null
             ),
             child: Column(
               children: [
@@ -157,6 +178,7 @@ class BioLinkDesignPreview extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(borderRadius),
                         border: Border.all(color: outlineColor, width: borderWidth)
                       ),
@@ -175,6 +197,7 @@ class BioLinkDesignPreview extends StatelessWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(borderRadius),
                         border: Border.all(color: outlineColor, width: borderWidth)
                       ),

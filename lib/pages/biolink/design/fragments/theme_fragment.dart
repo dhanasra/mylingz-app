@@ -20,7 +20,13 @@ class ThemeFragment extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       children: [
         WrapperTypePicker(
-          onChanged: (e)=>{},
+          type: vm.design.value.style,
+          onChanged: (e){
+            vm.design.value = vm.design.value.copyWith(
+              style: e
+            );
+            vm.design.notifyListeners();
+          },
         ),
         20.h(),
         "Font".ts(context),
