@@ -61,3 +61,10 @@ class SaveDesignEvent extends BioLinkEvent {
     required this.design,
   }); 
 }
+
+class TogglePublishEvent extends BioLinkEvent {
+  final bool isPublished;
+  TogglePublishEvent({
+    required this.isPublished,
+  }); 
+}

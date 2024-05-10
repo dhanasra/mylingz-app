@@ -29,3 +29,8 @@ class AnalyticsFetched extends BioLinkState {
   final List<ChartData> chart;
   AnalyticsFetched({ required this.totalClicks, required this.todayClicks, required this.location, required this.device, required this.chart});
 }
+
+final class PublishToggled extends BioLinkState {
+  final bool value;
+  PublishToggled(this.value);
+}

@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/date_exten.dart';
@@ -26,6 +28,7 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     on<GetFormMessagesEvent>(_onGetFormMessages);
     on<DeleteMessagesEvent>(_onDeleteMessages);
     on<SaveDesignEvent>(_onSaveDesign);
+    on<TogglePublishEvent>(_onTogglePublish);
   }
 
   final FirebaseClient _client =  FirebaseClient();
@@ -183,6 +186,19 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     try{
       await _client.messagesDB.doc(event.messageId).delete();
       emit(MessageDeleted());
+    }catch(e){
+      emit(Error());
+    }
+  }
+
+  _onTogglePublish(TogglePublishEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+      await _client.myBiolink.update({"isPublished": event.isPublished});
+      var updated = Global.bioLink.value!.copyWith(isPublished: event.isPublished);
+      Global.bioLink.value = updated;
+      Global.bioLink.notifyListeners();
+      emit(PublishToggled(event.isPublished));
     }catch(e){
       emit(Error());
     }

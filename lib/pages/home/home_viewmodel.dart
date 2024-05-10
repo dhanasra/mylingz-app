@@ -5,8 +5,10 @@ import 'package:mylingz_app/pages/home/fragments/dashboard_fragment.dart';
 import 'package:mylingz_app/pages/home/fragments/biolink_fragment.dart';
 import 'package:mylingz_app/pages/home/fragments/favourites_fragment.dart';
 import 'package:mylingz_app/routes/app_routes.dart';
+import 'package:mylingz_app/utils/global.dart';
 
 import '../../base/base_viewmodel.dart';
+import '../biolink/bloc/bio_link_bloc.dart';
 import '../links/bloc/links_bloc.dart';
 import 'cubit/home_cubit.dart';
 
@@ -41,6 +43,8 @@ class HomeViewModel extends BaseViewModel {
   late List<Widget> items;
   late BuildContext ctx;
 
+  late bool isPublished;
+
   final GlobalKey<ScaffoldState> key = GlobalKey();
 
   HomeViewModel(BuildContext context) {
@@ -55,10 +59,15 @@ class HomeViewModel extends BaseViewModel {
         create: (context) => LinksBloc(),
         child: const DashboardFragment(),
       ),
-      BioLinkFragment(vm: this),
+      BlocProvider(
+        create: (context) => BioLinkBloc(),
+        child: BioLinkFragment(vm: this),
+      ),
       const FavouritesFragment()
     ];
     ctx = context;
+
+    isPublished = Global.bioLink.value!.isPublished;
   }
 
   handleItemClick(BuildContext context, int idx) {

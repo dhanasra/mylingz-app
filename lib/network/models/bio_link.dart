@@ -27,10 +27,12 @@ class BioLink {
   final List<ContactFields> contactFields;
   final bool promote;
   final BioLinkDesign? design;
+  final bool isPublished;
 
   BioLink({
     required this.id,
     required this.title,
+    this.isPublished = true,
     this.slogan,
     this.picture,
     this.banner,
@@ -50,6 +52,7 @@ class BioLink {
     String? slogan,
     String? picture,
     String? banner,
+    bool? isPublished,
     Company? company,
     String? bioId,
     String? domainName,
@@ -64,6 +67,7 @@ class BioLink {
       title: title ?? this.title,
       slogan: slogan ?? this.slogan,
       picture: picture ?? this.picture,
+      isPublished: isPublished ?? this.isPublished,
       banner: banner ?? this.banner,
       company: company ?? this.company,
       bioId: bioId ?? this.bioId,
@@ -84,6 +88,7 @@ class BioLink {
       'picture': picture,
       'banner': banner,
       'company': company?.toMap(),
+      'isPublished': isPublished,
       'bioId': bioId,
       'domainName': domainName,
       'buttons': buttons.map((x) => x.toMap()).toList(),
@@ -98,6 +103,7 @@ class BioLink {
     return BioLink(
       id: map['id'] as String,
       title: map['title'] as String,
+      isPublished: map['isPublished'] ?? true,
       slogan: map['slogan'] != null ? map['slogan'] as String : null,
       picture: map['picture'] != null ? map['picture'] as String : null,
       banner: map['banner'] != null ? map['banner'] as String : null,

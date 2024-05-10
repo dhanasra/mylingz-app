@@ -14,7 +14,8 @@ import 'package:url_launcher/url_launcher_string.dart';
 class BioLinkItem extends StatelessWidget {
   final BioLink bioLink;
   final List options;
-  const BioLinkItem({super.key, required this.bioLink, required this.options});
+  final bool isPublished;
+  const BioLinkItem({super.key, required this.bioLink, required this.options, required this.isPublished});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +105,7 @@ class BioLinkItem extends StatelessWidget {
                           children: [
                             const Icon(Icons.circle, size: 8, color: Colors.green),
                             4.w(),
-                            "Published".bs(context, color: Colors.green)
+                            (isPublished ? "Published": "Stopped").bs(context, color: isPublished ? Colors.green : Colors.red)
                           ],
                         ),
                       )
