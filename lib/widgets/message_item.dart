@@ -35,7 +35,7 @@ class MessageItem extends StatelessWidget {
                     Expanded(
                       child: content.value!.hm(context, elipsis: true),
                     ),
-                    '${message.location["city"]}'.ts(context, color: context.theme().primaryColor)
+                    Icon(getDeviceIcon(message.device))
                   ],
                 ),
                 2.h(),
@@ -43,7 +43,7 @@ class MessageItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     message.createdAt.format("dd MMM yyyy, hh: mm").bs(context, color: Colors.grey),
-                    Icon(getDeviceIcon(message.device))
+                    
                   ],
                 )
               ],
