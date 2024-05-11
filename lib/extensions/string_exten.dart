@@ -14,8 +14,8 @@ extension TextExtensions on String {
     return Text(this, textAlign: align, style: Theme.of(context).textTheme.headlineLarge).tr();
   }
 
-  hm(BuildContext context, {TextAlign? align}){
-    return Text(this, textAlign: align, style: Theme.of(context).textTheme.headlineMedium).tr();
+  hm(BuildContext context, {TextAlign? align, bool elipsis = false}){
+    return Text(this, textAlign: align, overflow: elipsis ? TextOverflow.ellipsis: null, style: Theme.of(context).textTheme.headlineMedium).tr();
   }
   
   hs(BuildContext context){

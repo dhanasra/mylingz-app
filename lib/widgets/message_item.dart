@@ -19,6 +19,7 @@ class MessageItem extends StatelessWidget {
 
     return StyledWrapper(
       onClick: ()=>context.goto(Routes.messageDetails, args: message),
+      m: const EdgeInsets.only(bottom: 16),
       p: const EdgeInsets.all(20),
       child: Row(
         children: [
@@ -32,7 +33,7 @@ class MessageItem extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: content.value!.hm(context),
+                      child: content.value!.hm(context, elipsis: true),
                     ),
                     '${message.location["city"]}'.ts(context, color: context.theme().primaryColor)
                   ],
