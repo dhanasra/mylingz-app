@@ -9,7 +9,7 @@ class FormMessage {
   final String id;
   final List<ContactFields> data;
   final String device;
-  final String location;
+  final Map location;
   final DateTime createdAt;
 
   FormMessage({
@@ -24,7 +24,7 @@ class FormMessage {
     String? id,
     List<ContactFields>? data,
     String? device,
-    String? location,
+    Map? location,
     DateTime? createdAt,
   }) {
     return FormMessage(
@@ -51,7 +51,7 @@ class FormMessage {
       id: map['id'],
       data: List<ContactFields>.from((map['data']).map<ContactFields>((x) => ContactFields.fromMap(x as Map<String,dynamic>),),),
       device: map['device'] as String,
-      location: map['location'] as String,
+      location: map['location'],
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
     );
   }

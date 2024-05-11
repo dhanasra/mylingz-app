@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
+import 'package:mylingz_app/extensions/date_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/pages/biolink/message_details/message_details_viewmodel.dart';
@@ -53,6 +54,22 @@ class _MessageDetailsViewState extends State<MessageDetailsView> {
         body: ListView(
           padding: const EdgeInsets.all(20),
           children: [
+            "Date Time".ts(context),
+            4.h(),
+            _viewModel.message.createdAt.format("dd MMM yyyy, hh:mm").hm(context),
+
+            20.h(),
+            "Device Location".ts(context),
+            4.h(),
+            "${_viewModel.message.location["city"]}, ${_viewModel.message.location["country"]}".hm(context),
+
+            20.h(),
+            "Device Type".ts(context),
+            4.h(),
+            _viewModel.message.device.hm(context),
+
+            20.h(),
+
             ..._viewModel.message.data.map((e) => AbsorbPointer(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

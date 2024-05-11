@@ -32,9 +32,9 @@ class MessageItem extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      child: content.value!.tl(context),
+                      child: content.value!.hm(context),
                     ),
-                    message.location.ts(context, color: context.theme().primaryColor)
+                    '${message.location["city"]}'.ts(context, color: context.theme().primaryColor)
                   ],
                 ),
                 2.h(),
