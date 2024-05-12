@@ -63,10 +63,11 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                     8.w(),
                     "Add Social Links".ts(context, color: Theme.of(context).primaryColor)
                   ],
-                ): GridView.builder(
+                ):  GridView.builder(
+                  
                   padding: const EdgeInsets.symmetric(horizontal: 40),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: biolink.icons.length<4 ? biolink.icons.length : 4,
                     mainAxisSpacing: 20,
                     crossAxisSpacing: 20,
                     childAspectRatio: 1
