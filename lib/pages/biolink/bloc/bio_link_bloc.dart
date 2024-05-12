@@ -43,7 +43,7 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     try{
       emit(AnalyticsFetching());
 
-       var snapshots = await _client.userAnalytics.collection("m/${Global.bioLink.value!.bioId}").get();
+       var snapshots = await _client.userAnalytics.collection("m-${Global.bioLink.value!.bioId}").get();
       List<Analytics> analytics = [];
 
       DateTime today = DateTime.now();
@@ -60,17 +60,25 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
             todayAnalytics++;
         }
 
-        if(data.location["city"]!=null){
-          String location = data.location["city"];
+        if(data.location?["city"]!=null){
+          String location = data.location?["city"];
           locationCounts[location] = (locationCounts[location] ?? 0) + 1;
         }
 
         String device = data.device;
         deviceCounts[device] = (deviceCounts[device] ?? 0) + 1;
       }
+      
+      String mostCommonLocation = "N/A";
+      if (locationCounts.isNotEmpty){
+        mostCommonLocation = locationCounts.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+      }
 
-      String mostCommonLocation = locationCounts.entries.reduce((a, b) => a.value > b.value ? a : b).key;
-      String mostCommonDevice = deviceCounts.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+      String mostCommonDevice = "N/A";
+      if (deviceCounts.isNotEmpty) {
+        mostCommonDevice = deviceCounts.entries.reduce((a, b) => a.value > b.value ? a : b).key;
+      }
+       
 
       List<ChartData> last7DaysAnalytics = List.generate(7, (index) {
         DateTime dayStart = today.subtract(Duration(days: index + 1));

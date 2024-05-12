@@ -6,12 +6,12 @@ import 'package:flutter/foundation.dart';
 class Analytics {
 
   final String device;
-  final Map location;
+  final Map? location;
   final DateTime dateTime;
 
   Analytics({
     required this.device,
-    required this.location,
+    this.location,
     required this.dateTime,
   });
 
@@ -38,7 +38,7 @@ class Analytics {
   factory Analytics.fromMap(map) {
     return Analytics(
       device: map['device'] as String,
-      location: Map.from((map['location'] as Map)),
+      location: map['location'],
       dateTime: DateTime.fromMillisecondsSinceEpoch(map['dateTime'] as int),
     );
   }

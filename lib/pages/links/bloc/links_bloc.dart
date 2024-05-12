@@ -56,8 +56,8 @@ class LinksBloc extends Bloc<LinksEvent, LinksState> {
             todayAnalytics++;
         }
 
-        if(data.location["city"]!=null){
-          String location = data.location["city"];
+        if(data.location?["city"]!=null){
+          String location = data.location?["city"];
           locationCounts[location] = (locationCounts[location] ?? 0) + 1;
         }
 
