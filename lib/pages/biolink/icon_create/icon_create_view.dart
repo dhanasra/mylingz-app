@@ -84,9 +84,22 @@ class _IconCreateViewState extends State<IconCreateView> {
               SocialForm(icon: widget.icon)
             else if(widget.icon.name=="Viber")
               SocialForm(icon: widget.icon)
+            else if(widget.icon.name=="Playstore")
+              SocialForm(icon: widget.icon)
+            else if(widget.icon.name=="Maps")
+              SocialForm(icon: widget.icon)
+            else if(widget.icon.name=="Drive")
+              SocialForm(icon: widget.icon)
+            else if(widget.icon.name=="Medium")
+              SocialForm(icon: widget.icon)
+            else if(widget.icon.name=="TikTok")
+              SocialForm(icon: widget.icon)
+            else if(widget.icon.name=="Behance")
+              SocialForm(icon: widget.icon)
           ],
         ),
       ),
     );
   }
 }
+

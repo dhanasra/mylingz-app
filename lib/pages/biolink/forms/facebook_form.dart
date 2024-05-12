@@ -34,7 +34,7 @@ class FacebookForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(icon.icon),
+              Image.network(getIconUrl("colored", icon.name.toLowerCase())),
               16.h(),
               "Type".ts(context),
               8.h(),
@@ -95,7 +95,6 @@ class FacebookForm extends StatelessWidget {
                   context.back(args: SocialLink(
                       id: generateUniqueString(), 
                       name: icon.name, 
-                      icon: icon.icon, 
                       data: {
                         "value": data,
                         "type": type.value,

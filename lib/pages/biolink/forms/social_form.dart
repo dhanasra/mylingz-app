@@ -30,7 +30,7 @@ class SocialForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(icon.icon),
+              Image.network(getIconUrl("colored", icon.name.toLowerCase())),
               16.h(),
               icon.name.ts(context),
               8.h(),
@@ -68,7 +68,6 @@ class SocialForm extends StatelessWidget {
                   context.back(args: SocialLink(
                       id: generateUniqueString(), 
                       name: icon.name, 
-                      icon: icon.icon, 
                       data: {
                         "value": data,
                         "text": controller.trim()

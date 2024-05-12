@@ -168,7 +168,6 @@ class VcardForm extends StatelessWidget {
                   context.back(args: SocialLink(
                       id: generateUniqueString(), 
                       name: icon.name, 
-                      icon: icon.icon, 
                       data: {
                         "value": data,
                         "name": nameController.trim(),

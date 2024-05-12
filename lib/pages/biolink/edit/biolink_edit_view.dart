@@ -5,6 +5,7 @@ import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/routes/app_routes.dart';
 import 'package:mylingz_app/utils/global.dart';
+import 'package:mylingz_app/utils/utils.dart';
 import 'package:mylingz_app/widgets/dotted_wrapper.dart';
 import 'package:mylingz_app/widgets/styled_button.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
@@ -74,7 +75,7 @@ class _BioLinkEditViewState extends State<BioLinkEditView> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: biolink.icons.length,
                   itemBuilder: (_, idx){
-                    return Image.network(biolink.icons[idx].icon);
+                    return Image.network(getIconUrl("colored", biolink.icons[idx].name.toLowerCase()));
                   }
                 )
               ),

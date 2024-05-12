@@ -76,7 +76,6 @@ class EmailForm extends StatelessWidget {
                   context.back(args: SocialLink(
                       id: generateUniqueString(), 
                       name: icon.name, 
-                      icon: icon.icon, 
                       data: {
                         "value": data,
                         "email": mailController.trim(),

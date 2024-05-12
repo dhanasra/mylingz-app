@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
+import 'package:mylingz_app/utils/utils.dart';
 import 'package:mylingz_app/widgets/styled_wrapper.dart';
 import '../../../../utils/global.dart';
 
@@ -45,7 +46,7 @@ class IconsLibView extends StatelessWidget {
                           onClick(item);
                         },
                         p: const EdgeInsets.all(10),
-                        child: Image.network(item.icon)
+                        child: Image.network(getIconUrl("colored", item.id))
                       );
                     },
                   ),
@@ -65,7 +66,7 @@ class IconsLibView extends StatelessWidget {
                           onClick(item);
                         },
                         p: const EdgeInsets.all(10),
-                        child: Image.network(item.icon)
+                        child: Image.network(getIconUrl("colored", item.id))
                       );
                     },
                   ),

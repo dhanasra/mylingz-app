@@ -54,7 +54,6 @@ class PhoneForm extends StatelessWidget {
                   context.back(args: SocialLink(
                       id: generateUniqueString(), 
                       name: icon.name, 
-                      icon: icon.icon, 
                       data: {
                         "value": data,
                         "phone": controller.trim()

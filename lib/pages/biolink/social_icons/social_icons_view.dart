@@ -5,6 +5,7 @@ import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
 import 'package:mylingz_app/network/models/social_link.dart';
 import 'package:mylingz_app/pages/biolink/social_icons/social_icons_viewmodel.dart';
+import 'package:mylingz_app/utils/utils.dart';
 
 import '../../../widgets/styled_button.dart';
 import '../bloc/bio_link_bloc.dart';
@@ -115,7 +116,7 @@ class _SocialIconsViewState extends State<SocialIconsView> {
         title: Row(
           children: [
             Image.network(
-              button.icon,
+              getIconUrl("colored", button.name.toLowerCase()),
               width: 50,
             ),
             12.w(),

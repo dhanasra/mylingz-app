@@ -2,14 +2,12 @@ import 'dart:convert';
 
 class SocialIcon {
   final String name;
-  final String icon;
   final String type;
   final String id;
   final String category;
 
   SocialIcon({
     required this.name,
-    required this.icon,
     required this.type,
     required this.id,
     required this.category,
@@ -17,14 +15,12 @@ class SocialIcon {
 
   SocialIcon copyWith({
     String? name,
-    String? icon,
     String? type,
     String? id,
     String? category,
   }) {
     return SocialIcon(
       name: name ?? this.name,
-      icon: icon ?? this.icon,
       type: type ?? this.type,
       id: id ?? this.id,
       category: category ?? this.category,
@@ -34,7 +30,6 @@ class SocialIcon {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'name': name,
-      'icon': icon,
       'type': type,
       'id': id,
       'category': category,
@@ -44,7 +39,6 @@ class SocialIcon {
   factory SocialIcon.fromMap(map) {
     return SocialIcon(
       name: map['name'] as String,
-      icon: map['icon'] as String,
       type: map['type'] as String,
       id: map['id'] as String,
       category: map['category'] as String,
@@ -57,7 +51,7 @@ class SocialIcon {
 
   @override
   String toString() {
-    return 'SocialIcon(name: $name, icon: $icon, type: $type, id: $id, category: $category)';
+    return 'SocialIcon(name: $name, type: $type, id: $id, category: $category)';
   }
 
   @override
@@ -66,7 +60,6 @@ class SocialIcon {
   
     return 
       other.name == name &&
-      other.icon == icon &&
       other.type == type &&
       other.id == id &&
       other.category == category;
@@ -75,7 +68,6 @@ class SocialIcon {
   @override
   int get hashCode {
     return name.hashCode ^
-      icon.hashCode ^
       type.hashCode ^
       id.hashCode ^
       category.hashCode;

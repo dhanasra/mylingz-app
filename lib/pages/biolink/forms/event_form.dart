@@ -140,7 +140,6 @@ class EventForm extends StatelessWidget {
                   context.back(args: SocialLink(
                       id: generateUniqueString(), 
                       name: icon.name, 
-                      icon: icon.icon, 
                       data: {"value": qrData}, 
                       type: icon.type
                   ));

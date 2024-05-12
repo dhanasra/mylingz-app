@@ -6,14 +6,12 @@ import 'package:flutter/foundation.dart';
 class SocialLink {
   final String id;
   final String name;
-  final String icon;
   final Map data;
   final String type;
 
   SocialLink({
     required this.id,
     required this.name,
-    required this.icon,
     required this.data,
     required this.type,
   });
@@ -22,14 +20,12 @@ class SocialLink {
   SocialLink copyWith({
     String? id,
     String? name,
-    String? icon,
     Map? data,
     String? type,
   }) {
     return SocialLink(
       id: id ?? this.id,
       name: name ?? this.name,
-      icon: icon ?? this.icon,
       data: data ?? this.data,
       type: type ?? this.type,
     );
@@ -39,7 +35,6 @@ class SocialLink {
     return <String, dynamic>{
       'id': id,
       'name': name,
-      'icon': icon,
       'data': data,
       'type': type,
     };
@@ -49,7 +44,6 @@ class SocialLink {
     return SocialLink(
       id: map['id'] as String,
       name: map['name'] as String,
-      icon: map['icon'] as String,
       data: Map.from((map['data'] as Map)),
       type: map['type'] as String,
     );
@@ -61,7 +55,7 @@ class SocialLink {
 
   @override
   String toString() {
-    return 'SocialLink(id: $id, name: $name, icon: $icon, data: $data, type: $type)';
+    return 'SocialLink(id: $id, name: $name, data: $data, type: $type)';
   }
 
   @override
@@ -71,7 +65,6 @@ class SocialLink {
     return 
       other.id == id &&
       other.name == name &&
-      other.icon == icon &&
       mapEquals(other.data, data) &&
       other.type == type;
   }
@@ -80,7 +73,6 @@ class SocialLink {
   int get hashCode {
     return id.hashCode ^
       name.hashCode ^
-      icon.hashCode ^
       data.hashCode ^
       type.hashCode;
   }
