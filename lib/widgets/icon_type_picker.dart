@@ -38,6 +38,19 @@ class _IconTypePickerState extends State<IconTypePicker> {
       ), 
       children: [
         InkWell(
+          onTap: ()=>update("colored"),
+          child: Container(
+            decoration: BoxDecoration(
+              color: context.theme().shadowColor,
+              border: Border.all(
+                  width: selected=="colored" ? 3 : 1,
+                  color: selected=="colored" ? context.theme().primaryColor : Colors.white),
+            ),
+            padding: const EdgeInsets.all(8),
+            child: Image.network(getIconUrl("colored", "facebook")),
+          ),
+        ),
+        InkWell(
           onTap: ()=>update("outlined"),
           child: Container(
             decoration: BoxDecoration(

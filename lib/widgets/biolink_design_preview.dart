@@ -130,7 +130,7 @@ class BioLinkDesignPreview extends StatelessWidget {
               (e) => Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Image.network(
-                  getIconUrl(design.thumbnail?.style ?? "outlined", e), width: 32, color: design.thumbnail?.style!="gradient" ? iconColor: null),
+                  getIconUrl(design.thumbnail?.style ?? "outlined", e), width: 32, color: (design.thumbnail?.style!="gradient" && design.thumbnail?.style!="colored") ? iconColor: null),
               )).toList()
           ),
 
