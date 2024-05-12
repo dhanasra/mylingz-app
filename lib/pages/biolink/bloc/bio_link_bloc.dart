@@ -1,6 +1,10 @@
 // ignore_for_file: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
 
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:csv/csv.dart';
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 import 'package:mylingz_app/extensions/date_exten.dart';
 import 'package:mylingz_app/network/firebase_client.dart';
@@ -9,6 +13,7 @@ import 'package:mylingz_app/network/models/contact_fields.dart';
 import 'package:mylingz_app/network/models/form_message.dart';
 import 'package:mylingz_app/network/models/social_link.dart';
 import 'package:mylingz_app/utils/global.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 
 import '../../../network/models/analytics.dart';
 import '../../../network/models/bio_link_button.dart';
@@ -29,6 +34,7 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
     on<DeleteMessagesEvent>(_onDeleteMessages);
     on<SaveDesignEvent>(_onSaveDesign);
     on<TogglePublishEvent>(_onTogglePublish);
+    on<ExportMessagesEvent>(_onExportMessages);
   }
 
   final FirebaseClient _client =  FirebaseClient();
@@ -199,6 +205,74 @@ class BioLinkBloc extends Bloc<BioLinkEvent, BioLinkState> {
       Global.bioLink.value = updated;
       Global.bioLink.notifyListeners();
       emit(PublishToggled(event.isPublished));
+    }catch(e){
+      emit(Error());
+    }
+  }
+
+  _onExportMessages(ExportMessagesEvent event, Emitter emit)async{
+    emit(Loading());
+    try{
+
+      var snapshots = await _client.messagesDB.get();
+
+      final List<FormMessage> messages = [];
+      for (var shot in snapshots.docs) { 
+        var data = shot.data() as Map;
+        data['id'] = shot.id;
+        var message = FormMessage.fromMap(data);
+        messages.add(message);
+      }
+
+      var dataList = messages.map((e){
+        var details = e.data.map((e) => { e.label: e.value }).toList();
+        return {
+          "Device": e.device,
+          "Location": "${e.location["city"]}, ${e.location["country"]}",
+          "Date": e.createdAt.format("dd/MM/yyyy"),
+          "Time": e.createdAt.format("hh:mm a"),
+          "Details": details.toString()
+        };
+      }).toList();
+
+      if(event.type=="csv"){
+
+          List<List<dynamic>> csvData = [];
+
+          csvData.add(dataList.first.keys.toList());
+
+          for (var data in dataList) {
+            csvData.add(data.values.toList());
+          }
+
+          String csvString = const ListToCsvConverter().convert(csvData);
+
+          final directory = Directory('/storage/emulated/0/Download');
+          final file = File('${directory.path}/form-messages-mylingz.csv');
+          await file.writeAsString(csvString);
+          OpenFile.open(file.path);
+          
+      }else if(event.type=="excel"){
+
+          final excel = Excel.createExcel();
+          final Sheet sheet = excel['Contacts'];
+          for (var key in dataList.first.keys) {
+            sheet.cell(CellIndex.indexByString('${String.fromCharCode('A'.codeUnitAt(0) + dataList.first.keys.toList().indexOf(key) + 1)}1')).value = TextCellValue(key);
+          }
+          for (int i = 0; i < dataList.length; i++) {
+            final rowData = dataList[i];
+            rowData.forEach((key, value) {
+              sheet.cell(CellIndex.indexByString('${String.fromCharCode('A'.codeUnitAt(0) + rowData.keys.toList().indexOf(key) + 1)}${i + 2}')).value = TextCellValue(value);
+            });
+          }
+          final directory = Directory('/storage/emulated/0/Download');
+          final file = File('${directory.path}/form-messages-mylingz.xlsx');
+          var fileBytes = excel.save();
+          await file.writeAsBytes(fileBytes??[]);
+          OpenFile.open(file.path);
+      }
+
+      emit(ExportedSuccess());
     }catch(e){
       emit(Error());
     }

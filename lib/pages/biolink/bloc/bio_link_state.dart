@@ -19,6 +19,8 @@ class MessagesFetched extends BioLinkState {
 
 class MessageDeleted extends BioLinkState {}
 
+class ExportedSuccess extends BioLinkState {}
+
 class AnalyticsFetching extends BioLinkState {}
 
 class AnalyticsFetched extends BioLinkState {

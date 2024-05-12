@@ -65,6 +65,11 @@ dependencies:
 
   #language
   easy_localization: ^3.0.2
+
+  #widgets
+  csv: ^6.0.0
+  excel: ^4.0.2
+  open_file_plus: ^3.4.1
   device_info_plus: ^9.0.1
   dotted_border: ^2.1.0
   favicon: ^1.1.2

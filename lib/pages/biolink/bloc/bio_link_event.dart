@@ -68,3 +68,11 @@ class TogglePublishEvent extends BioLinkEvent {
     required this.isPublished,
   }); 
 }
+
+class ExportMessagesEvent extends BioLinkEvent {
+  final String type;
+  ExportMessagesEvent({
+    required this.type,
+  }); 
+}
+
