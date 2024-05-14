@@ -8,4 +8,6 @@ class UrlConst {
   static const privacyPolicy = "$domainName/legal/privacy";
   static const aboutUs = "$domainName/info/about";
 
+  static const company = "https://spiderlingz.com";
+
 }

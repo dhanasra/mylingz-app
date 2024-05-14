@@ -78,7 +78,7 @@ android {
     productFlavors {
         dev {
             dimension 'flavor'
-            resValue "string", "app_name", "Dev MYLingz"
+            resValue "string", "app_name", "MYLingz"
         }
         prod {
             dimension 'flavor'

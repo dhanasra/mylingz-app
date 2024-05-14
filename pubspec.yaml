@@ -102,7 +102,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "res/logo/app_logo.png"
+  image_path: "res/logo/app-logo.png"
 
 # The following section is specific to Flutter packages.
 flutter:
