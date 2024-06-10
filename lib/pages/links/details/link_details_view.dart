@@ -38,7 +38,7 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
 
   void loadAd() {
     nativeAd = NativeAd(
-        adUnitId: AdmobConst.nativeAd1,
+        adUnitId: AdmobConst.nativeAdTest,
         listener: NativeAdListener(
           onAdLoaded: (ad) {
             debugPrint('$NativeAd loaded.');

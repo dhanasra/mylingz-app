@@ -36,7 +36,7 @@ class _CreateLinkViewState extends State<CreateLinkView> {
   adLoaded()async{
 
     InterstitialAd.load(
-      adUnitId: AdmobConst.interstitialAd1, 
+      adUnitId: AdmobConst.interstitialAdTest, 
       request: const AdRequest(), 
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad){

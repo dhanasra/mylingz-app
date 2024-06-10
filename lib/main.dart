@@ -60,7 +60,7 @@ AppOpenAd? _appOpenAd;
 
 loadAds(){
   AppOpenAd.load(
-    adUnitId: AdmobConst.appOpenAd1, 
+    adUnitId: AdmobConst.appOpenAdTest, 
     request: const AdRequest(), 
     adLoadCallback: AppOpenAdLoadCallback(
       onAdLoaded: (ad){

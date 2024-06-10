@@ -32,7 +32,7 @@ class _MessagesViewState extends State<MessagesView> {
 
        BannerAd(
       size: AdSize.banner, 
-      adUnitId: AdmobConst.bannerAd2, 
+      adUnitId: AdmobConst.bannerAdTest, 
       listener: BannerAdListener(
         onAdLoaded: (ad){
           setState(() {

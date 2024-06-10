@@ -29,7 +29,7 @@ class _BioLinkDesignViewState extends State<BioLinkDesignView> {
 
      BannerAd(
       size: AdSize.banner, 
-      adUnitId: AdmobConst.bannerAd1, 
+      adUnitId: AdmobConst.bannerAdTest, 
       listener: BannerAdListener(
         onAdLoaded: (ad){
           setState(() {
