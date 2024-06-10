@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:in_app_review/in_app_review.dart';
 import 'package:mylingz_app/constants/assets_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
