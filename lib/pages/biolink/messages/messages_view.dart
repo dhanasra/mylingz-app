@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:lottie/lottie.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
@@ -9,6 +10,7 @@ import 'package:mylingz_app/utils/toast.dart';
 import 'package:mylingz_app/widgets/message_item.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../constants/admob_const.dart';
 import '../../../constants/assets_const.dart';
 import '../../../widgets/styled_button.dart';
 import '../bloc/bio_link_bloc.dart';
@@ -22,10 +24,28 @@ class MessagesView extends StatefulWidget {
 
 class _MessagesViewState extends State<MessagesView> {
   late MessagesViewModel _viewModel;
+  BannerAd? _bannerAd;
 
   @override
   void initState() {
     _viewModel = MessagesViewModel();
+
+       BannerAd(
+      size: AdSize.banner, 
+      adUnitId: AdmobConst.bannerAd2, 
+      listener: BannerAdListener(
+        onAdLoaded: (ad){
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        onAdFailedToLoad: (ad, error){
+          ad.dispose();
+        }
+      ), 
+      request: const AdRequest()
+    ).load();
+
     super.initState();
   }
 
@@ -47,6 +67,9 @@ class _MessagesViewState extends State<MessagesView> {
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                 constraints: const BoxConstraints(minWidth: 200),
                 onSelected: (v) {
+
+                  
+
                   context.read<BioLinkBloc>().add(ExportMessagesEvent(type: v));
                 },
                 itemBuilder: (_) => _viewModel.getMenuItem(context)),
@@ -95,6 +118,17 @@ class _MessagesViewState extends State<MessagesView> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               children: [
+
+              if(_bannerAd!=null)
+                SizedBox(
+                  height: _bannerAd!.size.height.toDouble(),
+                  width: _bannerAd!.size.width.toDouble(),
+                  child: AdWidget(
+                    ad: _bannerAd!
+                  ),
+                ),
+
+
                 ..._viewModel.messages.map((e) => MessageItem(message: e))
               ]);
           },

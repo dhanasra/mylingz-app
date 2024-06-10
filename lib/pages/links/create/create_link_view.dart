@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
@@ -8,6 +9,7 @@ import 'package:mylingz_app/network/models/short_link.dart';
 import 'package:mylingz_app/pages/links/create/create_link_viewmodel.dart';
 import 'package:mylingz_app/widgets/styled_button.dart';
 
+import '../../../constants/admob_const.dart';
 import '../../../constants/string_const.dart';
 import '../../../routes/app_routes.dart';
 import '../../../utils/validator.dart';
@@ -28,6 +30,24 @@ class _CreateLinkViewState extends State<CreateLinkView> {
   void initState() {
     _viewModel = CreateLinkViewModel(widget.link);
     super.initState();
+    adLoaded();
+  }
+
+  adLoaded()async{
+
+    InterstitialAd.load(
+      adUnitId: AdmobConst.interstitialAd1, 
+      request: const AdRequest(), 
+      adLoadCallback: InterstitialAdLoadCallback(
+        onAdLoaded: (ad){
+          _viewModel.interstitialAd = ad;
+          _viewModel.isInterstitialAdLoaded = true;
+        }, 
+        onAdFailedToLoad: (error){
+          _viewModel.interstitialAd?.dispose();
+          _viewModel.isInterstitialAdLoaded = false;
+        })
+    );
   }
 
   @override
@@ -160,7 +180,7 @@ class _CreateLinkViewState extends State<CreateLinkView> {
                     ),
                   ),
                   34.h(),
-                  StyledButton(onClick: ()=>_viewModel.save(context), text: (_viewModel.link!=null ? "Save": StringConst.create).toUpperCase())
+                  StyledButton(onClick: ()=>_viewModel.showAd(context), text: (_viewModel.link!=null ? "Save": StringConst.create).toUpperCase())
                 ],
               ),
             );

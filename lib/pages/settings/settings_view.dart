@@ -83,11 +83,11 @@ class _SettingsViewState extends State<SettingsView> {
               leading: const Icon(Icons.thumb_up_alt_outlined, size: 20),
               title: const Text(StringConst.recommendopt).tr(),
             ),
-            ListTile(
-              onTap: () => _viewModel.rateApp(context),
-              leading: const Icon(Icons.star_border, size: 20),
-              title: const Text(StringConst.rateOpt).tr(),
-            ),
+            // ListTile(
+            //   onTap: () => _viewModel.rateApp(context),
+            //   leading: const Icon(Icons.star_border, size: 20),
+            //   title: const Text(StringConst.rateOpt).tr(),
+            // ),
             ListTile(
               onTap: () => _viewModel.sendReportOrFeedback("Report"),
               leading: const Icon(Icons.flag_outlined, size: 20),

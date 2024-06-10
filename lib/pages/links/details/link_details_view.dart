@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:like_button/like_button.dart';
+import 'package:mylingz_app/constants/admob_const.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/extensions/number_exten.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
@@ -24,12 +26,61 @@ class LinkDetailsView extends StatefulWidget {
 
 class _LinkDetailsViewState extends State<LinkDetailsView> {
   late LinkDetailsViewModel _viewModel;
+  NativeAd? nativeAd;
+  bool _nativeAdIsLoaded = false;
 
   @override
   void initState() {
     _viewModel = LinkDetailsViewModel(widget.linkId, context);
-    
+    loadAd();
     super.initState();
+  }
+
+  void loadAd() {
+    nativeAd = NativeAd(
+        adUnitId: AdmobConst.nativeAd1,
+        listener: NativeAdListener(
+          onAdLoaded: (ad) {
+            debugPrint('$NativeAd loaded.');
+            setState(() {
+              _nativeAdIsLoaded = true;
+            });
+          },
+          onAdFailedToLoad: (ad, error) {
+            // Dispose the ad here to free resources.
+            debugPrint('$NativeAd failed to load: $error');
+            ad.dispose();
+          },
+        ),
+        request: const AdRequest(),
+        // Styling
+        nativeTemplateStyle: NativeTemplateStyle(
+            // Required: Choose a template.
+            templateType: TemplateType.medium,
+            // Optional: Customize the ad's style.
+            mainBackgroundColor: Colors.purple,
+            cornerRadius: 10.0,
+            callToActionTextStyle: NativeTemplateTextStyle(
+                textColor: Colors.cyan,
+                backgroundColor: Colors.red,
+                style: NativeTemplateFontStyle.monospace,
+                size: 16.0),
+            primaryTextStyle: NativeTemplateTextStyle(
+                textColor: Colors.red,
+                backgroundColor: Colors.cyan,
+                style: NativeTemplateFontStyle.italic,
+                size: 16.0),
+            secondaryTextStyle: NativeTemplateTextStyle(
+                textColor: Colors.green,
+                backgroundColor: Colors.black,
+                style: NativeTemplateFontStyle.bold,
+                size: 16.0),
+            tertiaryTextStyle: NativeTemplateTextStyle(
+                textColor: Colors.brown,
+                backgroundColor: Colors.amber,
+                style: NativeTemplateFontStyle.normal,
+                size: 16.0)))
+      ..load();
   }
 
   @override
@@ -62,6 +113,7 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
         body: ListView(
           padding: const EdgeInsets.all(16),
           children: [
+
             StyledWrapper(
                 p: const EdgeInsets.all(16),
                 child: Column(
@@ -144,7 +196,18 @@ class _LinkDetailsViewState extends State<LinkDetailsView> {
                             .toList())
                   ],
                 )),
-            26.h(),
+
+            16.h(),
+            if(_nativeAdIsLoaded)
+            ConstrainedBox(
+              constraints: const BoxConstraints(
+                minWidth: 320, 
+                minHeight: 320, 
+                maxWidth: 400,
+                maxHeight: 400
+              ),
+              child: AdWidget(ad: nativeAd!),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2),
               child: "Analytics".hm(context),

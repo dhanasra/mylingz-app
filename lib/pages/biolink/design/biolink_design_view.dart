@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mylingz_app/extensions/context_exten.dart';
 import 'package:mylingz_app/pages/biolink/design/biolink_design_viewmodel.dart';
 import 'package:mylingz_app/pages/biolink/design/fragments/block_fragment.dart';
@@ -8,6 +9,7 @@ import 'package:mylingz_app/pages/biolink/design/fragments/theme_fragment.dart';
 import 'package:mylingz_app/utils/toast.dart';
 import 'package:mylingz_app/widgets/biolink_design_preview.dart';
 
+import '../../../constants/admob_const.dart';
 import '../bloc/bio_link_bloc.dart';
 
 class BioLinkDesignView extends StatefulWidget {
@@ -19,10 +21,28 @@ class BioLinkDesignView extends StatefulWidget {
 
 class _BioLinkDesignViewState extends State<BioLinkDesignView> {
   late BioLinkDesignViewModel _viewModel;
+  BannerAd? _bannerAd;
 
   @override
   void initState() {
     _viewModel = BioLinkDesignViewModel();
+
+     BannerAd(
+      size: AdSize.banner, 
+      adUnitId: AdmobConst.bannerAd1, 
+      listener: BannerAdListener(
+        onAdLoaded: (ad){
+          setState(() {
+            _bannerAd = ad as BannerAd;
+          });
+        },
+        onAdFailedToLoad: (ad, error){
+          ad.dispose();
+        }
+      ), 
+      request: const AdRequest()
+    ).load();
+
     super.initState();
   }
 
@@ -42,7 +62,7 @@ class _BioLinkDesignViewState extends State<BioLinkDesignView> {
             body: Column(
               children: [
                 Expanded(
-                  flex: 6,
+                  flex: 7,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -66,13 +86,24 @@ class _BioLinkDesignViewState extends State<BioLinkDesignView> {
                     ],
                   ),
                 ),
+
+                if(_bannerAd!=null)
+                  SizedBox(
+                    height: _bannerAd!.size.height.toDouble(),
+                    width: _bannerAd!.size.width.toDouble(),
+                    child: AdWidget(
+                      ad: _bannerAd!
+                    ),
+                  ),
+
+                
                 const TabBar(tabs: [
                   Tab(text: "Theme"),
                   Tab(text: "Block"),
                   Tab(text: "Profile")
                 ]),
                 Expanded(
-                  flex: 4,
+                  flex: 6,
                   child: TabBarView(children: [
                     ThemeFragment(vm: _viewModel),
                     BlockFragment(vm: _viewModel),

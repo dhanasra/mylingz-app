@@ -1,17 +1,23 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'app/app.dart';
+import 'constants/admob_const.dart';
+import 'constants/app_const.dart';
 import 'network/local_db.dart';
 
 void main() async{
 
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  MobileAds.instance.initialize();
 
   await Firebase.initializeApp(
     options: const FirebaseOptions(
@@ -38,15 +44,32 @@ void main() async{
 
   FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
 
+  if(FirebaseAuth.instance.currentUser!=null){
+    loadAds();
+  }
+  
   runApp(EasyLocalization(
-    supportedLocales: const [
-      Locale('en', 'US'), 
-      Locale('ta', 'IN'),
-      Locale('ml', 'IN'),
-      Locale('kn', 'IN'),
-      Locale('hi', 'IN')
-    ],
+    supportedLocales: AppConst.locales,
     path: 'res/translations',
     fallbackLocale: currentLocale,
     child: const App()));
+}
+
+
+AppOpenAd? _appOpenAd;
+
+loadAds(){
+  AppOpenAd.load(
+    adUnitId: AdmobConst.appOpenAd1, 
+    request: const AdRequest(), 
+    adLoadCallback: AppOpenAdLoadCallback(
+      onAdLoaded: (ad){
+        _appOpenAd = ad;
+        _appOpenAd?.show();
+      }, 
+      onAdFailedToLoad: (error){
+        print(error);
+      },
+    )
+  );
 }

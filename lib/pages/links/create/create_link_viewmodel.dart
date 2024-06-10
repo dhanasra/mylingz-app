@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:mylingz_app/base/base_viewmodel.dart';
 import 'package:mylingz_app/constants/url_const.dart';
 import 'package:mylingz_app/extensions/string_exten.dart';
@@ -37,7 +38,11 @@ class CreateLinkViewModel extends BaseViewModel {
     availability = ValueNotifier(true);
   }
 
-  save(BuildContext context){
+  InterstitialAd? interstitialAd;
+  bool isInterstitialAdLoaded = false;
+
+  showAd(BuildContext context){
+
     if(availability.value==null){
       return;
     }else if(!availability.value!){
@@ -49,6 +54,24 @@ class CreateLinkViewModel extends BaseViewModel {
       mode.value = AutovalidateMode.always;
       return;
     }
+
+    if(isInterstitialAdLoaded && interstitialAd!=null ){
+      interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(
+        onAdDismissedFullScreenContent: (InterstitialAd ad) {
+          save(context);
+        },
+        onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+          save(context);
+          isInterstitialAdLoaded = false;
+        },
+      );
+      interstitialAd!.show();
+      return;
+    }
+    save(context);
+  }
+
+  save(BuildContext context){
 
     context.read<LinksBloc>().add(
       SaveLinkEvent(

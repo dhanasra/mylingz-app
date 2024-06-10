@@ -15,11 +15,14 @@ class DashboardFragment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return BlocBuilder<LinksBloc, LinksState>(
       builder: (context, state) {
         return ListView(
           padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
-          children: Global.links.isEmpty
+          children: [
+
+            ...(Global.links.isEmpty
               ? [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +45,8 @@ class DashboardFragment extends StatelessWidget {
                   StringConst.generatedLinks.ts(context),
                   20.h(),
                   ...Global.links.map((e) => LinkItem(link: e))
-                ],
+                ])
+          ],
         );
       },
     );

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../common/theme/theme_cubit.dart';
+import '../constants/app_const.dart';
 import '../constants/theme_const.dart';
 import '../routes/app_routes.dart';
 import '../utils/utils.dart';
@@ -21,13 +22,7 @@ class App extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               localizationsDelegates: context.localizationDelegates,
               locale: context.locale,
-              supportedLocales: const [
-                Locale('en', 'US'), 
-                Locale('ta', 'IN'),
-                Locale('ml', 'IN'),
-                Locale('kn', 'IN'),
-                Locale('hi', 'IN')
-              ],
+              supportedLocales: AppConst.locales,
               onGenerateRoute: (s) => RouteGenerator(settings: s).getRoute(),
               initialRoute: Routes.splash,
               theme: ThemeConst.getApplicationTheme(false),

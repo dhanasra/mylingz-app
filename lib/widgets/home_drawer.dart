@@ -57,18 +57,18 @@ class _HomeDrawerState extends State<HomeDrawer> with TickerProviderStateMixin{
                 leading: const Icon(Icons.thumb_up_alt_outlined, size: 20),
                 title: const Text(StringConst.recommendopt).tr(),
               ),
-              ListTile(
-                onTap: ()async{
-                  final InAppReview inAppReview = InAppReview.instance;
-                  if (await inAppReview.isAvailable()) {
-                    inAppReview.requestReview();
-                  }else{
-                    inAppReview.openStoreListing();
-                  }
-                },
-                leading: const Icon(Icons.star_border, size: 20),
-                title: const Text(StringConst.rateOpt).tr(),
-              ),
+              // ListTile(
+              //   onTap: ()async{
+              //     final InAppReview inAppReview = InAppReview.instance;
+              //     if (await inAppReview.isAvailable()) {
+              //       inAppReview.requestReview();
+              //     }else{
+              //       inAppReview.openStoreListing();
+              //     }
+              //   },
+              //   leading: const Icon(Icons.star_border, size: 20),
+              //   title: const Text(StringConst.rateOpt).tr(),
+              // ),
               ListTile(
                 onTap: (){
                   launchUrlString(UrlConst.privacyPolicy);
